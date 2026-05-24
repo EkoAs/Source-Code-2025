@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modern Classic Design</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+    <style>
+    /* --- VARIABLES LOKAL (PROJECTS B) --- */
+    #projects {
+        --proj-bg: #080808;
+        --card-bg: #111;
+        --neon-yellow: #FFD700;
+        --neon-purple: #d946ef;
+        --text-main: #ffffff;
+        --text-dim: #888;
+        --scanline: rgba(0,0,0,0.5);
+    }
+
+    /* --- LAYOUT --- */
+    .proj-b-section {
+        padding: 100px 5%;
+        background-color: var(--proj-bg);
+        /* Background Dot Pattern */
+        background-image: radial-gradient(#333 1px, transparent 1px);
+        background-size: 30px 30px;
+        position: relative;
+    }
+
+    .proj-b-header {
+        text-align: center;
+        margin-bottom: 70px;
+    }
+
+    .proj-b-title {
+        font-family: sans-serif;
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Garis hiasan di bawah judul */
+    .proj-b-title::after {
+        content: '';
+        display: block;
+        width: 60%;
+        height: 4px;
+        background: var(--neon-yellow);
+        margin: 10px auto 0;
+        box-shadow: 0 0 15px var(--neon-yellow);
+    }
+
+    /* --- GRID CONTAINER --- */
+    .proj-b-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* --- CARD --- */
+    .holo-card {
+        background-color: var(--card-bg);
+        border: 1px solid #333;
+        position: relative;
+        transition: all 0.4s ease;
+        overflow: hidden;
+    }
+
+    /* Sudut Siku Cyber (Hiasan Border) */
+    .holo-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        border: 1px solid transparent;
+        pointer-events: none;
+        transition: 0.4s;
+        z-index: 10;
+    }
+
+    /* HOVER EFFECT: Border Menyala */
+    .holo-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        border-color: var(--neon-purple);
+    }
+    
+    .holo-card:hover::before {
+        border-top: 2px solid var(--neon-yellow);
+        border-bottom: 2px solid var(--neon-yellow);
+    }
+
+    /* --- GAMBAR PROYEK --- */
+    .holo-img-box {
+        height: 220px;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        border-bottom: 1px solid #333;
+    }
+
+    .holo-img-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+        filter: contrast(1.1) brightness(0.8);
+    }
+
+    /* Efek Scanline (Garis TV) di atas gambar */
+    .scan-overlay {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+        background-size: 100% 2px, 3px 100%;
+        pointer-events: none;
+        opacity: 1;
+        transition: 0.5s;
+    }
+
+    .holo-card:hover .holo-img-box img {
+        transform: scale(1.1);
+        filter: contrast(1) brightness(1); /* Jadi normal pas hover */
+    }
+    
+    .holo-card:hover .scan-overlay {
+        opacity: 0.3; /* Scanline menipis pas hover */
+    }
+
+    /* --- KONTEN TEKS --- */
+    .holo-content {
+        padding: 25px;
+    }
+
+    .holo-title {
+        font-family: sans-serif;
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: #fff;
+        margin: 0 0 10px 0;
+        text-transform: uppercase;
+    }
+
+    .holo-desc {
+        font-family: 'Courier New', monospace; /* Font coding */
+        font-size: 0.9rem;
+        color: var(--text-dim);
+        line-height: 1.5;
+        margin-bottom: 20px;
+        height: 60px; /* Batasi tinggi biar rapi */
+        overflow: hidden;
+    }
+
+    /* --- TAGS --- */
+    .holo-tags {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 25px;
+    }
+
+    .tech-tag {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--neon-yellow);
+        border: 1px solid var(--neon-yellow);
+        padding: 3px 10px;
+        text-transform: uppercase;
+        background: rgba(255, 215, 0, 0.05);
+    }
+
+    /* --- BUTTONS --- */
+    .holo-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid #222;
+        padding-top: 15px;
+    }
+
+    .btn-holo {
+        text-decoration: none;
+        color: #fff;
+        font-size: 0.9rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        transition: 0.3s;
+    }
+    
+    .btn-holo:hover {
+        color: var(--neon-purple);
+        text-shadow: 0 0 8px var(--neon-purple);
+    }
+    
+    .folder-icon {
+        font-family: monospace;
+        color: #555;
+    }
+
+</style>
+
+<section id="projects" class="proj-b-section">
+    <div class="proj-b-header">
+        <h2 class="proj-b-title">DEPLOYMENT_DATA</h2>
+        <p style="color: #666; font-family: 'Courier New'; margin-top: 10px;">[ SELECT FILE TO VIEW DETAILS ]</p>
+    </div>
+
+    <div class="proj-b-grid">
+        
+        <div class="holo-card">
+            <div class="holo-img-box">
+                <div class="scan-overlay"></div>
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Project 1">
+            </div>
+            <div class="holo-content">
+                <h3 class="holo-title">Cyber Security Dashboard</h3>
+                <p class="holo-desc">
+                    > System monitoring tool dengan real-time traffic analysis dan deteksi anomali jaringan.
+                </p>
+                <div class="holo-tags">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">D3.js</span>
+                    <span class="tech-tag">Node</span>
+                </div>
+                <div class="holo-actions">
+                    <span class="folder-icon">DIR/PROJECT_01</span>
+                    <a href="#" class="btn-holo">EXECUTE VIEW &rarr;</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="holo-card">
+            <div class="holo-img-box">
+                <div class="scan-overlay"></div>
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Project 2">
+            </div>
+            <div class="holo-content">
+                <h3 class="holo-title">AI Image Generator</h3>
+                <p class="holo-desc">
+                    > Platform berbasis Python untuk generate gambar futuristik menggunakan model Deep Learning.
+                </p>
+                <div class="holo-tags">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">TensorFlow</span>
+                    <span class="tech-tag">Flask</span>
+                </div>
+                <div class="holo-actions">
+                    <span class="folder-icon">DIR/PROJECT_02</span>
+                    <a href="#" class="btn-holo">EXECUTE VIEW &rarr;</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="holo-card">
+            <div class="holo-img-box">
+                <div class="scan-overlay"></div>
+                <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Project 3">
+            </div>
+            <div class="holo-content">
+                <h3 class="holo-title">Crypto Trading Bot</h3>
+                <p class="holo-desc">
+                    > Automasi trading aset kripto dengan algoritma prediksi harga dan manajemen risiko.
+                </p>
+                <div class="holo-tags">
+                    <span class="tech-tag">Solidity</span>
+                    <span class="tech-tag">Web3.js</span>
+                    <span class="tech-tag">API</span>
+                </div>
+                <div class="holo-actions">
+                    <span class="folder-icon">DIR/PROJECT_03</span>
+                    <a href="#" class="btn-holo">EXECUTE VIEW &rarr;</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+</body>
+</html>

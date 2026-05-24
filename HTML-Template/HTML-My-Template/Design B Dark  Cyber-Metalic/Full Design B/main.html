@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modern Classic Design</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+    <style>
+    /* --- VARIABLES (Tema Hitam-Kuning-Ungu) --- */
+    :root {
+        /* Default (Light/Standard Mode - Tetap Hitam-Kuning biar garang) */
+        --nav-b-bg: #0a0a0a; /* Hitam pekat */
+        --nav-b-shine: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 100%); /* Efek kilap atas */
+        --text-primary: #ffffff;
+        --accent-yellow: #FFD700; /* Emas/Kuning Tajam */
+        --accent-purple: #d946ef; /* Ungu Cerah (Sync dgn A) */
+        --border-glow: linear-gradient(90deg, var(--accent-yellow), var(--accent-purple));
+        --glass-panel: rgba(20, 20, 20, 0.95);
+    }
+
+    /* Jika body ada class 'light-mode' (Opsional kalau mau dibalik) 
+       Tapi karena requestnya campuran hitam kuning, kita kunci base-nya gelap.
+       Kita gunakan variabel ini untuk mengatur intensitas kilap/cahaya saja. */
+    
+    /* --- STRUKTUR UTAMA --- */
+    .navbar-b {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 75px;
+        z-index: 1000;
+        
+        /* Background & Shine Effect */
+        background-color: var(--nav-b-bg);
+        background-image: var(--nav-b-shine);
+        backdrop-filter: blur(10px);
+        
+        /* Border Bawah Gradasi (Kuning ke Ungu) */
+        border-bottom: 3px solid transparent;
+        border-image: var(--border-glow) 1;
+        
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        display: flex;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+    .nav-b-container {
+        width: 100%;
+        max-width: 1200px;
+        padding: 0 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* --- LOGO AREA --- */
+    .nav-b-logo {
+        font-family: sans-serif; /* Bisa ganti font futuristic */
+        font-size: 1.8rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--text-primary);
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* Aksen Kuning di Logo */
+    .logo-accent {
+        color: var(--accent-yellow);
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+
+    /* --- MENU DESKTOP --- */
+    .nav-b-menu {
+        display: flex;
+        gap: 5px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-b-link {
+        text-decoration: none;
+        color: #aaa; /* Abu-abu sebelum di hover */
+        font-family: sans-serif;
+        font-weight: 600;
+        font-size: 0.9rem;
+        padding: 10px 20px;
+        border-radius: 4px;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Efek Hover: Text jadi putih, background glow ungu dikit */
+    .nav-b-link:hover {
+        color: var(--text-primary);
+        background: rgba(217, 70, 239, 0.1); /* Ungu transparan */
+        text-shadow: 0 0 8px var(--accent-purple);
+    }
+
+    /* Garis bawah animasi saat hover (Warna Kuning) */
+    .nav-b-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0%;
+        height: 2px;
+        background-color: var(--accent-yellow);
+        transition: width 0.3s ease;
+        box-shadow: 0 0 10px var(--accent-yellow);
+    }
+
+    .nav-b-link:hover::after {
+        width: 100%;
+    }
+
+    /* --- BAGIAN KANAN (SEARCH & TOOLS) --- */
+    .nav-b-right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    /* Search Bar Futuristik */
+    .search-b-wrapper {
+        position: relative;
+        height: 40px;
+        display: flex;
+        align-items: center;
+    }
+
+    .search-b-input {
+        background: transparent;
+        border: 1px solid #333;
+        color: var(--accent-yellow);
+        padding: 8px 15px 8px 40px; /* Padding kiri besar buat icon */
+        border-radius: 5px;
+        width: 120px; /* Lebar awal */
+        transition: all 0.4s ease;
+        font-family: sans-serif;
+    }
+
+    .search-b-input:focus {
+        outline: none;
+        width: 200px; /* Melebar saat diklik */
+        border-color: var(--accent-purple);
+        background-color: rgba(0,0,0,0.3);
+        box-shadow: 0 0 15px rgba(217, 70, 239, 0.2);
+    }
+
+    .search-b-icon-btn {
+        position: absolute;
+        left: 10px;
+        background: none;
+        border: none;
+        color: #666;
+        cursor: pointer;
+        pointer-events: none; /* Biar tembus ke input */
+    }
+
+    .search-b-input:focus + .search-b-icon-btn {
+        color: var(--accent-purple);
+    }
+
+    /* Tombol Hamburger (Mobile) */
+    .hamburger-b {
+        display: none;
+        background: none;
+        border: 1px solid var(--accent-yellow);
+        color: var(--accent-yellow);
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: 0.3s;
+    }
+    
+    .hamburger-b:hover {
+        background-color: var(--accent-yellow);
+        color: black;
+        box-shadow: 0 0 15px var(--accent-yellow);
+    }
+
+    /* --- MOBILE MENU --- */
+    .mobile-menu-b {
+        position: fixed;
+        top: 75px;
+        right: -100%; /* Sembunyi di kanan */
+        width: 250px;
+        height: calc(100vh - 75px);
+        background-color: var(--nav-b-bg);
+        border-left: 1px solid var(--accent-yellow);
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+    }
+
+    .mobile-menu-b.active {
+        right: 0;
+    }
+
+    .mobile-link-b {
+        color: #fff;
+        text-decoration: none;
+        padding: 15px 0;
+        border-bottom: 1px solid #222;
+        font-family: sans-serif;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        transition: 0.3s;
+    }
+
+    .mobile-link-b:hover {
+        color: var(--accent-yellow);
+        padding-left: 10px;
+        border-bottom-color: var(--accent-purple);
+    }
+
+    @media (max-width: 768px) {
+        .nav-b-menu { display: none; }
+        .hamburger-b { display: block; }
+    }
+</style>
+
+<nav id="navbar-b" class="navbar-b">
+    <div class="nav-b-container">
+        
+        <div class="nav-b-logo">
+            <span class="logo-accent">⚡</span> NEXUS
+        </div>
+
+        <ul class="nav-b-menu">
+            <li><a href="#about" class="nav-b-link">About</a></li>
+            <li><a href="#pendidikan" class="nav-b-link">Pendidikan</a></li>
+            <li><a href="#skills" class="nav-b-link">Skills</a></li>
+            <li><a href="#projects" class="nav-b-link">Projects</a></li>
+            <li><a href="#contact" class="nav-b-link">Contact</a></li>
+        </ul>
+
+        <div class="nav-b-right">
+            
+            <div class="search-b-wrapper">
+                <input type="text" id="searchB" class="search-b-input" placeholder="Search...">
+                <button class="search-b-icon-btn" onclick="searchActionB()">🔍</button>
+            </div>
+
+            <button class="hamburger-b" onclick="toggleMobileB()">
+                ☰
+            </button>
+        </div>
+    </div>
+
+    <div id="mobileMenuB" class="mobile-menu-b">
+        <a href="#about" class="mobile-link-b" onclick="toggleMobileB()">About Me</a>
+        <a href="#pendidikan" class="mobile-link-b" onclick="toggleMobileB()">Pendidikan</a>
+        <a href="#skills" class="mobile-link-b" onclick="toggleMobileB()">Skills</a>
+        <a href="#projects" class="mobile-link-b" onclick="toggleMobileB()">Projects</a>
+        <a href="#contact" class="mobile-link-b" onclick="toggleMobileB()">Contact</a>
+        
+        <div style="margin-top: 20px; border-top: 1px solid #333; padding-top: 20px;">
+             <input type="text" id="searchBMobile" placeholder="Cari..." 
+                    style="width: 100%; padding: 10px; background: #111; border: 1px solid #333; color: white;">
+             <button onclick="searchActionBMobile()" 
+                     style="margin-top:10px; width: 100%; padding: 10px; background: var(--accent-yellow); border:none; font-weight:bold; cursor:pointer;">
+                 CARI
+             </button>
+        </div>
+    </div>
+</nav>
+
+<script>
+    // 1. Toggle Mobile Menu (Slide dari kanan)
+    function toggleMobileB() {
+        const menu = document.getElementById('mobileMenuB');
+        menu.classList.toggle('active');
+    }
+
+    // 2. Fungsi Search Navbar B
+    function searchActionB() {
+        const query = document.getElementById('searchB').value;
+        if(query) {
+            const found = window.find(query);
+            if(!found) alert("Not found: " + query);
+        } else {
+            // Kalau kosong, fokuskan ke input
+            document.getElementById('searchB').focus();
+        }
+    }
+
+    function searchActionBMobile() {
+        const query = document.getElementById('searchBMobile').value;
+        if(query) {
+            toggleMobileB(); // Tutup menu
+            const found = window.find(query);
+            if(!found) alert("Not found: " + query);
+        }
+    }
+    
+    // 3. Enter key support for search
+    document.getElementById('searchB').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            searchActionB();
+        }
+    });
+</script>
+
+<style>
+    /* --- CSS VARIABLES LOKAL (ABOUT B) --- */
+    #about {
+        --cyber-bg: #050505; /* Hitam Hampir Pekat */
+        --cyber-grid: rgba(255, 215, 0, 0.05); /* Grid Kuning Tipis */
+        --neon-yellow: #FFD700;
+        --neon-purple: #d946ef; /* Ungu Sinkronisasi */
+        --text-main: #ffffff;
+        --text-dim: #aaaaaa;
+    }
+
+    /* --- LAYOUT UTAMA --- */
+    .about-b-section {
+        position: relative;
+        padding: 120px 5% 100px 5%;
+        background-color: var(--cyber-bg);
+        overflow: hidden;
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Background Grid Animation */
+    .cyber-grid-bg {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background-image: 
+            linear-gradient(var(--cyber-grid) 1px, transparent 1px),
+            linear-gradient(90deg, var(--cyber-grid) 1px, transparent 1px);
+        background-size: 40px 40px;
+        z-index: 0;
+        /* Efek Vignette (Gelap di pinggir) */
+        mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+        -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+    }
+
+    .about-b-container {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: row-reverse; /* Foto di Kanan, Teks di Kiri (Beda dgn A) */
+        align-items: center;
+        gap: 60px;
+        max-width: 1200px;
+        width: 100%;
+    }
+
+    /* --- KOLOM FOTO (HEXAGON) --- */
+    .about-b-photo {
+        flex: 0 0 400px; /* Ukuran Fix */
+        height: 400px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Frame Hexagon Luar (Ungu - Sync) */
+    .hex-frame {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, var(--neon-yellow), var(--neon-purple));
+        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        animation: pulseGlow 3s infinite alternate;
+        z-index: 1;
+    }
+
+    /* Foto Hexagon Dalam */
+    .hex-img-wrapper {
+        width: 96%; /* Sedikit lebih kecil dari frame biar kelihatan bordernya */
+        height: 96%;
+        background-color: #111;
+        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        position: relative;
+        z-index: 2;
+        overflow: hidden;
+    }
+
+    .hex-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(80%); /* Foto jadi agak hitam putih biar garang */
+        transition: 0.5s;
+    }
+
+    /* Saat Hover, foto jadi berwarna */
+    .about-b-photo:hover .hex-img-wrapper img {
+        filter: grayscale(0%);
+        transform: scale(1.1);
+    }
+
+    @keyframes pulseGlow {
+        from { filter: drop-shadow(0 0 5px var(--neon-yellow)); }
+        to { filter: drop-shadow(0 0 20px var(--neon-purple)); }
+    }
+
+    /* --- KOLOM TEKS --- */
+    .about-b-text {
+        flex: 1;
+        text-align: right; /* Rata Kanan biar unik */
+    }
+
+    .label-cyber {
+        font-family: 'Courier New', monospace; /* Font koding */
+        color: var(--neon-yellow);
+        font-size: 1rem;
+        letter-spacing: 3px;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .name-cyber {
+        font-family: sans-serif;
+        font-size: 4rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        line-height: 1;
+        margin-bottom: 20px;
+        /* Efek Teks Metalik (Gradient Text) */
+        background: linear-gradient(to right, #fff, #aaa, #fff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 0 2px rgba(255,255,255,0.5));
+    }
+
+    .desc-cyber {
+        font-family: sans-serif;
+        color: var(--text-dim);
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 30px;
+        padding-left: 20%; /* Biar teksnya gak lebar banget */
+    }
+
+    /* Highlight pencarian nanti */
+    .highlight {
+        background-color: var(--neon-purple);
+        color: white;
+    }
+
+    /* Tombol Cyber */
+    .btn-cyber {
+        display: inline-block;
+        padding: 12px 35px;
+        background: transparent;
+        border: 1px solid var(--neon-yellow);
+        color: var(--neon-yellow);
+        font-family: 'Courier New', monospace;
+        font-weight: bold;
+        text-decoration: none;
+        text-transform: uppercase;
+        position: relative;
+        overflow: hidden;
+        transition: 0.3s;
+    }
+
+    .btn-cyber::before {
+        content: '';
+        position: absolute;
+        top: 0; left: -100%;
+        width: 100%; height: 100%;
+        background: var(--neon-yellow);
+        transition: 0.3s;
+        z-index: -1;
+    }
+
+    .btn-cyber:hover {
+        color: black;
+    }
+    .btn-cyber:hover::before {
+        left: 0;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 900px) {
+        .about-b-container {
+            flex-direction: column-reverse; /* Foto di atas, Teks di bawah */
+            text-align: center;
+            gap: 30px;
+        }
+        .about-b-text {
+            text-align: center;
+        }
+        .desc-cyber {
+            padding-left: 0;
+        }
+        .about-b-photo {
+            flex: none;
+            width: 300px;
+            height: 300px;
+        }
+        .name-cyber {
+            font-size: 2.8rem;
+        }
+    }
+</style>
+
+<section id="about" class="about-b-section">
+    <div class="cyber-grid-bg"></div>
+
+    <div class="about-b-container">
+        
+        <div class="about-b-text">
+            <span class="label-cyber">&lt;HELLO_WORLD /&gt;</span>
+            
+            <h1 class="name-cyber">
+                ALEXANDRIA<br>
+                WIJAYA
+            </h1>
+
+            <p class="desc-cyber">
+                Seorang pengembang web dengan fokus pada antarmuka futuristik dan kinerja tinggi. 
+                Menggabungkan logika kode dengan estetika desain modern. 
+                Cobalah cari kata "Kinerja" di search bar atas untuk menguji sistem.
+            </p>
+
+            <div style="display: flex; gap: 15px; justify-content: flex-end;" class="action-wrapper">
+                <a href="#contact" class="btn-cyber">Initiate Contact</a>
+                <a href="#projects" class="btn-cyber" style="border-color: var(--neon-purple); color: var(--neon-purple);">View Data</a>
+            </div>
+        </div>
+
+        <div class="about-b-photo">
+            <div class="hex-frame"></div> <div class="hex-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Profile">
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    // Script kecil untuk fix alignment tombol di mobile
+    const mediaQuery = window.matchMedia('(max-width: 900px)')
+    function handleTabletChange(e) {
+      const wrappers = document.querySelectorAll('.action-wrapper');
+      wrappers.forEach(w => {
+          if (e.matches) {
+            w.style.justifyContent = 'center';
+          } else {
+            w.style.justifyContent = 'flex-end';
+          }
+      });
+    }
+    mediaQuery.addListener(handleTabletChange);
+    handleTabletChange(mediaQuery);
+</script>
+
+
+
+<style>
+    /* --- CSS VARIABLES LOKAL (PENDIDIKAN B) --- */
+    #pendidikan {
+        --edu-b-bg: #080808; /* Hitam pekat beda dikit dari About */
+        --neon-yellow: #FFD700;
+        --neon-purple: #d946ef;
+        --terminal-text: #00ff41; /* Hijau Terminal klasik untuk status */
+        --card-bg: rgba(20, 20, 20, 0.8);
+        --border-color: #333;
+    }
+
+    /* --- LAYOUT --- */
+    .edu-b-section {
+        padding: 100px 5%;
+        background-color: var(--edu-b-bg);
+        font-family: 'Courier New', Courier, monospace; /* Font Hacker */
+        color: #ddd;
+        position: relative;
+        /* Pattern Garis Scanline TV (Opsional, biar retro) */
+        background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+        background-size: 100% 2px, 3px 100%;
+    }
+
+    .edu-b-header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    .edu-b-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--neon-yellow);
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        display: inline-block;
+        border-bottom: 2px solid var(--neon-purple);
+        padding-bottom: 10px;
+    }
+
+    /* Efek Kursor Berkedip di Judul */
+    .cursor-blink {
+        display: inline-block;
+        width: 12px;
+        height: 25px;
+        background-color: var(--neon-yellow);
+        animation: blink 1s infinite;
+        vertical-align: middle;
+        margin-left: 5px;
+    }
+
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+    }
+
+    /* --- CONTAINER KARTU --- */
+    .logs-container {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    /* --- KARTU LOG (ITEM PENDIDIKAN) --- */
+    .log-card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-left: 4px solid var(--neon-yellow); /* Aksen Kiri Kuning */
+        padding: 25px;
+        position: relative;
+        transition: all 0.3s ease;
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 98% 100%, 0 100%); /* Sudut terpotong dikit */
+    }
+
+    /* Hover Effect: Glow Ungu */
+    .log-card:hover {
+        border-color: var(--neon-purple);
+        border-left-color: var(--neon-purple);
+        box-shadow: 0 0 20px rgba(217, 70, 239, 0.2); /* Ungu Glow */
+        transform: translateX(10px); /* Geser kanan dikit */
+    }
+
+    /* Header Kartu (Baris atas: Tahun & Status) */
+    .log-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        font-size: 0.9rem;
+        color: #888;
+        border-bottom: 1px dashed #333;
+        padding-bottom: 10px;
+    }
+
+    .log-year {
+        color: var(--neon-yellow);
+        font-weight: bold;
+    }
+
+    .log-status {
+        color: var(--terminal-text); /* Hijau */
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    /* Konten Kartu */
+    .log-school {
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: #fff;
+        margin: 0 0 5px 0;
+        font-family: sans-serif; /* Judul sekolah tetap sans-serif biar mudah dibaca */
+        text-transform: uppercase;
+    }
+
+    .log-major {
+        color: var(--neon-purple);
+        font-size: 1rem;
+        margin-bottom: 15px;
+        font-style: italic;
+    }
+
+    .log-desc {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #ccc;
+    }
+
+    /* Hiasan Angka Index di background (01, 02) */
+    .log-index {
+        position: absolute;
+        right: 20px;
+        bottom: 10px;
+        font-size: 4rem;
+        font-weight: 900;
+        color: rgba(255, 255, 255, 0.03);
+        pointer-events: none;
+    }
+
+    @media (max-width: 600px) {
+        .edu-b-title { font-size: 1.5rem; }
+        .log-school { font-size: 1.2rem; }
+    }
+</style>
+
+<section id="pendidikan" class="edu-b-section">
+    <div class="edu-b-header">
+        <h2 class="edu-b-title">
+            > SYSTEM_LOGS: EDUCATION<span class="cursor-blink"></span>
+        </h2>
+        <p style="color: #666; margin-top: 10px;">[ LOADING ACADEMIC HISTORY... ]</p>
+    </div>
+
+    <div class="logs-container">
+        
+        <div class="log-card">
+            <span class="log-index">01</span>
+            <div class="log-header">
+                <span class="log-year">[ 2020 - 2024 ]</span>
+                <span class="log-status">STATUS: COMPLETED_SUCCESFULLY</span>
+            </div>
+            <h3 class="log-school">Universitas Teknologi Digital</h3>
+            <div class="log-major">S1 Teknik Informatika</div>
+            <p class="log-desc">
+                >> Output: IPK 3.85 (Cumlaude)<br>
+                >> Focus: Artificial Intelligence & Web Security.<br>
+                >> Melakukan enkripsi data tugas akhir dengan metode kriptografi modern.
+            </p>
+        </div>
+
+        <div class="log-card">
+            <span class="log-index">02</span>
+            <div class="log-header">
+                <span class="log-year">[ 2017 - 2020 ]</span>
+                <span class="log-status">STATUS: ARCHIVED</span>
+            </div>
+            <h3 class="log-school">SMA Negeri 1 Cyber City</h3>
+            <div class="log-major">Jurusan Ilmu Pengetahuan Alam</div>
+            <p class="log-desc">
+                >> Activities: Ketua Klub Komputer.<br>
+                >> Achievement: Juara 1 Lomba Coding tingkat Kota.<br>
+                >> Memulai inisiasi pembelajaran bahasa Python dasar.
+            </p>
+        </div>
+
+        <div class="log-card">
+            <span class="log-index">03</span>
+            <div class="log-header">
+                <span class="log-year">[ 2014 - 2017 ]</span>
+                <span class="log-status">STATUS: ARCHIVED</span>
+            </div>
+            <h3 class="log-school">SMP Negeri 5 Jakarta</h3>
+            <div class="log-major">-</div>
+            <p class="log-desc">
+                >> System Init: Pengenalan dasar logika matematika.<br>
+                >> Mengikuti ekstrakurikuler Robotika dasar.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    /* --- VARIABLES LOKAL (SKILLS B) --- */
+    #skills {
+        --skill-bg: #050505;
+        --card-glass: rgba(255, 255, 255, 0.03);
+        --neon-yellow: #FFD700;
+        --neon-purple: #d946ef;
+        --text-main: #ffffff;
+        --border-tech: rgba(255, 215, 0, 0.3);
+    }
+
+    /* --- LAYOUT --- */
+    .skills-b-section {
+        padding: 100px 5%;
+        background-color: var(--skill-bg);
+        /* Background Circuit Pattern Halus */
+        background-image: radial-gradient(#222 1px, transparent 1px);
+        background-size: 20px 20px;
+        position: relative;
+    }
+
+    .skills-b-header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    .skills-b-title {
+        font-family: sans-serif;
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        /* Text Stroke Kuning */
+        -webkit-text-stroke: 1px var(--neon-yellow); 
+        text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    }
+
+    /* --- GRID --- */
+    .modules-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* --- MODULE CARD --- */
+    .skill-module {
+        background: var(--card-glass);
+        border: 1px solid var(--border-tech);
+        padding: 25px;
+        position: relative;
+        /* Sudut Techy (Potong siku) */
+        clip-path: polygon(
+            20px 0, 100% 0, 
+            100% calc(100% - 20px), calc(100% - 20px) 100%, 
+            0 100%, 0 20px
+        );
+        transition: all 0.3s;
+        backdrop-filter: blur(5px);
+    }
+
+    .skill-module:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: var(--neon-yellow);
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.1);
+        transform: translateY(-5px);
+    }
+
+    /* Judul Kategori (Frontend, Backend, etc) */
+    .module-title {
+        color: var(--neon-yellow);
+        font-family: 'Courier New', monospace;
+        font-size: 1.1rem;
+        font-weight: bold;
+        border-bottom: 1px solid #333;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    /* --- ITEM SKILL & BAR --- */
+    .tech-item {
+        margin-bottom: 20px;
+    }
+
+    .tech-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-family: sans-serif;
+        font-size: 0.9rem;
+        color: #ccc;
+        font-weight: 600;
+    }
+
+    .tech-percent {
+        color: var(--neon-purple);
+        font-family: 'Courier New', monospace;
+    }
+
+    /* Container Bar (Jalur Energi) */
+    .energy-bar-bg {
+        width: 100%;
+        height: 8px;
+        background-color: #111;
+        border-radius: 2px;
+        overflow: hidden;
+        position: relative;
+        border: 1px solid #333;
+    }
+
+    /* Isi Bar (Cairan Energi) */
+    .energy-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--neon-yellow), var(--neon-purple));
+        width: 0%; /* Start 0 for animation */
+        position: relative;
+        box-shadow: 0 0 10px var(--neon-yellow);
+        transition: width 1.5s cubic-bezier(0.1, 0.7, 1.0, 0.1);
+    }
+
+    /* Efek Kilap Bergerak di Bar */
+    .energy-fill::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; bottom: 0; right: 0;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+        transform: translateX(-100%);
+        animation: shimmerTech 2s infinite;
+    }
+
+    @keyframes shimmerTech {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
+    /* Hiasan Sudut Kecil (Deco) */
+    .deco-corner {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border: 2px solid var(--neon-purple);
+        bottom: 5px;
+        right: 5px;
+        border-top: none;
+        border-left: none;
+    }
+</style>
+
+<section id="skills" class="skills-b-section">
+    <div class="skills-b-header">
+        <h2 class="skills-b-title">ARSENAL & TOOLS</h2>
+        <p style="color: #666; font-family: 'Courier New'; margin-top: 10px;">[ SYSTEM DIAGNOSTICS: ONLINE ]</p>
+    </div>
+
+    <div class="modules-grid">
+        
+        <div class="skill-module">
+            <div class="module-title">
+                <span>// WEB_CORE</span>
+                <span>V.2.0</span>
+            </div>
+
+            <div class="tech-item">
+                <div class="tech-info">
+                    <span>HTML5 & CSS3</span>
+                    <span class="tech-percent">[ 95% ]</span>
+                </div>
+                <div class="energy-bar-bg">
+                    <div class="energy-fill" style="width: 95%"></div>
+                </div>
+            </div>
+
+            <div class="tech-item">
+                <div class="tech-info">
+                    <span>JavaScript (ES6+)</span>
+                    <span class="tech-percent">[ 85% ]</span>
+                </div>
+                <div class="energy-bar-bg">
+                    <div class="energy-fill" style="width: 85%"></div>
+                </div>
+            </div>
+
+            <div class="deco-corner"></div>
+        </div>
+
+        <div class="skill-module">
+            <div class="module-title">
+                <span>// FRAMEWORKS</span>
+                <span>MOD_ACTIVE</span>
+            </div>
+
+            <div class="tech-item">
+                <div class="tech-info">
+                    <span>Tailwind CSS</span>
+                    <span class="tech-percent">[ 90% ]</span>
+                </div>
+                <div class="energy-bar-bg">
+                    <div class="energy-fill" style="width: 90%"></div>
+                </div>
+            </div>
+
+            <div class="tech-item">
+                <div class="tech-info">
+                    <span>React / Vue</span>
+                    <span class="tech-percent">[ 75% ]</span>
+                </div>
+                <div class="energy-bar-bg">
+                    <div class="energy-fill" style="width: 75%"></div>
+                </div>
+            </div>
+
+            <div class="deco-corner" style="border-color: var(--neon-yellow);"></div>
+        </div>
+
+        <div class="skill-module">
+            <div class="module-title">
+                <span>// BACKEND_SYS</span>
+                <span>DB_LINKED</span>
+            </div>
+
+            <div class="tech-item">
+                <div class="tech-info">
+                    <span>Python & Django</span>
+                    <span class="tech-percent">[ 80% ]</span>
+                </div>
+                <div class="energy-bar-bg">
+                    <div class="energy-fill" style="width: 80%"></div>
+                </div>
+            </div>
+
+            <div class="tech-item">
+                <div class="tech-info">
+                    <span>MySQL / PostgreSQL</span>
+                    <span class="tech-percent">[ 70% ]</span>
+                </div>
+                <div class="energy-bar-bg">
+                    <div class="energy-fill" style="width: 70%"></div>
+                </div>
+            </div>
+            
+            <div class="deco-corner"></div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    // Opsional: Script ini bikin bar ngisi dari 0 pas discroll ke section ini
+    // Kalau gak pake script ini, bar akan langsung penuh saat loading
+    document.addEventListener("DOMContentLoaded", function() {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bars = entry.target.querySelectorAll('.energy-fill');
+                    bars.forEach(bar => {
+                        // Trik memicu animasi CSS: ambil width asli dari atribut style
+                        // Lalu set ulang. (Tapi CSS transition di atas sudah cukup handle sebenarnya)
+                        // Untuk simplisitas, CSS transition di atas sudah cukup 'smooth' saat load
+                        bar.style.opacity = 1; 
+                    });
+                }
+            });
+        });
+        
+        const skillSection = document.querySelector('#skills');
+        if(skillSection) observer.observe(skillSection);
+    });
+</script>
+
+<style>
+    /* --- VARIABLES LOKAL (PROJECTS B) --- */
+    #projects {
+        --proj-bg: #080808;
+        --card-bg: #111;
+        --neon-yellow: #FFD700;
+        --neon-purple: #d946ef;
+        --text-main: #ffffff;
+        --text-dim: #888;
+        --scanline: rgba(0,0,0,0.5);
+    }
+
+    /* --- LAYOUT --- */
+    .proj-b-section {
+        padding: 100px 5%;
+        background-color: var(--proj-bg);
+        /* Background Dot Pattern */
+        background-image: radial-gradient(#333 1px, transparent 1px);
+        background-size: 30px 30px;
+        position: relative;
+    }
+
+    .proj-b-header {
+        text-align: center;
+        margin-bottom: 70px;
+    }
+
+    .proj-b-title {
+        font-family: sans-serif;
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Garis hiasan di bawah judul */
+    .proj-b-title::after {
+        content: '';
+        display: block;
+        width: 60%;
+        height: 4px;
+        background: var(--neon-yellow);
+        margin: 10px auto 0;
+        box-shadow: 0 0 15px var(--neon-yellow);
+    }
+
+    /* --- GRID CONTAINER --- */
+    .proj-b-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* --- CARD --- */
+    .holo-card {
+        background-color: var(--card-bg);
+        border: 1px solid #333;
+        position: relative;
+        transition: all 0.4s ease;
+        overflow: hidden;
+    }
+
+    /* Sudut Siku Cyber (Hiasan Border) */
+    .holo-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        border: 1px solid transparent;
+        pointer-events: none;
+        transition: 0.4s;
+        z-index: 10;
+    }
+
+    /* HOVER EFFECT: Border Menyala */
+    .holo-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        border-color: var(--neon-purple);
+    }
+    
+    .holo-card:hover::before {
+        border-top: 2px solid var(--neon-yellow);
+        border-bottom: 2px solid var(--neon-yellow);
+    }
+
+    /* --- GAMBAR PROYEK --- */
+    .holo-img-box {
+        height: 220px;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        border-bottom: 1px solid #333;
+    }
+
+    .holo-img-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+        filter: contrast(1.1) brightness(0.8);
+    }
+
+    /* Efek Scanline (Garis TV) di atas gambar */
+    .scan-overlay {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+        background-size: 100% 2px, 3px 100%;
+        pointer-events: none;
+        opacity: 1;
+        transition: 0.5s;
+    }
+
+    .holo-card:hover .holo-img-box img {
+        transform: scale(1.1);
+        filter: contrast(1) brightness(1); /* Jadi normal pas hover */
+    }
+    
+    .holo-card:hover .scan-overlay {
+        opacity: 0.3; /* Scanline menipis pas hover */
+    }
+
+    /* --- KONTEN TEKS --- */
+    .holo-content {
+        padding: 25px;
+    }
+
+    .holo-title {
+        font-family: sans-serif;
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: #fff;
+        margin: 0 0 10px 0;
+        text-transform: uppercase;
+    }
+
+    .holo-desc {
+        font-family: 'Courier New', monospace; /* Font coding */
+        font-size: 0.9rem;
+        color: var(--text-dim);
+        line-height: 1.5;
+        margin-bottom: 20px;
+        height: 60px; /* Batasi tinggi biar rapi */
+        overflow: hidden;
+    }
+
+    /* --- TAGS --- */
+    .holo-tags {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 25px;
+    }
+
+    .tech-tag {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--neon-yellow);
+        border: 1px solid var(--neon-yellow);
+        padding: 3px 10px;
+        text-transform: uppercase;
+        background: rgba(255, 215, 0, 0.05);
+    }
+
+    /* --- BUTTONS --- */
+    .holo-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid #222;
+        padding-top: 15px;
+    }
+
+    .btn-holo {
+        text-decoration: none;
+        color: #fff;
+        font-size: 0.9rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        transition: 0.3s;
+    }
+    
+    .btn-holo:hover {
+        color: var(--neon-purple);
+        text-shadow: 0 0 8px var(--neon-purple);
+    }
+    
+    .folder-icon {
+        font-family: monospace;
+        color: #555;
+    }
+
+</style>
+
+<section id="projects" class="proj-b-section">
+    <div class="proj-b-header">
+        <h2 class="proj-b-title">DEPLOYMENT_DATA</h2>
+        <p style="color: #666; font-family: 'Courier New'; margin-top: 10px;">[ SELECT FILE TO VIEW DETAILS ]</p>
+    </div>
+
+    <div class="proj-b-grid">
+        
+        <div class="holo-card">
+            <div class="holo-img-box">
+                <div class="scan-overlay"></div>
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Project 1">
+            </div>
+            <div class="holo-content">
+                <h3 class="holo-title">Cyber Security Dashboard</h3>
+                <p class="holo-desc">
+                    > System monitoring tool dengan real-time traffic analysis dan deteksi anomali jaringan.
+                </p>
+                <div class="holo-tags">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">D3.js</span>
+                    <span class="tech-tag">Node</span>
+                </div>
+                <div class="holo-actions">
+                    <span class="folder-icon">DIR/PROJECT_01</span>
+                    <a href="#" class="btn-holo">EXECUTE VIEW &rarr;</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="holo-card">
+            <div class="holo-img-box">
+                <div class="scan-overlay"></div>
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Project 2">
+            </div>
+            <div class="holo-content">
+                <h3 class="holo-title">AI Image Generator</h3>
+                <p class="holo-desc">
+                    > Platform berbasis Python untuk generate gambar futuristik menggunakan model Deep Learning.
+                </p>
+                <div class="holo-tags">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">TensorFlow</span>
+                    <span class="tech-tag">Flask</span>
+                </div>
+                <div class="holo-actions">
+                    <span class="folder-icon">DIR/PROJECT_02</span>
+                    <a href="#" class="btn-holo">EXECUTE VIEW &rarr;</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="holo-card">
+            <div class="holo-img-box">
+                <div class="scan-overlay"></div>
+                <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Project 3">
+            </div>
+            <div class="holo-content">
+                <h3 class="holo-title">Crypto Trading Bot</h3>
+                <p class="holo-desc">
+                    > Automasi trading aset kripto dengan algoritma prediksi harga dan manajemen risiko.
+                </p>
+                <div class="holo-tags">
+                    <span class="tech-tag">Solidity</span>
+                    <span class="tech-tag">Web3.js</span>
+                    <span class="tech-tag">API</span>
+                </div>
+                <div class="holo-actions">
+                    <span class="folder-icon">DIR/PROJECT_03</span>
+                    <a href="#" class="btn-holo">EXECUTE VIEW &rarr;</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<style>
+    /* --- VARIABLES LOKAL (CONTACT B) --- */
+    #contact {
+        --con-b-bg: #050505;
+        --panel-bg: rgba(20, 20, 20, 0.7);
+        --neon-yellow: #FFD700;
+        --neon-purple: #d946ef;
+        --terminal-green: #00ff41; /* Warna teks input */
+        --text-main: #ffffff;
+        --text-dim: #888;
+        --border-tech: #333;
+    }
+
+    /* --- LAYOUT --- */
+    .contact-b-section {
+        padding: 100px 5%;
+        background-color: var(--con-b-bg);
+        position: relative;
+        /* Background Grid Circuit */
+        background-image: 
+            linear-gradient(rgba(255, 215, 0, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 215, 0, 0.03) 1px, transparent 1px);
+        background-size: 50px 50px;
+    }
+
+    .con-b-header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    .con-b-title {
+        font-family: sans-serif;
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    /* --- CONTAINER (PANEL) --- */
+    .con-b-container {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: 0; /* Nempel biar kayak satu mesin */
+        max-width: 1000px;
+        margin: 0 auto;
+        border: 1px solid var(--border-tech);
+        background-color: var(--panel-bg);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    }
+
+    /* --- KOLOM KIRI (INFO) --- */
+    .con-info-panel {
+        padding: 40px;
+        background-color: rgba(255, 215, 0, 0.02); /* Kuning tipis banget */
+        border-right: 1px solid var(--border-tech);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .info-b-item {
+        margin-bottom: 30px;
+    }
+
+    .info-label {
+        font-family: 'Courier New', monospace;
+        color: var(--neon-purple);
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .info-value {
+        font-family: sans-serif;
+        color: #fff;
+        font-size: 1.1rem;
+        font-weight: bold;
+    }
+
+    /* Social Hexagons */
+    .social-b-wrapper {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .hex-btn {
+        width: 45px;
+        height: 40px;
+        background-color: #111;
+        color: var(--neon-yellow);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+        transition: 0.3s;
+        border: 1px solid transparent; /* Buat trigger hover */
+        font-weight: bold;
+        font-size: 0.8rem;
+    }
+
+    .hex-btn:hover {
+        background-color: var(--neon-yellow);
+        color: #000;
+        transform: scale(1.1);
+        box-shadow: 0 0 15px var(--neon-yellow);
+    }
+
+    /* --- KOLOM KANAN (FORM) --- */
+    .con-form-panel {
+        padding: 40px;
+        position: relative;
+    }
+
+    /* Hiasan Sudut Panel */
+    .corner-deco {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--neon-yellow);
+        border-bottom: none;
+        border-right: none;
+        top: 10px;
+        left: 10px;
+    }
+    .corner-deco.bottom {
+        top: auto; left: auto;
+        bottom: 10px; right: 10px;
+        border: 2px solid var(--neon-purple);
+        border-top: none;
+        border-left: none;
+    }
+
+    .form-group-b {
+        margin-bottom: 25px;
+    }
+
+    .label-cyber {
+        display: block;
+        color: var(--text-dim);
+        font-family: 'Courier New', monospace;
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+    }
+
+    .input-cyber {
+        width: 100%;
+        background-color: #0a0a0a;
+        border: 1px solid #333;
+        border-left: 3px solid #333;
+        color: var(--terminal-green); /* Teks Hijau Hacker */
+        padding: 12px 15px;
+        font-family: 'Courier New', monospace;
+        font-size: 1rem;
+        transition: 0.3s;
+        box-sizing: border-box;
+    }
+
+    .input-cyber:focus {
+        outline: none;
+        border-color: var(--neon-yellow);
+        border-left-color: var(--neon-yellow);
+        box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.1);
+    }
+
+    textarea.input-cyber {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    /* Tombol Kirim Keren */
+    .btn-transmit {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(90deg, #222, #111);
+        border: 1px solid var(--neon-purple);
+        color: #fff;
+        font-family: sans-serif;
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 2px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition: 0.4s;
+    }
+
+    .btn-transmit:hover {
+        background: var(--neon-purple);
+        box-shadow: 0 0 20px rgba(217, 70, 239, 0.4);
+        border-color: var(--neon-purple);
+    }
+    
+    /* Animasi garis jalan di tombol */
+    .btn-transmit::before {
+        content: '';
+        position: absolute;
+        top: 0; left: -100%;
+        width: 100%; height: 2px;
+        background: var(--neon-yellow);
+        animation: scanBtn 2s infinite linear;
+    }
+    
+    @keyframes scanBtn {
+        0% { left: -100%; }
+        100% { left: 100%; }
+    }
+
+    /* --- FOOTER B --- */
+    footer {
+        background-color: #000;
+        border-top: 1px solid #222;
+        padding: 30px;
+        text-align: center;
+    }
+
+    .footer-tech-text {
+        font-family: 'Courier New', monospace;
+        color: #555;
+        font-size: 0.8rem;
+    }
+
+    .footer-tech-text span {
+        color: var(--neon-yellow);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+        .con-b-container {
+            grid-template-columns: 1fr;
+        }
+        .con-info-panel {
+            border-right: none;
+            border-bottom: 1px solid var(--border-tech);
+        }
+    }
+</style>
+
+<section id="contact" class="contact-b-section">
+    <div class="con-b-header">
+        <h2 class="con-b-title">ESTABLISH UPLINK</h2>
+        <p style="color: #666; font-family: 'Courier New'; margin-top: 10px;">[ SECURE CONNECTION READY ]</p>
+    </div>
+
+    <div class="con-b-container">
+        
+        <div class="con-info-panel">
+            <div class="info-b-item">
+                <span class="info-label">> TARGET_EMAIL</span>
+                <span class="info-value">contact@nexus.dev</span>
+            </div>
+            
+            <div class="info-b-item">
+                <span class="info-label">> COMMS_FREQ</span>
+                <span class="info-value">+62 812 0000 1010</span>
+            </div>
+
+            <div class="info-b-item">
+                <span class="info-label">> BASE_COORDINATES</span>
+                <span class="info-value">Jakarta, IDN - Sector 7</span>
+            </div>
+
+            <div class="info-b-item">
+                <span class="info-label">> SOCIAL_NODES</span>
+                <div class="social-b-wrapper">
+                    <a href="#" class="hex-btn">GH</a>
+                    <a href="#" class="hex-btn">LN</a>
+                    <a href="#" class="hex-btn">IG</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="con-form-panel">
+            <div class="corner-deco"></div>
+            <div class="corner-deco bottom"></div>
+
+            <form onsubmit="kirimPesanB(event)">
+                <div class="form-group-b">
+                    <label class="label-cyber">CODENAME / NAME:</label>
+                    <input type="text" class="input-cyber" placeholder="_" required>
+                </div>
+
+                <div class="form-group-b">
+                    <label class="label-cyber">RETURN_ADDRESS / EMAIL:</label>
+                    <input type="email" class="input-cyber" placeholder="_" required>
+                </div>
+
+                <div class="form-group-b">
+                    <label class="label-cyber">DATA_PACKET / MESSAGE:</label>
+                    <textarea class="input-cyber" placeholder="Input transmission data..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-transmit">
+                    INITIATE TRANSMISSION
+                </button>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <p class="footer-tech-text">
+        SYSTEM STATUS: <span>ONLINE</span> | VERSION: 2.5.0 <br><br>
+        &copy; 2025 NEXUS PORTFOLIO. ALL RIGHTS RESERVED.<br>
+        DESIGNED BY <span style="color: var(--neon-purple);">[ YOUR_NAME ]</span>
+    </p>
+</footer>
+
+<script>
+    function kirimPesanB(e) {
+        e.preventDefault();
+        // Efek suara atau alert futuristik
+        alert(">> TRANSMISSION SUCCESSFUL.\n>> DATA UPLOADED TO SERVER.");
+        e.target.reset();
+    }
+</script>
+    </body>
+</html>

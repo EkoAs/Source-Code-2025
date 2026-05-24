@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id-en">
+<head>
+    <title>Pixel Math - Menu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
+</head>
+<body>
+
+<div class="game-wrapper">
+    <!-- ==============================MENU UTAMA========================================== -->
+    <div class="container">
+        <h1 class="title-neon">PIXEL<br>MATH<br>ULTIMATE</h1>
+        <div style="width: 100%; text-align: center; margin-top: -20px; margin-bottom: 30px;">
+            <p style="color: #ffcc00; font-size: 0.9rem; margin: 0 0 5px 0;">kelompok</p>
+            <p style="color: #888888; font-size: 0.6rem; margin: 0;">TUGASS PWD</p>
+        </div>
+        <div class="rank-box">
+            <p>CHAMPION:</p>
+            <h3 id="top-rank">{{ highscore }}</h3>
+        </div>
+
+        <p>ENTER YOUR NAME:</p>
+        <input type="text" id="player-name" class="input-pixel" placeholder="NAME">
+
+        <div class="menu-grid">
+            
+            <button class="btn-pixel" onclick="MasterEngine.goToMode('perkalian')">PERKALIAN</button>
+            <button class="btn-pixel" onclick="MasterEngine.goToMode('penambahan')">PENAMBAHAN</button>
+            
+         
+            <button class="btn-pixel" onclick="MasterEngine.goToMode('pengurangan')">PENGURANGAN</button>
+            <button class="btn-pixel" onclick="MasterEngine.goToMode('pembagian')">PEMBAGIAN</button>
+            
+            
+            <button class="btn-pixel" onclick="MasterEngine.goToMode('campuran')" style="grid-column: span 2; background: linear-gradient(180deg, #ffaa00 0%, #885500 100%); border-color: #ffd700; color: black;">
+                Ultimate Mode
+            </button>
+        </div>
+    </div>
+
+    <!-- =============================PANEL RUMUS========================================== -->
+    <div class="panel-kanan">
+    <div class="side-panel">
+       <h3 class="decor-title" style="background: #000; color: #0f0; text-shadow: 0 0 10px #0f0;">> SYSTEM_LOG</h3>
+       <div style="width: 100%; text-align: left; margin-top: 0; margin-bottom: 30px; margin-left: 10px">
+            <p style="color: #888888; font-size: 0.7rem; margin: 0 0 5px 0;">Ultimate Formula</p></div>
+       <div id="python-ticker" class="terminal-box">
+           Loading modules...
+       </div>
+   </div>
+
+   <!-- =======================PANEL INFORMASI========================================== -->
+   <div class="info-panel">
+        
+        <div class="panel-header">
+            <h2 class="panel-title">CREDITS & INFO</h2>
+            <p class="panel-subtitle">VERSION 2.5 - STABLE BUILD</p>
+        </div>
+
+        <ul class="name-list">
+            <li>DEV: -</li>
+            <li>DESIGN: -</li>
+            <li>TESTER: -</li>
+            <li>ENGINE: -</li>
+            <li>SERVER: -</li>
+            <li>SECURITY: -</li>
+        </ul>
+
+        <p class="panel-desc">
+            pppppppppppppppppppppppppppppppppppppppp
+			pppppppppppppppppppppppppppppppppppppppp
+			pppppppppppppppppppppppppppppppppppppppp
+			pppppppppppppppppppppppppppppppppppppppp
+        </p>
+
+        <div class="panel-footer">
+            &copy; 2025 PIXEL MATH UNIVERSE. ALL RIGHTS RESERVED.
+        </div>
+
+    </div>
+
+    </div>
+    </div>
+
+
+    <script>
+    // DAFTAR RUMUS=================================================================================
+        const formulaList = [
+            'lambda: f"{rn()} + {rn()} - {rn()}"',
+            'lambda: f"{rn()} * {rn()} - {rn()}"',
+            'lambda: f"{rn_big()} - {rn()} * {rn()}"',
+            
+            '# LEVEL 2: Kurung Sederhana\nlambda: f"({rn()} + {rn()}) * {rn()}"',
+            'lambda: f"{rn()} * ({rn()} + {rn()})"',
+            'lambda: f"({rn_big()} - {rn()}) * {rn()}"',
+            
+            '# LEVEL 3: Panjang Linear\nlambda: f"{rn()} + {rn()} + {rn()} - {rn()}"',
+            'lambda: f"{rn()} * {rn()} + {rn()} * {rn()}"',
+            
+            '# LEVEL 4: Double Kill\nlambda: f"({rn()} + {rn()}) - ({rn()} + {rn()})"',
+            'lambda: f"({rn()} * {rn()}) + ({rn()} * {rn()})"',
+            'lambda: f"({rn()} * {rn()}) - ({rn()} * {rn()})"',
+            
+            '# LEVEL 5: The Boss\nlambda: f"(({rn()} + {rn()}) * {rn()}) - {rn()}"',
+            'lambda: f"{rn_big()} - (({rn()} * {rn()}) - {rn()})"',
+            
+            '# LEVEL 6: Jebakan Batman\nlambda: f"({rn_big()} * {rn_big()}) * 0"',
+            'lambda: f"({rn()} + {rn_big()}) * 1"',
+            
+            '# LEVEL 7: Random Abis\nlambda: f"({rn()} + {rn()}) + ({rn_big()} - {rn()}) + {rn()}"',
+            'lambda: f"{rn()} + ({rn()} * {rn()}) - ({rn()} + {rn()})"',
+
+            '# HIDUP JOKOWI!!'
+
+
+        ];
+
+        const tickerBox = document.getElementById('python-ticker');
+
+        function updateFormula() {
+            const randomFormula = formulaList[Math.floor(Math.random() * formulaList.length)];
+            
+            // Tampilkan di kotak (innerText menjaga format baris baru \n)
+            tickerBox.innerText = randomFormula;
+            tickerBox.style.opacity = 0.5;
+            setTimeout(() => { tickerBox.style.opacity = 1; }, 100);
+        }
+        updateFormula();
+        setInterval(updateFormula, 3000);
+    </script>
+    <script src="{{ url_for('static', filename='js/master_engine.js') }}"></script>
+
+    <script>
+        const savedName = localStorage.getItem('pixel_player');
+        if(savedName) {
+            document.getElementById('player-name').value = savedName;
+        }
+    </script>
+    
+
+
+</body>
+</html>

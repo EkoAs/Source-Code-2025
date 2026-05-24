@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>TEST SELVER</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<h1>Perang Dunia II</h1>
+			<p><left>
+					<i>Perang Dunia II</i> atau <i>Perang Dunia Kedua</i> (biasa disingkat menjadi PDII atau PD2) adalah sebuah<br>
+					perang global yangberlangsung mulai tahun 1939 sampai 1945. Perang ini melibatkan banyak sekali negara di dunia<br>
+					kekuatan besar—yang pada akhirnya membentuk dua aliansi militer yang saling bertentangan: Sekutu dan Poros.<br>
+					Perang ini merupakan perang terluas dalam sejarah yang melibatkan lebih dari 100 juta orang di berbagai pasukan<br>
+					militer.<br>
+			</left></p>
+			<p><left>
+					Dalam keadaan "perang total", negara-negara besar memaksimalkan seluruh kemampuan ekonomi, industri, dan<br>
+					ilmiahnya untuk keperluan perang, sehingga menghapus perbedaan antara sumber daya sipil dan militer. Ditandai oleh<br>
+					sejumlah peristiwa penting yang melibatkan kematian massal warga sipil, termasuk Holokaus dan pemakaian senjata nuklir<br>
+					dalam peperangan, perang ini memakan korban jiwa sebanyak 50 juta sampai 70 juta jiwa. Jumlah kematian ini menjadikan<br>
+					Perang Dunia II konflik paling mematikan sepanjang sejarah umat manusia
+				<a href="https://id.wikipedia.org/wiki/Perang_Dunia_II">Baca selengkapnya....</a>
+			</left></p>
+			<p><left>
+				<img src="WW2.png" width="450" height="640"alt="WW2"/>
+				<img src="WW22.jpg" width="450" height+"640"alt="WW22"/>
+			</left></p>
+		<h2>LATAR BELAKANG</h2>
+			<p><left>
+				<a href="https://encyclopedia.ushmm.org/content/id/article/world-war-ii-in-europe-abridged-article">Perang Dunia 2</a>
+					membuat perubahan besar pada peta politik, dengan kekalahan Blok Sentral, termasuk Austria-Hungaria, Kekaisaran Jerman,<br>
+					dan Kesultanan Utsmaniyah; dan perebutan kekuasaan oleh Bolshevik di Rusia pada tahun 1917. Sementara itu, negara-negara<br>
+					Sekutu yang menang seperti Prancis, Belgia, Italia, Yunani, dan Rumania memperoleh wilayah baru, dan negara-negara baru<br>
+					tercipta dari runtuhnya Austria-Hungaria, Kekaisaran Rusia, dan Kesultanan Utsmaniyah.<br>
+			</left></p>
+		<h3>pelajari selengkapnya di wikipedia</h3>
+			<p><left>
+				<a href="https://id.wikipedia.org/wiki/Perang_Dunia_II#Perang_Saudara_Spanyol_(1936-39)">perang Saudara Spanyol 1936-39</a><br>
+				<a href="https://id.wikipedia.org/wiki/Perang_Dunia_II#Perang_global_(1941)">Perang global 1941</a><br>
+				<a href="https://id.wikipedia.org/wiki/Perang_Dunia_II#Invasi_Jepang_ke_Uni_Soviet_dan_Mongolia_(1938)">Invasi Jepang ke Uni Soviet dan Mongolia 1938</a><br>
+				<a href="https://id.wikipedia.org/wiki/Perang_Dunia_II#Pendudukan_Eropa_dan_perjanjian">Pendudukan Eropa dan perjanjian</a><br>
+				<a href="https://id.wikipedia.org/wiki/Perang_Dunia_II#Pecah_di_Eropa_(1939)">Pecah di Eropa 1939</a><br>
+			</p></left>
+		<div>Copyright &copy; 2023 by Eas</div>
+	</body>
+</html>

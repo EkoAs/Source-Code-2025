@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modern Classic Design</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+    <style>
+    /* --- VARIABLES LOKAL (PENDIDIKAN D) --- */
+    #pendidikan {
+        --bg-d: #050505;
+        --bronze-main: #CD7F32;
+        --bronze-light: #F4A460;
+        --line-color: rgba(205, 127, 50, 0.2); /* Garis pemisah transparan */
+        --text-light: #e0e0e0;
+        --text-dim: #666;
+        --font-serif: 'Playfair Display', serif;
+        --font-sans: 'Inter', sans-serif;
+    }
+
+    /* --- LAYOUT --- */
+    .edu-d-section {
+        padding: 120px 5%;
+        background-color: var(--bg-d);
+        color: var(--text-light);
+        position: relative;
+        /* Background Noise Halus (Optional Texture) */
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+    }
+
+    /* HEADER (Kecil & Minimalis) */
+    .edu-d-header {
+        max-width: 1000px;
+        margin: 0 auto 60px auto;
+        border-bottom: 1px solid var(--line-color);
+        padding-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    .edu-d-title {
+        font-family: var(--font-sans);
+        font-size: 0.9rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--bronze-main);
+    }
+
+    .edu-d-number {
+        font-family: var(--font-serif);
+        font-size: 3rem;
+        font-style: italic;
+        color: rgba(255,255,255,0.05);
+        line-height: 0.8;
+    }
+
+    /* --- LIST CONTAINER --- */
+    .edu-list {
+        max-width: 1000px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* --- ITEM BARIS (THE ROW) --- */
+    .edu-item {
+        position: relative;
+        padding: 40px 0;
+        border-bottom: 1px solid var(--line-color);
+        display: grid;
+        grid-template-columns: 1fr 3fr; /* Kiri (Tahun) : Kanan (Konten) */
+        gap: 40px;
+        transition: all 0.5s ease;
+        cursor: default;
+    }
+
+    /* Efek Hover pada Baris */
+    .edu-item:hover {
+        border-bottom-color: var(--bronze-main);
+        background: linear-gradient(to right, rgba(205, 127, 50, 0.03), transparent);
+        padding-left: 20px; /* Sedikit geser ke kanan */
+    }
+
+    /* KOLOM TAHUN (Kiri) */
+    .edu-year-d {
+        font-family: var(--font-serif);
+        font-size: 2.5rem;
+        font-weight: 400;
+        font-style: italic;
+        color: var(--text-dim);
+        transition: 0.4s;
+        position: relative;
+    }
+
+    /* Garis dekorasi kecil di sebelah tahun */
+    .edu-year-d::before {
+        content: '';
+        position: absolute;
+        top: 50%; left: -20px;
+        width: 0; height: 1px;
+        background-color: var(--bronze-light);
+        transition: 0.4s;
+    }
+
+    .edu-item:hover .edu-year-d {
+        color: var(--bronze-light);
+    }
+    .edu-item:hover .edu-year-d::before {
+        width: 15px; /* Muncul garis saat hover */
+        left: -25px;
+    }
+
+    /* KOLOM KONTEN (Kanan) */
+    .edu-content-d {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .edu-school-d {
+        font-family: var(--font-sans);
+        font-size: 1.8rem;
+        font-weight: 300; /* Tipis biar elegan */
+        color: var(--text-light);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: 0.4s;
+    }
+
+    /* Text Gradient Metalik saat Hover */
+    .edu-item:hover .edu-school-d {
+        background: linear-gradient(to right, var(--bronze-light), var(--bronze-main));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-weight: 400;
+    }
+
+    .edu-major-d {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 1.2rem;
+        color: var(--bronze-main);
+    }
+
+    .edu-desc-d {
+        font-family: var(--font-sans);
+        font-size: 0.95rem;
+        color: var(--text-dim);
+        line-height: 1.6;
+        max-width: 80%;
+        margin-top: 10px;
+        
+        /* Sembunyikan deskripsi secara halus (Opacity) */
+        opacity: 0.4;
+        transform: translateY(10px);
+        transition: 0.5s;
+    }
+
+    .edu-item:hover .edu-desc-d {
+        opacity: 1;
+        transform: translateY(0);
+        color: #aaa;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+        .edu-item {
+            grid-template-columns: 1fr; /* Tumpuk vertikal di HP */
+            gap: 10px;
+            padding: 30px 0;
+        }
+        .edu-year-d { font-size: 1.5rem; margin-bottom: 10px; }
+        .edu-school-d { font-size: 1.4rem; }
+        .edu-item:hover { padding-left: 0; } /* Matikan geser di HP */
+    }
+</style>
+
+<section id="pendidikan" class="edu-d-section">
+    
+    <div class="edu-d-header">
+        <span class="edu-d-title">Academic Timeline</span>
+        <span class="edu-d-number">02</span>
+    </div>
+
+    <div class="edu-list">
+        
+        <div class="edu-item">
+            <div class="edu-year-d">2020 — 2024</div>
+            <div class="edu-content-d">
+                <h3 class="edu-school-d">Universitas Teknologi Digital</h3>
+                <span class="edu-major-d">Bachelor of Computer Science</span>
+                <p class="edu-desc-d">
+                    Lulus dengan predikat Cumlaude. Fokus penelitian pada Artificial Intelligence dan Keamanan Data. 
+                    Memimpin organisasi mahasiswa tingkat fakultas selama dua periode.
+                </p>
+            </div>
+        </div>
+
+        <div class="edu-item">
+            <div class="edu-year-d">2017 — 2020</div>
+            <div class="edu-content-d">
+                <h3 class="edu-school-d">SMA Negeri 1 Jakarta</h3>
+                <span class="edu-major-d">Natural Science (IPA)</span>
+                <p class="edu-desc-d">
+                    Aktif dalam klub sains dan teknologi. Juara 1 Olimpiade Komputer tingkat kota. 
+                    Mengembangkan minat awal pada pemrograman web.
+                </p>
+            </div>
+        </div>
+
+        <div class="edu-item">
+            <div class="edu-year-d">2014 — 2017</div>
+            <div class="edu-content-d">
+                <h3 class="edu-school-d">SMP Negeri 5 Jakarta</h3>
+                <span class="edu-major-d">General Education</span>
+                <p class="edu-desc-d">
+                    Membangun fondasi logika matematika dan bahasa Inggris yang kuat. 
+                    Mulai bereksperimen dengan HTML dasar secara otodidak.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+    </body>
+</html>

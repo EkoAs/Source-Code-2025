@@ -1,0 +1,42 @@
+# Operasi dan manipulasi string
+print('='*8, 'menyambung string')
+nama_depan = "Ucup"
+nama_tengah = "The"
+nama_akhir = "Siatong"
+nama_lengkap = nama_depan + " " + nama_tengah + " " + nama_akhir
+print(nama_lengkap)
+
+print('='*8, 'menghitung panjang string')
+panjang_nama = len(nama_lengkap)
+print('panjang nama adalah', panjang_nama)
+
+print('='*5, 'mengecek apakah char atau string di dalam string')
+# mengecek apakah ada huruf a di dalam string
+cek_nama = 'a' in nama_lengkap
+print('huruf a', str(cek_nama))
+
+print('='*3, r'megambil data dalam string(indexing)')
+data_dalamstr = nama_lengkap[2]
+print('data ke 2 adalah', data_dalamstr)
+data_dalamstr = nama_lengkap[0:9]
+print(' data dari 0 dampai 9 adalah :', data_dalamstr)
+data_dalamstr = nama_lengkap[0:10:2]
+print(' data dari 0 dampai 10 dengan step 2 adalah :', data_dalamstr)
+
+print('='*5, 'menghitung item paling kecil')
+# menghitung item paling kecil
+data_min = min(nama_lengkap)
+data_max = max(nama_lengkap)
+print('data minimunnya :', data_min, ' dan data maxnya adalah :', data_max)
+
+# meghitung ascii code
+data_ascii = ord("u")
+print('ascii dari huruf u adalah :', data_ascii)
+# mengubah ascii ke char
+data_char = chr(117)
+print('char dari ascii 117 adalah :', data_char)
+
+#menghitung string dalam bentuk method
+nama_lengkap = " otong suratong nanotong"
+full_data = nama_lengkap.count("o")
+print('data' + nama_lengkap + " " + 'ada' + " " + str(full_data))

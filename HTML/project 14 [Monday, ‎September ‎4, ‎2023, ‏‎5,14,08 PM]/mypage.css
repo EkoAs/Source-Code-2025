@@ -1,0 +1,24 @@
+.body {
+	font-family: 'Times New Roman', Times, serif;
+	font-style: italic;
+	font-size: medium;
+	font-variant: unset;
+}
+.link {
+	font-size: 20px;
+}
+.text1 {
+	font-size: 120px;
+}
+.margin1 {
+	font-variant-position: normal;
+	border: solid 5px red;
+	width: 1300px;
+	height: 200;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: chartreuse;
+	font-size: 25px;
+	font-family: 'Times New Roman', Times, serif;
+}

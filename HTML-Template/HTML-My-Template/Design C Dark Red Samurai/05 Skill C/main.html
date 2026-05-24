@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modern Classic Design</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+    <style>
+    /* --- VARIABLES LOKAL (SKILLS C) --- */
+    #skills {
+        --bg-c: #050505;
+        --card-bg: #141414;
+        --accent-c: #ff003c; /* Merah Crimson */
+        --text-c: #ffffff;
+        --bar-bg: #333;
+    }
+
+    /* --- LAYOUT --- */
+    .skills-c-section {
+        padding: 120px 5%;
+        background-color: var(--bg-c);
+        position: relative;
+        /* Background Striped Pattern (Garis miring tipis) */
+        background-image: repeating-linear-gradient(
+            -45deg,
+            transparent,
+            transparent 10px,
+            rgba(255, 0, 60, 0.02) 10px,
+            rgba(255, 0, 60, 0.02) 20px
+        );
+    }
+
+    .skills-c-header {
+        text-align: center;
+        margin-bottom: 70px;
+    }
+
+    .skills-c-title {
+        font-family: sans-serif;
+        font-size: 3rem;
+        font-weight: 900;
+        font-style: italic;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: -1px;
+        /* Efek Glitch text shadow */
+        text-shadow: 2px 2px 0px var(--accent-c), -1px -1px 0 #000;
+    }
+
+    .skills-c-subtitle {
+        background: var(--accent-c);
+        color: #000;
+        display: inline-block;
+        padding: 5px 15px;
+        font-weight: 800;
+        transform: skewX(-20deg);
+        font-size: 0.9rem;
+        margin-top: 10px;
+    }
+
+    /* --- GRID --- */
+    .loadout-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 40px;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    /* --- SKILL CARD (STAT BLOCK) --- */
+    .stat-block {
+        background-color: var(--card-bg);
+        padding: 30px;
+        border-left: 5px solid var(--accent-c); /* Garis merah tebal di kiri */
+        position: relative;
+        transition: 0.3s;
+        /* Sudut tajam tapi kotak */
+        box-shadow: 0 0 0 rgba(255, 0, 60, 0);
+    }
+
+    .stat-block:hover {
+        background-color: #1a1a1a;
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(255, 0, 60, 0.1);
+    }
+
+    /* Judul Kategori */
+    .stat-cat-title {
+        font-family: sans-serif;
+        font-size: 1.5rem;
+        font-weight: 900;
+        font-style: italic;
+        text-transform: uppercase;
+        color: #fff;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #333;
+        padding-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .stat-icon {
+        color: var(--accent-c);
+    }
+
+    /* --- ITEM SKILL --- */
+    .skill-c-item {
+        margin-bottom: 25px;
+    }
+
+    .skill-c-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 8px;
+    }
+
+    .skill-name {
+        font-weight: 700;
+        font-size: 1rem;
+        text-transform: uppercase;
+        color: #ccc;
+    }
+
+    .skill-val {
+        font-family: sans-serif;
+        font-weight: 900;
+        font-size: 1.2rem;
+        color: var(--accent-c);
+        font-style: italic;
+    }
+
+    /* BAR CONTAINER (Miring/Skewed) */
+    .bar-c-bg {
+        width: 100%;
+        height: 12px;
+        background-color: var(--bar-bg);
+        transform: skewX(-30deg); /* Kunci desain ini: BAR MIRING */
+        overflow: hidden;
+    }
+
+    .bar-c-fill {
+        height: 100%;
+        background-color: var(--accent-c);
+        width: 0%; /* Animasi dari 0 */
+        transition: width 1s cubic-bezier(0.2, 1, 0.3, 1); /* Cepat di awal */
+        position: relative;
+        box-shadow: 0 0 10px var(--accent-c);
+    }
+
+    /* Striped Texture di dalam bar merah */
+    .bar-c-fill::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background-image: linear-gradient(
+            45deg, 
+            rgba(0,0,0,0.2) 25%, 
+            transparent 25%, 
+            transparent 50%, 
+            rgba(0,0,0,0.2) 50%, 
+            rgba(0,0,0,0.2) 75%, 
+            transparent 75%, 
+            transparent
+        );
+        background-size: 10px 10px;
+    }
+
+    /* Deco Corner */
+    .deco-corner-c {
+        position: absolute;
+        top: 0; right: 0;
+        width: 0; height: 0;
+        border-style: solid;
+        border-width: 0 30px 30px 0;
+        border-color: transparent var(--accent-c) transparent transparent;
+    }
+
+</style>
+
+<section id="skills" class="skills-c-section">
+    <div class="skills-c-header">
+        <h2 class="skills-c-title">ABILITY STATS</h2>
+        <div class="skills-c-subtitle">CURRENT LOADOUT</div>
+    </div>
+
+    <div class="loadout-grid">
+        
+        <div class="stat-block">
+            <div class="deco-corner-c"></div> <div class="stat-cat-title">
+                <span class="stat-icon">///</span> CORE_TECH
+            </div>
+
+            <div class="skill-c-item">
+                <div class="skill-c-info">
+                    <span class="skill-name">HTML & CSS Architecture</span>
+                    <span class="skill-val">95%</span>
+                </div>
+                <div class="bar-c-bg">
+                    <div class="bar-c-fill" style="width: 95%"></div>
+                </div>
+            </div>
+
+            <div class="skill-c-item">
+                <div class="skill-c-info">
+                    <span class="skill-name">JavaScript Mechanics</span>
+                    <span class="skill-val">85%</span>
+                </div>
+                <div class="bar-c-bg">
+                    <div class="bar-c-fill" style="width: 85%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stat-block">
+            <div class="deco-corner-c"></div>
+            <div class="stat-cat-title">
+                <span class="stat-icon">///</span> FRAMEWORKS
+            </div>
+
+            <div class="skill-c-item">
+                <div class="skill-c-info">
+                    <span class="skill-name">Tailwind CSS</span>
+                    <span class="skill-val">90%</span>
+                </div>
+                <div class="bar-c-bg">
+                    <div class="bar-c-fill" style="width: 90%"></div>
+                </div>
+            </div>
+
+            <div class="skill-c-item">
+                <div class="skill-c-info">
+                    <span class="skill-name">React JS / Vue</span>
+                    <span class="skill-val">75%</span>
+                </div>
+                <div class="bar-c-bg">
+                    <div class="bar-c-fill" style="width: 75%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stat-block">
+            <div class="deco-corner-c"></div>
+            <div class="stat-cat-title">
+                <span class="stat-icon">///</span> BACKEND & TOOLS
+            </div>
+
+            <div class="skill-c-item">
+                <div class="skill-c-info">
+                    <span class="skill-name">Python</span>
+                    <span class="skill-val">80%</span>
+                </div>
+                <div class="bar-c-bg">
+                    <div class="bar-c-fill" style="width: 80%"></div>
+                </div>
+            </div>
+
+            <div class="skill-c-item">
+                <div class="skill-c-info">
+                    <span class="skill-name">Git / Version Control</span>
+                    <span class="skill-val">85%</span>
+                </div>
+                <div class="bar-c-bg">
+                    <div class="bar-c-fill" style="width: 85%"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    // Trigger animasi saat scroll sampai ke skills
+    document.addEventListener("DOMContentLoaded", function() {
+        const observerC = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bars = entry.target.querySelectorAll('.bar-c-fill');
+                    bars.forEach(bar => {
+                        // Pakai teknik re-apply width agar transisi CSS jalan
+                        const w = bar.style.width;
+                        bar.style.width = '0%';
+                        setTimeout(() => { bar.style.width = w; }, 100);
+                    });
+                    observerC.unobserve(entry.target); // Hanya animasi sekali
+                }
+            });
+        });
+        
+        const skillSec = document.querySelector('#skills');
+        if(skillSec) observerC.observe(skillSec);
+    });
+</script>
+    </body>
+</html>

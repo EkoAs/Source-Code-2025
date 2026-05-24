@@ -1,0 +1,14 @@
+# copy list
+a = ["Dudung", "Otong", "Raihan"]
+b = a # jika a atau b dilalukan perubahan pada list, keduanya akan berubah karena 
+      # memiliki addres yang sama
+a[0] = "Dafa"
+b[2] = "Zull"
+print(f"Data a = {a} => {hex(id(a))}") # hasil a=b memiliki addres yang sama 
+print(f"Data a = {b} => {hex(id(b))}")
+
+# cara copy list yang  benar
+c  = a.copy()
+c[1] = "Hans"
+print(f"Data c = {c} => {hex(id(c))}")
+

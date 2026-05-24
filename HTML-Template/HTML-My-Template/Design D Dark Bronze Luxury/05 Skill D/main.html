@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modern Classic Design</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+    <style>
+    /* --- VARIABLES LOKAL (SKILLS D) --- */
+    #skills {
+        --bg-d: #050505;
+        --bronze-main: #CD7F32;
+        --bronze-light: #F4A460;
+        --text-dim: #444;
+        --text-light: #fff;
+        --font-serif: 'Playfair Display', serif;
+        --font-sans: 'Inter', sans-serif;
+    }
+
+    /* --- LAYOUT --- */
+    .skills-d-section {
+        position: relative;
+        min-height: 100vh;
+        background-color: var(--bg-d);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+        padding: 80px 0;
+    }
+
+    .d-skills-container {
+        display: flex;
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 5%;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* --- BAGIAN KIRI: DISPLAY VISUAL --- */
+    .d-visual-panel {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+    }
+
+    /* Angka Besar (Dynamic) */
+    .d-big-number {
+        font-family: var(--font-serif);
+        font-size: 15rem; /* Sangat Besar */
+        line-height: 1;
+        font-weight: 400;
+        font-style: italic;
+        background: linear-gradient(135deg, #fff, var(--bronze-light), var(--bronze-main));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        opacity: 0; /* Hidden default, muncul via JS */
+        transform: translateY(50px);
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .d-big-number.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Label Kategori di atas angka */
+    .d-skill-label {
+        font-family: var(--font-sans);
+        color: var(--bronze-main);
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        margin-bottom: -20px;
+        padding-left: 20px;
+        opacity: 0;
+        transition: 0.5s;
+    }
+    .d-skill-label.active { opacity: 1; }
+
+    /* Deskripsi Skill di bawah angka */
+    .d-skill-desc {
+        font-family: var(--font-sans);
+        color: #888;
+        max-width: 400px;
+        margin-top: 20px;
+        padding-left: 20px;
+        line-height: 1.6;
+        opacity: 0;
+        transform: translateX(-20px);
+        transition: 0.5s;
+    }
+    .d-skill-desc.active {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    /* --- BAGIAN KANAN: LIST MENU --- */
+    .d-list-panel {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .d-skill-item {
+        font-family: var(--font-sans);
+        font-size: 3rem; /* Teks besar */
+        font-weight: 700;
+        color: var(--text-dim); /* Abu gelap saat diam */
+        cursor: pointer;
+        transition: 0.4s;
+        position: relative;
+        padding-left: 0;
+    }
+
+    /* Hover Effect: Jadi Emas & Geser */
+    .d-skill-item:hover, .d-skill-item.active {
+        color: var(--text-light);
+        padding-left: 40px; /* Geser kanan */
+    }
+    
+    /* Garis Emas muncul saat hover */
+    .d-skill-item::before {
+        content: '';
+        position: absolute;
+        left: 0; top: 50%;
+        width: 0; height: 2px;
+        background-color: var(--bronze-main);
+        transition: 0.4s;
+    }
+    
+    .d-skill-item:hover::before {
+        width: 30px;
+    }
+
+    /* --- RUNNING TEXT (MARQUEE) --- */
+    .d-marquee-wrapper {
+        margin-top: auto;
+        padding-top: 80px;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        border-top: 1px solid rgba(205, 127, 50, 0.1);
+        position: relative;
+    }
+
+    .d-marquee-content {
+        display: inline-block;
+        animation: scrollText 20s linear infinite;
+    }
+
+    .d-marquee-item {
+        font-family: var(--font-serif);
+        font-size: 1.5rem;
+        color: #444;
+        margin: 0 40px;
+        font-style: italic;
+    }
+    
+    .d-marquee-item span {
+        color: var(--bronze-main); /* Tanda titik/pemisah */
+    }
+
+    @keyframes scrollText {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 900px) {
+        .d-skills-container { flex-direction: column-reverse; }
+        .d-visual-panel { height: 250px; align-items: center; text-align: center; }
+        .d-big-number { font-size: 8rem; }
+        .d-list-panel { text-align: center; gap: 5px; }
+        .d-skill-item { font-size: 2rem; }
+        .d-skill-item:hover { padding-left: 0; color: var(--bronze-light); }
+        .d-skill-item::before { display: none; }
+    }
+</style>
+
+<section id="skills" class="skills-d-section">
+    
+    <div class="d-skills-container">
+        
+        <div class="d-visual-panel">
+            <div class="d-skill-label" id="skillLabel">SKILL MASTERY</div>
+            <div class="d-big-number active" id="skillNum">Select</div>
+            <div class="d-skill-desc active" id="skillDesc">
+                Hover over the list on the right to view detailed mastery metrics.
+            </div>
+        </div>
+
+        <div class="d-list-panel">
+            <div class="d-skill-item" 
+                 onmouseover="updateSkill('95%', 'Frontend Dev', 'Menguasai HTML5, CSS3, dan manipulasi DOM modern untuk struktur web yang kokoh.')">
+                HTML & CSS
+            </div>
+            
+            <div class="d-skill-item" 
+                 onmouseover="updateSkill('85%', 'Scripting', 'Logika interaktif menggunakan ES6+ dan manajemen asinkronus.')">
+                JavaScript
+            </div>
+            
+            <div class="d-skill-item" 
+                 onmouseover="updateSkill('90%', 'Styling', 'Penggunaan Utility-first CSS framework untuk desain cepat dan responsif.')">
+                Tailwind
+            </div>
+            
+            <div class="d-skill-item" 
+                 onmouseover="updateSkill('80%', 'Backend', 'Pengolahan data server-side dan integrasi API menggunakan Python.')">
+                Python
+            </div>
+            
+            <div class="d-skill-item" 
+                 onmouseover="updateSkill('75%', 'UI/UX Design', 'Prototyping dan desain antarmuka high-fidelity.')">
+                Figma
+            </div>
+        </div>
+
+    </div>
+
+    <div class="d-marquee-wrapper">
+        <div class="d-marquee-content">
+            <span class="d-marquee-item">VS Code <span>•</span></span>
+            <span class="d-marquee-item">Git <span>•</span></span>
+            <span class="d-marquee-item">NPM <span>•</span></span>
+            <span class="d-marquee-item">Postman <span>•</span></span>
+            <span class="d-marquee-item">MySQL <span>•</span></span>
+            <span class="d-marquee-item">Adobe XD <span>•</span></span>
+            <span class="d-marquee-item">Bootstrap <span>•</span></span>
+            <span class="d-marquee-item">Django <span>•</span></span>
+            <span class="d-marquee-item">VS Code <span>•</span></span>
+            <span class="d-marquee-item">Git <span>•</span></span>
+            <span class="d-marquee-item">NPM <span>•</span></span>
+            <span class="d-marquee-item">Postman <span>•</span></span>
+            <span class="d-marquee-item">MySQL <span>•</span></span>
+            <span class="d-marquee-item">Adobe XD <span>•</span></span>
+        </div>
+    </div>
+
+</section>
+
+<script>
+    // Fungsi Ganti Angka & Teks
+    function updateSkill(percent, label, desc) {
+        const numEl = document.getElementById('skillNum');
+        const labelEl = document.getElementById('skillLabel');
+        const descEl = document.getElementById('skillDesc');
+
+        // 1. Fade Out
+        numEl.classList.remove('active');
+        labelEl.classList.remove('active');
+        descEl.classList.remove('active');
+
+        // 2. Ganti Konten & Fade In (ada delay dikit biar smooth)
+        setTimeout(() => {
+            numEl.innerText = percent;
+            labelEl.innerText = label;
+            descEl.innerText = desc;
+
+            numEl.classList.add('active');
+            labelEl.classList.add('active');
+            descEl.classList.add('active');
+        }, 200);
+    }
+</script>
+    </body>
+</html>

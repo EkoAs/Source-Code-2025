@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modern Classic Design</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+    <style>
+    /* --- CSS VARIABLES (Tema C) --- */
+    :root {
+        --bg-c: #000000;         /* Hitam Mati */
+        --accent-c: #ff003c;     /* Merah Neon/Crimson */
+        --text-c: #ffffff;
+        --gray-c: #1a1a1a;
+        --font-c: sans-serif;    /* Bisa diganti font gaming kayak 'Rajdhani' */
+    }
+
+    /* --- UTAMA --- */
+    .navbar-c {
+        position: fixed;
+        top: 0; left: 0; width: 100%;
+        height: 80px;
+        background-color: var(--bg-c);
+        border-bottom: 3px solid var(--accent-c); /* Garis Merah Tegas di Bawah */
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 5px 20px rgba(255, 0, 60, 0.15); /* Glow Merah Tipis */
+    }
+
+    /* Pattern Garis Miring di Background (Opsional, biar sporty) */
+    .navbar-c::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(255, 255, 255, 0.03) 10px,
+            rgba(255, 255, 255, 0.03) 20px
+        );
+        pointer-events: none;
+    }
+
+    .nav-c-container {
+        width: 100%;
+        max-width: 1200px;
+        padding: 0 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* --- LOGO (Kiri) --- */
+    .logo-c {
+        font-size: 1.8rem;
+        font-weight: 900;
+        font-style: italic; /* Miring biar kenceng */
+        color: var(--text-c);
+        text-transform: uppercase;
+        letter-spacing: -1px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    /* Titik Merah Kotak */
+    .logo-dot {
+        width: 12px;
+        height: 12px;
+        background-color: var(--accent-c);
+        transform: skewX(-20deg); /* Miring */
+    }
+
+    /* --- MENU (Tengah) --- */
+    .menu-c {
+        display: flex;
+        gap: 5px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .link-c {
+        position: relative;
+        text-decoration: none;
+        color: #888;
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        padding: 10px 25px;
+        transition: color 0.3s;
+        overflow: hidden; /* Biar background miring gak keluar */
+    }
+
+    /* Background Slash Effect */
+    .link-c::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background-color: var(--accent-c);
+        transform: skewX(-20deg) translateX(-150%); /* Mulai dari luar kiri */
+        transition: transform 0.3s ease-out;
+        z-index: -1;
+    }
+
+    .link-c:hover {
+        color: #fff;
+    }
+
+    /* Saat hover, background merah menyapu dari kiri */
+    .link-c:hover::before {
+        transform: skewX(-20deg) translateX(0);
+    }
+
+    /* --- KANAN (Search & Tools) --- */
+    .tools-c {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    /* Tombol Search Bulat -> Kotak di C */
+    .btn-icon-c {
+        background: none;
+        border: 1px solid #333;
+        color: var(--text-c);
+        width: 40px; height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s;
+        transform: skewX(-10deg); /* Miring */
+    }
+
+    .btn-icon-c:hover {
+        background-color: var(--accent-c);
+        border-color: var(--accent-c);
+        box-shadow: 0 0 10px var(--accent-c);
+    }
+
+    .icon-normal {
+        transform: skewX(10deg); /* Balikin icon biar tegak */
+        font-size: 1.1rem;
+    }
+
+    /* INPUT SEARCH (Hidden by default, muncul overlay) */
+    .search-overlay {
+        position: absolute;
+        top: 80px; /* Tepat di bawah navbar */
+        left: 0;
+        width: 100%;
+        background-color: var(--accent-c);
+        padding: 15px;
+        transform: scaleY(0); /* Terlipat */
+        transform-origin: top;
+        transition: transform 0.3s ease;
+        display: flex;
+        justify-content: center;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
+
+    .search-overlay.active {
+        transform: scaleY(1); /* Terbuka */
+    }
+
+    .input-c {
+        width: 100%;
+        max-width: 600px;
+        background: rgba(0,0,0,0.3);
+        border: none;
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 1.1rem;
+        outline: none;
+        font-weight: bold;
+        border-left: 5px solid #fff;
+    }
+    .input-c::placeholder { color: rgba(255,255,255,0.7); }
+
+    /* --- MOBILE --- */
+    .hamburger-c {
+        display: none;
+        flex-direction: column;
+        gap: 6px;
+        cursor: pointer;
+    }
+    .bar-c {
+        width: 30px; height: 3px;
+        background-color: var(--text-c);
+        transition: 0.3s;
+    }
+    .hamburger-c:hover .bar-c {
+        background-color: var(--accent-c);
+    }
+
+    /* Mobile Menu Overlay (Full Screen Hitam) */
+    .mobile-menu-c {
+        position: fixed;
+        top: 80px; left: 0; width: 100%; height: 0;
+        background-color: rgba(0,0,0,0.95);
+        overflow: hidden;
+        transition: height 0.4s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 900;
+    }
+    
+    .mobile-menu-c.active {
+        height: calc(100vh - 80px);
+    }
+
+    .mobile-link-c {
+        font-size: 2rem;
+        font-weight: 900;
+        color: #fff;
+        text-decoration: none;
+        text-transform: uppercase;
+        margin: 15px 0;
+        font-style: italic;
+        position: relative;
+        transition: 0.3s;
+    }
+    
+    .mobile-link-c:hover {
+        color: var(--accent-c);
+        letter-spacing: 5px; /* Efek melebar */
+    }
+
+    @media (max-width: 768px) {
+        .menu-c { display: none; }
+        .hamburger-c { display: flex; }
+    }
+</style>
+
+<nav id="navbar-c" class="navbar-c">
+    <div class="nav-c-container">
+        
+        <div class="logo-c">
+            <div class="logo-dot"></div>
+            SAMURAI<span style="color: var(--accent-c);">DEV</span>
+        </div>
+
+        <ul class="menu-c">
+            <li><a href="#about" class="link-c">About</a></li>
+            <li><a href="#pendidikan" class="link-c">Education</a></li>
+            <li><a href="#skills" class="link-c">Skills</a></li>
+            <li><a href="#projects" class="link-c">Projects</a></li>
+            <li><a href="#contact" class="link-c">Contact</a></li>
+        </ul>
+
+        <div class="tools-c">
+            <button class="btn-icon-c" onclick="toggleSearchC()">
+                <span class="icon-normal">🔍</span>
+            </button>
+
+            <div class="hamburger-c" onclick="toggleMobileC()">
+                <div class="bar-c"></div>
+                <div class="bar-c"></div>
+                <div class="bar-c"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="searchPanelC" class="search-overlay">
+        <input type="text" id="searchC" class="input-c" placeholder="COMMAND: SEARCH_KEYWORD...">
+        <button onclick="performSearchC()" style="background:black; color:white; border:none; padding:0 20px; font-weight:bold; cursor:pointer;">GO</button>
+    </div>
+
+    <div id="mobileMenuC" class="mobile-menu-c">
+        <a href="#about" class="mobile-link-c" onclick="toggleMobileC()">About</a>
+        <a href="#pendidikan" class="mobile-link-c" onclick="toggleMobileC()">Education</a>
+        <a href="#skills" class="mobile-link-c" onclick="toggleMobileC()">Skills</a>
+        <a href="#projects" class="mobile-link-c" onclick="toggleMobileC()">Projects</a>
+        <a href="#contact" class="mobile-link-c" onclick="toggleMobileC()">Contact</a>
+    </div>
+</nav>
+
+<script>
+    // 1. Toggle Search Panel
+    function toggleSearchC() {
+        const panel = document.getElementById('searchPanelC');
+        panel.classList.toggle('active');
+        if(panel.classList.contains('active')) {
+            document.getElementById('searchC').focus();
+        }
+    }
+
+    // 2. Perform Search
+    function performSearchC() {
+        const query = document.getElementById('searchC').value;
+        if(query) {
+            // Tutup panel dulu biar rapi
+            document.getElementById('searchPanelC').classList.remove('active');
+            
+            const found = window.find(query);
+            if(!found) alert("TARGET NOT FOUND: " + query);
+        }
+    }
+
+    // Enter key trigger
+    document.getElementById('searchC').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            performSearchC();
+        }
+    });
+
+    // 3. Toggle Mobile Menu
+    function toggleMobileC() {
+        const menu = document.getElementById('mobileMenuC');
+        menu.classList.toggle('active');
+        
+        // Animasi Hamburger jadi X (Optional logic simple)
+        const bars = document.querySelectorAll('.bar-c');
+        if(menu.classList.contains('active')){
+            bars[1].style.opacity = 0;
+            bars[0].style.transform = "rotate(45deg) translate(5px, 6px)";
+            bars[2].style.transform = "rotate(-45deg) translate(5px, -6px)";
+        } else {
+            bars[1].style.opacity = 1;
+            bars[0].style.transform = "none";
+            bars[2].style.transform = "none";
+        }
+    }
+</script>
+
+<style>
+    /* --- CSS VARIABLES LOKAL (ABOUT C) --- */
+    #about {
+        --bg-c: #050505;
+        --accent-c: #ff003c;
+        --text-c: #ffffff;
+        --gray-c: #222;
+    }
+
+    /* --- LAYOUT --- */
+    .about-c-section {
+        position: relative;
+        padding: 150px 5% 100px 5%;
+        background-color: var(--bg-c);
+        overflow: hidden;
+        min-height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Elemen Dekorasi Miring (Slash Background) */
+    .slash-bg {
+        position: absolute;
+        top: 0; right: -20%;
+        width: 60%;
+        height: 100%;
+        background-color: var(--gray-c);
+        transform: skewX(-20deg);
+        z-index: 0;
+        border-left: 5px solid var(--accent-c);
+    }
+
+    /* Garis-garis dekorasi */
+    .deco-line {
+        position: absolute;
+        background-color: var(--accent-c);
+        opacity: 0.2;
+        transform: skewX(-20deg);
+    }
+    .dl-1 { top: 10%; left: 10%; width: 200px; height: 2px; }
+    .dl-2 { bottom: 10%; right: 10%; width: 300px; height: 2px; }
+    .dl-3 { top: 50%; left: -50px; width: 100px; height: 20px; opacity: 0.1; }
+
+    .about-c-container {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        gap: 80px;
+        max-width: 1200px;
+        width: 100%;
+    }
+
+    /* --- KIRI: FOTO (MIRING) --- */
+    .about-c-photo-wrapper {
+        flex: 0 0 400px;
+        position: relative;
+    }
+
+    /* Bingkai Foto */
+    .photo-frame-c {
+        width: 100%;
+        height: 500px;
+        position: relative;
+        /* Clip Path miring tajam */
+        clip-path: polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%);
+        transition: 0.4s;
+    }
+
+    .photo-frame-c img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* Efek Duotone Merah Hitam */
+        filter: grayscale(100%) contrast(1.2);
+        transition: 0.4s;
+    }
+
+    /* Hover Effect: Jadi berwarna & Geser */
+    .about-c-photo-wrapper:hover .photo-frame-c {
+        transform: scale(1.02);
+    }
+    .about-c-photo-wrapper:hover img {
+        filter: grayscale(0%);
+    }
+
+    /* Border Hiasan di belakang foto */
+    .photo-border-deco {
+        position: absolute;
+        top: 20px; left: -20px;
+        width: 100%; height: 100%;
+        border: 2px solid var(--accent-c);
+        clip-path: polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%);
+        z-index: -1;
+        transition: 0.4s;
+    }
+    
+    .about-c-photo-wrapper:hover .photo-border-deco {
+        top: 10px; left: -10px; /* Efek mendekat saat hover */
+        background-color: rgba(255, 0, 60, 0.1);
+    }
+
+    /* --- KANAN: TEKS --- */
+    .about-c-text {
+        flex: 1;
+    }
+
+    .label-c {
+        display: inline-block;
+        background-color: var(--accent-c);
+        color: #000;
+        font-weight: 900;
+        font-style: italic;
+        padding: 5px 15px;
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+        transform: skewX(-20deg);
+    }
+    
+    /* Agar teks di dalam label gak ikut miring */
+    .label-c span {
+        display: block;
+        transform: skewX(20deg); 
+    }
+
+    /* Nama dengan Efek Glitch Sederhana */
+    .name-c {
+        font-family: sans-serif;
+        font-size: 4rem;
+        font-weight: 900;
+        font-style: italic;
+        text-transform: uppercase;
+        line-height: 0.9;
+        margin-bottom: 25px;
+        color: #fff;
+        position: relative;
+    }
+
+    .name-c span {
+        color: var(--accent-c);
+    }
+
+    .desc-c {
+        color: #aaa;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 40px;
+        border-left: 3px solid var(--gray-c);
+        padding-left: 20px;
+    }
+
+    /* Stats Grid (Kotak-kotak kecil info) */
+    .stats-c {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+
+    .stat-item {
+        background: rgba(255,255,255,0.05);
+        padding: 15px;
+        border-left: 2px solid var(--accent-c);
+    }
+    .stat-num {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #fff;
+        display: block;
+    }
+    .stat-label {
+        font-size: 0.8rem;
+        color: #666;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Tombol C */
+    .btn-c {
+        display: inline-block;
+        background-color: transparent;
+        color: #fff;
+        font-weight: 800;
+        font-style: italic;
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 15px 40px;
+        border: 2px solid var(--accent-c);
+        position: relative;
+        overflow: hidden;
+        transition: 0.3s;
+        transform: skewX(-20deg);
+    }
+    
+    .btn-c span {
+        display: block;
+        transform: skewX(20deg); /* Balikin teks biar tegak */
+    }
+
+    .btn-c:hover {
+        background-color: var(--accent-c);
+        box-shadow: 0 0 20px var(--accent-c);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+        .about-c-container {
+            flex-direction: column;
+            gap: 50px;
+        }
+        
+        .slash-bg {
+            width: 100%;
+            right: -50%;
+        }
+
+        .about-c-photo-wrapper {
+            flex: none;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .photo-frame-c {
+            height: 350px;
+            /* Kurangi kemiringan di HP biar foto gak kepotong banyak */
+            clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+        }
+        .photo-border-deco {
+             clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+        }
+
+        .name-c {
+            font-size: 3rem;
+        }
+    }
+</style>
+
+<section id="about" class="about-c-section">
+    
+    <div class="slash-bg"></div>
+    <div class="deco-line dl-1"></div>
+    <div class="deco-line dl-2"></div>
+    <div class="deco-line dl-3"></div>
+
+    <div class="about-c-container">
+        
+        <div class="about-c-photo-wrapper">
+            <div class="photo-border-deco"></div>
+            <div class="photo-frame-c">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Profile">
+            </div>
+        </div>
+
+        <div class="about-c-text">
+            <div class="label-c"><span>PLAYER_01 // PROFILE</span></div>
+            
+            <h1 class="name-c">
+                ALEXANDRIA<br>
+                <span>WIJAYA</span>
+            </h1>
+
+            <p class="desc-c">
+                Pengembang Web Spesialis Antarmuka. Menggabungkan kecepatan kode dengan desain yang agresif. 
+                Siap mengeksekusi proyek sulit dengan presisi tinggi. 
+                Gunakan fitur "SEARCH" di menu atas untuk melacak data spesifik.
+            </p>
+
+            <div class="stats-c">
+                <div class="stat-item">
+                    <span class="stat-num">LVL. 25</span>
+                    <span class="stat-label">Current Age</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-num">50+</span>
+                    <span class="stat-label">Missions Done</span>
+                </div>
+            </div>
+
+            <a href="#contact" class="btn-c"><span>START MISSION</span></a>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    /* --- VARIABLES LOKAL (PENDIDIKAN C) --- */
+    #pendidikan {
+        --bg-c: #050505;
+        --card-bg: #111;
+        --accent-c: #ff003c; /* Merah Crimson */
+        --text-c: #fff;
+        --text-gray: #888;
+        --path-color: #333;
+    }
+
+    /* --- LAYOUT --- */
+    .edu-c-section {
+        padding: 120px 5%;
+        background-color: var(--bg-c);
+        position: relative;
+        /* Background Texture (Carbon Fiber look) */
+        background-image: 
+            linear-gradient(45deg, #0a0a0a 25%, transparent 25%, transparent 75%, #0a0a0a 75%, #0a0a0a),
+            linear-gradient(45deg, #0a0a0a 25%, transparent 25%, transparent 75%, #0a0a0a 75%, #0a0a0a);
+        background-size: 20px 20px;
+        background-position: 0 0, 10px 10px;
+    }
+
+    .edu-c-header {
+        text-align: center;
+        margin-bottom: 80px;
+    }
+
+    .edu-c-title {
+        font-family: sans-serif;
+        font-size: 3rem;
+        font-weight: 900;
+        font-style: italic;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: -2px;
+        text-shadow: 4px 4px 0px var(--accent-c); /* Shadow Merah Solid */
+    }
+
+    .edu-c-subtitle {
+        color: var(--accent-c);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        margin-top: 10px;
+    }
+
+    /* --- QUEST TREE CONTAINER --- */
+    .quest-tree {
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        padding-left: 50px; /* Ruang untuk garis kiri */
+    }
+
+    /* Garis Penghubung Utama (Kiri) */
+    .quest-tree::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 15px;
+        width: 4px; height: 100%;
+        background-color: var(--path-color);
+    }
+
+    /* --- KARTU QUEST --- */
+    .quest-card {
+        position: relative;
+        margin-bottom: 50px;
+    }
+
+    /* Titik Node di Garis Kiri */
+    .quest-node {
+        position: absolute;
+        left: -43px; /* Menyesuaikan posisi garis */
+        top: 0;
+        width: 20px; height: 20px;
+        background-color: var(--bg-c);
+        border: 3px solid var(--accent-c);
+        transform: rotate(45deg); /* Belah ketupat */
+        z-index: 2;
+        transition: 0.3s;
+    }
+
+    /* Garis Horizontal Penghubung Node ke Kartu */
+    .quest-connector {
+        position: absolute;
+        left: -20px; top: 10px;
+        width: 20px; height: 2px;
+        background-color: var(--accent-c);
+    }
+
+    /* BOX KONTEN UTAMA */
+    .quest-content {
+        background-color: var(--card-bg);
+        padding: 30px;
+        position: relative;
+        transition: all 0.3s;
+        border-left: 4px solid var(--accent-c);
+        /* Potongan Sudut Kanan Bawah */
+        clip-path: polygon(
+            0 0, 
+            100% 0, 
+            100% 80%, 
+            95% 100%, 
+            0 100%
+        );
+    }
+
+    /* Hiasan 'Top Secret' Stripe */
+    .quest-content::before {
+        content: '';
+        position: absolute;
+        top: 0; right: 0;
+        width: 50px; height: 50px;
+        background: linear-gradient(135deg, transparent 50%, rgba(255,0,60,0.2) 50%);
+        pointer-events: none;
+    }
+
+    /* HOVER EFFECT */
+    .quest-card:hover .quest-node {
+        background-color: var(--accent-c);
+        box-shadow: 0 0 15px var(--accent-c);
+    }
+
+    .quest-card:hover .quest-content {
+        transform: translateX(10px); /* Geser Kanan */
+        background-color: #1a1a1a;
+        box-shadow: -5px 5px 20px rgba(0,0,0,0.5);
+    }
+
+    /* --- TEXT INSIDE CARD --- */
+    .rank-badge {
+        display: inline-block;
+        background-color: var(--accent-c);
+        color: #000;
+        font-weight: 900;
+        font-size: 0.8rem;
+        padding: 3px 10px;
+        margin-bottom: 10px;
+        transform: skewX(-20deg);
+    }
+    
+    .year-text {
+        float: right;
+        color: var(--text-gray);
+        font-family: monospace;
+        font-weight: bold;
+    }
+
+    .school-name {
+        font-family: sans-serif;
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #fff;
+        text-transform: uppercase;
+        font-style: italic;
+        margin: 10px 0 5px 0;
+    }
+
+    .major-name {
+        color: var(--accent-c);
+        font-weight: 700;
+        font-size: 1rem;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .quest-desc {
+        color: #aaa;
+        line-height: 1.6;
+        font-size: 0.95rem;
+        border-top: 1px solid #333;
+        padding-top: 15px;
+    }
+
+    /* Status 'Completed' */
+    .status-stamped {
+        position: absolute;
+        bottom: 20px; right: 20px;
+        border: 2px solid rgba(255,255,255,0.1);
+        color: rgba(255,255,255,0.2);
+        padding: 5px 10px;
+        font-weight: 900;
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        transform: rotate(-15deg);
+        pointer-events: none;
+    }
+    
+    .quest-card:hover .status-stamped {
+        color: rgba(255,255,255,0.4);
+        border-color: rgba(255,255,255,0.4);
+    }
+
+    @media (max-width: 768px) {
+        .edu-c-title { font-size: 2.2rem; }
+        .quest-tree { padding-left: 30px; }
+        .quest-node { left: -23px; width: 16px; height: 16px; }
+    }
+</style>
+
+<section id="pendidikan" class="edu-c-section">
+    <div class="edu-c-header">
+        <h2 class="edu-c-title">CAMPAIGN LOG</h2>
+        <div class="edu-c-subtitle">// ACADEMIC HISTORY</div>
+    </div>
+
+    <div class="quest-tree">
+        
+        <div class="quest-card">
+            <div class="quest-connector"></div>
+            <div class="quest-node"></div>
+            
+            <div class="quest-content">
+                <div class="rank-badge">LEVEL 03 // MASTER</div>
+                <span class="year-text">[ 2020 - 2024 ]</span>
+                
+                <h3 class="school-name">Universitas Teknologi Digital</h3>
+                <div class="major-name">S1 Teknik Informatika</div>
+                
+                <p class="quest-desc">
+                    <strong>MISSION REPORT:</strong><br>
+                    Menyelesaikan studi dengan predikat Cumlaude (Score: 3.85). 
+                    Fokus utama pada pengembangan algoritma AI dan keamanan jaringan.
+                </p>
+                
+                <div class="status-stamped">COMPLETED</div>
+            </div>
+        </div>
+
+        <div class="quest-card">
+            <div class="quest-connector"></div>
+            <div class="quest-node"></div>
+            
+            <div class="quest-content">
+                <div class="rank-badge">LEVEL 02 // ROOKIE</div>
+                <span class="year-text">[ 2017 - 2020 ]</span>
+                
+                <h3 class="school-name">SMA Negeri 1 Jakarta</h3>
+                <div class="major-name">Jurusan IPA</div>
+                
+                <p class="quest-desc">
+                    <strong>MISSION REPORT:</strong><br>
+                    Aktif dalam guild (ekskul) Komputer. Memenangkan turnamen logika matematika tingkat regional.
+                </p>
+
+                <div class="status-stamped">COMPLETED</div>
+            </div>
+        </div>
+
+        <div class="quest-card">
+            <div class="quest-connector"></div>
+            <div class="quest-node"></div>
+            
+            <div class="quest-content">
+                <div class="rank-badge">LEVEL 01 // NOOB</div>
+                <span class="year-text">[ 2014 - 2017 ]</span>
+                
+                <h3 class="school-name">SMP Negeri 5 Jakarta</h3>
+                <div class="major-name">Pendidikan Dasar</div>
+                
+                <p class="quest-desc">
+                    <strong>MISSION REPORT:</strong><br>
+                    Inisiasi pembelajaran dasar teknologi. Mengikuti pelatihan pramuka dan basket.
+                </p>
+
+                <div class="status-stamped">COMPLETED</div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    /* --- VARIABLES LOKAL (SKILLS C) --- */
+    #skills {
+        --bg-c: #050505;
+        --card-bg: #141414;
+        --accent-c: #ff003c; /* Merah Crimson */
+        --text-c: #ffffff;
+        --bar-bg: #333;
+    }
+
+    /* --- LAYOUT --- */
+    .skills-c-section {
+        padding: 120px 5%;
+        background-color: var(--bg-c);
+        position: relative;
+        /* Background Striped Pattern (Garis miring tipis) */
+        background-image: repeating-linear-gradient(
+            -45deg,
+            transparent,
+            transparent 10px,
+            rgba(255, 0, 60, 0.02) 10px,
+            rgba(255, 0, 60, 0.02) 20px
+        );
+    }
+
+    .skills-c-header {
+        text-align: center;
+        margin-bottom: 70px;
+    }
+
+    .skills-c-title {
+        font-family: sans-serif;
+        font-size: 3rem;
+        font-weight: 900;
+        font-style: italic;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: -1px;
+        /* Efek Glitch text shadow */
+        text-shadow: 2px 2px 0px var(--accent-c), -1px -1px 0 #000;
+    }
+
+    .skills-c-subtitle {
+        background: var(--accent-c);
+        color: #000;
+        display: inline-block;
+        padding: 5px 15px;
+        font-weight: 800;
+        transform: skewX(-20deg);
+        font-size: 0.9rem;
+        margin-top: 10px;
+    }
+
+    /* --- GRID --- */
+    .loadout-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 40px;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    /* --- SKILL CARD (STAT BLOCK) --- */
+    .stat-block {
+        background-color: var(--card-bg);
+        padding: 30px;
+        border-left: 5px solid var(--accent-c); /* Garis merah tebal di kiri */
+        position: relative;
+        transition: 0.3s;
+        /* Sudut tajam tapi kotak */
+        box-shadow: 0 0 0 rgba(255, 0, 60, 0);
+    }
+
+    .stat-block:hover {
+        background-color: #1a1a1a;
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(255, 0, 60, 0.1);
+    }
+
+    /* Judul Kategori */
+    .stat-cat-title {
+        font-family: sans-serif;
+        font-size: 1.5rem;
+        font-weight: 900;
+        font-style: italic;
+        text-transform: uppercase;
+        color: #fff;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #333;
+        padding-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .stat-icon {
+        color: var(--accent-c);
+    }
+
+    /* --- ITEM SKILL --- */
+    .skill-c-item {
+        margin-bottom: 25px;
+    }
+
+    .skill-c-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 8px;
+    }
+
+    .skill-name {
+        font-weight: 700;
+        font-size: 1rem;
+        text-transform: uppercase;
+        color: #ccc;
+    }
+
+    .skill-val {
+        font-family: sans-serif;
+        font-weight: 900;
+        font-size: 1.2rem;
+        color: var(--accent-c);
+        font-style: italic;
+    }
+
+    /* BAR CONTAINER (Miring/Skewed) */
+    .bar-c-bg {
+        width: 100%;
+        height: 12px;
+        background-color: var(--bar-bg);
+        transform: skewX(-30deg); /* Kunci desain ini: BAR MIRING */
+        overflow: hidden;
+    }
+
+    .bar-c-fill {
+        height: 100%;
+        background-color: var(--accent-c);
+        width: 0%; /* Animasi dari 0 */
+        transition: width 1s cubic-bezier(0.2, 1, 0.3, 1); /* Cepat di awal */
+        position: relative;
+        box-shadow: 0 0 10px var(--accent-c);
+    }
+
+    /* Striped Texture di dalam bar merah */
+    .bar-c-fill::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background-image: linear-gradient(
+            45deg, 
+            rgba(0,0,0,0.2) 25%, 
+            transparent 25%, 
+            transparent 50%, 
+            rgba(0,0,0,0.2) 50%, 
+            rgba(0,0,0,0.2) 75%, 
+            transparent 75%, 
+            transparent
+        );
+        background-size: 10px 10px;
+    }
+
+    /* Deco Corner */
+    .deco-corner-c {
+        position: absolute;
+        top: 0; right: 0;
+        width: 0; height: 0;
+        border-style: solid;
+        border-width: 0 30px 30px 0;
+        border-color: transparent var(--accent-c) transparent transparent;
+    }
+
+</style>
+
+<section id="skills" class="skills-c-section">
+    <div class="skills-c-header">
+        <h2 class="skills-c-title">ABILITY STATS</h2>
+        <div class="skills-c-subtitle">CURRENT LOADOUT</div>
+    </div>
+
+    <div class="loadout-grid">
+        
+        <div class="stat-block">
+            <div class="deco-corner-c"></div> <div class="stat-cat-title">
+                <span class="stat-icon">///</span> CORE_TECH
+            </div>
+
+            <div class="skill-c-item">
+                <div class="skill-c-info">
+                    <span class="skill-name">HTML & CSS Architecture</span>
+                    <span class="skill-val">95%</span>
+                </div>
+                <div class="bar-c-bg">
+                    <div class="bar-c-fill" style="width: 95%"></div>
+                </div>
+            </div>
+
+            <div class="skill-c-item">
+                <div class="skill-c-info">
+                    <span class="skill-name">JavaScript Mechanics</span>
+                    <span class="skill-val">85%</span>
+                </div>
+                <div class="bar-c-bg">
+                    <div class="bar-c-fill" style="width: 85%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stat-block">
+            <div class="deco-corner-c"></div>
+            <div class="stat-cat-title">
+                <span class="stat-icon">///</span> FRAMEWORKS
+            </div>
+
+            <div class="skill-c-item">
+                <div class="skill-c-info">
+                    <span class="skill-name">Tailwind CSS</span>
+                    <span class="skill-val">90%</span>
+                </div>
+                <div class="bar-c-bg">
+                    <div class="bar-c-fill" style="width: 90%"></div>
+                </div>
+            </div>
+
+            <div class="skill-c-item">
+                <div class="skill-c-info">
+                    <span class="skill-name">React JS / Vue</span>
+                    <span class="skill-val">75%</span>
+                </div>
+                <div class="bar-c-bg">
+                    <div class="bar-c-fill" style="width: 75%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stat-block">
+            <div class="deco-corner-c"></div>
+            <div class="stat-cat-title">
+                <span class="stat-icon">///</span> BACKEND & TOOLS
+            </div>
+
+            <div class="skill-c-item">
+                <div class="skill-c-info">
+                    <span class="skill-name">Python</span>
+                    <span class="skill-val">80%</span>
+                </div>
+                <div class="bar-c-bg">
+                    <div class="bar-c-fill" style="width: 80%"></div>
+                </div>
+            </div>
+
+            <div class="skill-c-item">
+                <div class="skill-c-info">
+                    <span class="skill-name">Git / Version Control</span>
+                    <span class="skill-val">85%</span>
+                </div>
+                <div class="bar-c-bg">
+                    <div class="bar-c-fill" style="width: 85%"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    // Trigger animasi saat scroll sampai ke skills
+    document.addEventListener("DOMContentLoaded", function() {
+        const observerC = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bars = entry.target.querySelectorAll('.bar-c-fill');
+                    bars.forEach(bar => {
+                        // Pakai teknik re-apply width agar transisi CSS jalan
+                        const w = bar.style.width;
+                        bar.style.width = '0%';
+                        setTimeout(() => { bar.style.width = w; }, 100);
+                    });
+                    observerC.unobserve(entry.target); // Hanya animasi sekali
+                }
+            });
+        });
+        
+        const skillSec = document.querySelector('#skills');
+        if(skillSec) observerC.observe(skillSec);
+    });
+</script>
+
+<style>
+    /* --- VARIABLES LOKAL (PROJECTS C) --- */
+    #projects {
+        --bg-c: #050505;
+        --card-bg: #000;
+        --accent-c: #ff003c; /* Merah Crimson */
+        --text-c: #fff;
+        --overlay-c: rgba(255, 0, 60, 0.9);
+    }
+
+    /* --- LAYOUT --- */
+    .proj-c-section {
+        padding: 120px 5%;
+        background-color: var(--bg-c);
+        position: relative;
+        /* Background Mesh Pattern */
+        background-image: radial-gradient(circle, #222 1px, transparent 1px);
+        background-size: 30px 30px;
+    }
+
+    .proj-c-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 60px;
+        border-bottom: 2px solid #333;
+        padding-bottom: 20px;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .proj-c-title {
+        font-family: sans-serif;
+        font-size: 3.5rem;
+        font-weight: 900;
+        font-style: italic;
+        color: #fff;
+        text-transform: uppercase;
+        line-height: 1;
+        margin: 0;
+    }
+
+    .proj-c-subtitle {
+        font-family: monospace;
+        color: var(--accent-c);
+        font-size: 1rem;
+        font-weight: bold;
+        text-align: right;
+    }
+
+    /* --- GRID --- */
+    .proj-c-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* --- MISSION CARD --- */
+    .mission-card {
+        position: relative;
+        height: 450px; /* Kartu tinggi */
+        background-color: var(--card-bg);
+        border: 1px solid #333;
+        overflow: hidden;
+        transition: 0.3s;
+        group-hover: none;
+    }
+
+    /* Border Hiasan Sudut */
+    .mission-card::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        border: 2px solid transparent;
+        transition: 0.3s;
+        pointer-events: none;
+        z-index: 10;
+    }
+
+    .mission-card:hover {
+        border-color: var(--accent-c);
+        transform: translateY(-10px);
+        box-shadow: 0 10px 40px rgba(255, 0, 60, 0.2);
+    }
+    
+    /* Garis merah tebal muncul saat hover */
+    .mission-card:hover::after {
+        border-bottom: 5px solid var(--accent-c);
+    }
+
+    /* --- GAMBAR --- */
+    .mission-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(100%) contrast(1.2); /* Hitam Putih Kontras */
+        transition: 0.5s;
+    }
+
+    .mission-card:hover .mission-img {
+        filter: grayscale(0%) contrast(1); /* Jadi Berwarna */
+        transform: scale(1.1);
+    }
+
+    /* --- KONTEN OVERLAY (Hidden by default, slide up) --- */
+    .mission-content {
+        position: absolute;
+        bottom: 0; left: 0;
+        width: 100%;
+        background: linear-gradient(to top, #000 10%, rgba(0,0,0,0.8) 80%, transparent);
+        padding: 30px 20px;
+        transform: translateY(80px); /* Sembunyikan sebagian teks */
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .mission-card:hover .mission-content {
+        transform: translateY(0); /* Muncul penuh */
+        background: linear-gradient(to top, #000 40%, rgba(255,0,60,0.9) 100%); /* Merah pas hover */
+    }
+
+    /* Badge Status */
+    .mission-badge {
+        position: absolute;
+        top: 20px; right: 20px;
+        background: #000;
+        color: var(--accent-c);
+        padding: 5px 10px;
+        font-weight: bold;
+        font-size: 0.8rem;
+        border: 1px solid var(--accent-c);
+        z-index: 5;
+        text-transform: uppercase;
+    }
+
+    .mission-title {
+        font-family: sans-serif;
+        font-size: 1.8rem;
+        font-weight: 900;
+        font-style: italic;
+        color: #fff;
+        text-transform: uppercase;
+        margin: 0 0 5px 0;
+        line-height: 1;
+    }
+
+    .mission-cat {
+        color: #aaa;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+        display: block;
+    }
+
+    .mission-desc {
+        color: #ddd;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 20px;
+        opacity: 0; /* Hilang dulu */
+        transition: 0.4s;
+        transform: translateY(20px);
+    }
+
+    .mission-card:hover .mission-desc {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.1s;
+    }
+
+    /* Tombol Execute */
+    .btn-execute {
+        display: inline-block;
+        border: 2px solid #fff;
+        color: #fff;
+        padding: 10px 25px;
+        text-transform: uppercase;
+        font-weight: 900;
+        text-decoration: none;
+        font-style: italic;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: 0.4s;
+    }
+
+    .btn-execute:hover {
+        background: #fff;
+        color: #000;
+    }
+
+    .mission-card:hover .btn-execute {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.2s;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+        .proj-c-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .proj-c-title { font-size: 2.5rem; }
+    }
+</style>
+
+<section id="projects" class="proj-c-section">
+    <div class="proj-c-header">
+        <h2 class="proj-c-title">OPERATIONS</h2>
+        <div class="proj-c-subtitle">
+            // DEPLOYED_PROJECTS<br>
+            // STATUS: ALL_GREEN
+        </div>
+    </div>
+
+    <div class="proj-c-grid">
+        
+        <div class="mission-card">
+            <div class="mission-badge">OP: E-COMMERCE</div>
+            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Project 1" class="mission-img">
+            
+            <div class="mission-content">
+                <span class="mission-cat">Web Development</span>
+                <h3 class="mission-title">TOKO ONLINE PRO</h3>
+                <p class="mission-desc">
+                    Platform belanja digital dengan integrasi payment gateway midtrans dan dashboard admin real-time.
+                    <br><br>
+                    <span style="font-size:0.8rem; color: #fff;">[ STACK: PHP / LARAVEL / MYSQL ]</span>
+                </p>
+                <a href="#" class="btn-execute">EXECUTE VIEW</a>
+            </div>
+        </div>
+
+        <div class="mission-card">
+            <div class="mission-badge">OP: SECURITY</div>
+            <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Project 2" class="mission-img">
+            
+            <div class="mission-content">
+                <span class="mission-cat">App Development</span>
+                <h3 class="mission-title">DASHBOARD APP</h3>
+                <p class="mission-desc">
+                    Aplikasi monitoring server dengan visualisasi data grafis dan sistem peringatan dini.
+                    <br><br>
+                    <span style="font-size:0.8rem; color: #fff;">[ STACK: REACT / NODE.JS ]</span>
+                </p>
+                <a href="#" class="btn-execute">EXECUTE VIEW</a>
+            </div>
+        </div>
+
+        <div class="mission-card">
+            <div class="mission-badge">OP: AI VISION</div>
+            <img src="https://images.unsplash.com/photo-1535378437268-135931202f17?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Project 3" class="mission-img">
+            
+            <div class="mission-content">
+                <span class="mission-cat">Artificial Intelligence</span>
+                <h3 class="mission-title">FACE RECOGNITION</h3>
+                <p class="mission-desc">
+                    Sistem presensi otomatis menggunakan deteksi wajah dengan akurasi tinggi dalam kondisi minim cahaya.
+                    <br><br>
+                    <span style="font-size:0.8rem; color: #fff;">[ STACK: PYTHON / OPENCV ]</span>
+                </p>
+                <a href="#" class="btn-execute">EXECUTE VIEW</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    /* --- VARIABLES LOKAL (CONTACT C) --- */
+    #contact {
+        --bg-c: #050505;
+        --panel-bg: #0a0a0a;
+        --accent-c: #ff003c;
+        --text-c: #fff;
+        --input-text: #ddd;
+    }
+
+    /* --- LAYOUT --- */
+    .contact-c-section {
+        padding: 120px 5% 80px 5%;
+        background-color: var(--bg-c);
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Hiasan Background Besar (Tulisan Samar) */
+    .bg-text-deco {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%) rotate(-10deg);
+        font-size: 15vw; /* Sangat besar */
+        font-weight: 900;
+        font-style: italic;
+        color: rgba(255, 255, 255, 0.02);
+        white-space: nowrap;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .contact-c-container {
+        position: relative;
+        z-index: 1;
+        max-width: 900px;
+        margin: 0 auto;
+        background-color: var(--panel-bg);
+        padding: 60px;
+        border-right: 10px solid var(--accent-c); /* Garis tebal di kanan */
+        box-shadow: -20px 20px 0px rgba(20, 20, 20, 1); /* Shadow kotak solid */
+    }
+
+    .con-c-header {
+        margin-bottom: 50px;
+    }
+
+    .con-c-title {
+        font-family: sans-serif;
+        font-size: 3rem;
+        font-weight: 900;
+        font-style: italic;
+        color: #fff;
+        text-transform: uppercase;
+        line-height: 1;
+    }
+
+    .con-c-subtitle {
+        color: var(--accent-c);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-top: 10px;
+        display: block;
+    }
+
+    /* --- FORM --- */
+    .form-group-c {
+        position: relative;
+        margin-bottom: 40px;
+    }
+
+    .input-c-field {
+        width: 100%;
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid #333;
+        padding: 15px 0;
+        font-size: 1.2rem;
+        color: var(--input-text);
+        font-family: sans-serif;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .input-c-field:focus {
+        outline: none;
+        border-bottom-color: var(--accent-c);
+    }
+
+    /* Label Floating (Diam di atas, tapi berubah warna) */
+    .label-c-float {
+        position: absolute;
+        top: -10px; left: 0;
+        font-size: 0.8rem;
+        color: #666;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: 0.3s;
+    }
+
+    .input-c-field:focus + .label-c-float {
+        color: var(--accent-c);
+    }
+
+    /* Tombol Kirim (Slanted Button) */
+    .btn-trigger {
+        display: inline-block;
+        width: 100%;
+        padding: 20px;
+        background-color: var(--accent-c);
+        border: none;
+        color: #fff;
+        font-size: 1.5rem;
+        font-weight: 900;
+        font-style: italic;
+        text-transform: uppercase;
+        cursor: pointer;
+        transform: skewX(-10deg);
+        transition: 0.3s;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-trigger:hover {
+        background-color: #fff;
+        color: var(--accent-c);
+        box-shadow: 0 0 30px var(--accent-c);
+    }
+
+    .btn-text {
+        display: block;
+        transform: skewX(10deg); /* Balikin teks biar tegak */
+    }
+
+    /* --- FOOTER C --- */
+    .footer-c {
+        background-color: #000;
+        padding: 60px 5%;
+        text-align: center;
+        border-top: 5px solid var(--accent-c);
+    }
+
+    .footer-c-grid {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .footer-logo {
+        font-size: 2rem;
+        font-weight: 900;
+        font-style: italic;
+        color: #fff;
+    }
+
+    .social-c-links {
+        display: flex;
+        gap: 20px;
+    }
+
+    .social-c-btn {
+        width: 50px; height: 50px;
+        border: 2px solid #333;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-weight: bold;
+        transform: rotate(45deg); /* Belah ketupat */
+        transition: 0.3s;
+    }
+    
+    .social-c-btn span {
+        transform: rotate(-45deg); /* Teks lurus */
+    }
+
+    .social-c-btn:hover {
+        border-color: var(--accent-c);
+        background-color: var(--accent-c);
+        box-shadow: 0 0 15px var(--accent-c);
+    }
+
+    .copyright-c {
+        color: #555;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+        .contact-c-container { padding: 30px; border-right: 5px solid var(--accent-c); }
+        .bg-text-deco { display: none; }
+        .con-c-title { font-size: 2rem; }
+    }
+</style>
+
+<section id="contact" class="contact-c-section">
+    <div class="bg-text-deco">GAME OVER</div>
+
+    <div class="contact-c-container">
+        <div class="con-c-header">
+            <h2 class="con-c-title">INITIATE COMMS</h2>
+            <span class="con-c-subtitle">// SEND MESSAGE TO BASE</span>
+        </div>
+
+        <form onsubmit="kirimPesanC(event)">
+            <div class="form-group-c">
+                <input type="text" class="input-c-field" required placeholder=" ">
+                <label class="label-c-float">PLAYER NAME / ID</label>
+            </div>
+
+            <div class="form-group-c">
+                <input type="email" class="input-c-field" required placeholder=" ">
+                <label class="label-c-float">EMAIL ADDRESS</label>
+            </div>
+
+            <div class="form-group-c">
+                <input type="text" class="input-c-field" required placeholder=" ">
+                <label class="label-c-float">MISSION BRIEF / MESSAGE</label>
+            </div>
+
+            <button type="submit" class="btn-trigger">
+                <span class="btn-text">SEND DATA >></span>
+            </button>
+        </form>
+    </div>
+</section>
+
+<footer class="footer-c">
+    <div class="footer-c-grid">
+        <div class="footer-logo">
+            SAMURAI<span style="color: var(--accent-c)">DEV</span>
+        </div>
+
+        <div class="social-c-links">
+            <a href="#" class="social-c-btn"><span>GH</span></a>
+            <a href="#" class="social-c-btn"><span>IG</span></a>
+            <a href="#" class="social-c-btn"><span>LI</span></a>
+        </div>
+
+        <div class="copyright-c">
+            &copy; 2025 ALL RIGHTS RESERVED. <br>
+            PRESS 'START' TO PLAY AGAIN.
+        </div>
+    </div>
+</footer>
+
+<script>
+    function kirimPesanC(e) {
+        e.preventDefault();
+        const btn = document.querySelector('.btn-text');
+        const originalText = btn.innerText;
+        
+        btn.innerText = "SENDING...";
+        
+        setTimeout(() => {
+            alert("MISSION ACCOMPLISHED.\nMessage Sent Successfully.");
+            btn.innerText = "SENT!";
+            e.target.reset();
+            setTimeout(() => { btn.innerText = originalText; }, 2000);
+        }, 1000);
+    }
+</script>
+    </body>
+</html>

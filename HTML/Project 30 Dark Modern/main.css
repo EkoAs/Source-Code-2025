@@ -1,0 +1,636 @@
+
+html{scroll-behavior: smooth;}
+body{
+    background-color: black;
+    color: antiquewhite;
+    background: linear-gradient(to right, rgb(10, 10, 10), rgb(20, 20, 20)); /* latar gelap */
+    overflow: hidden;
+    position: relative;
+    scroll-behavior: smooth
+}
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(146, 141, 141, 0.288) 0%,
+    rgba(112, 151, 209, 0.35) 40%,
+    rgba(98, 153, 255, 0.452) 50%,
+    rgba(127, 140, 184, 0.35) 60%,
+    rgba(99, 96, 96, 0.336) 100%
+  );
+  filter: blur(15px); /* bayangan cahaya lembut */
+  animation: bodyShine 10s ease-in-out infinite;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+@keyframes bodyShine {
+  0% { left: -150%; opacity: 0.1; }
+  50% { left: 150%; opacity: 0.2; }
+  100% { left: -150%; opacity: 0.1; }
+}
+
+/* ======================================================================================= */
+/* ==================================Navbar====================================== */
+.MAIN-Menu{
+
+    background-image: linear-gradient(to right, rgb(193, 223, 57),  rgb(73, 73, 235));
+    /* -webkit-background-clip: background; */
+    background-clip: border-box;
+    color: transparent;
+    clear: both;
+    z-index: 999;
+    display: block;
+    width: 100%;
+    background-color: rgba(35, 83, 216, 0.897);
+    backdrop-filter: blur(5px);
+    padding: 8px;
+    float: left;
+    justify-content: space-between;
+    position: fixed;
+    overflow: auto;
+    flex-wrap: wrap;
+    backdrop-filter: blur(10px); /* efek blur di belakang */
+    -webkit-backdrop-filter: blur(10px); /* buat Safari */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* biar keliatan glossy */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* efek mengkilap lembut */
+    overflow: hidden; 
+    /* background: linear-gradient(135deg, rgb(29, 97, 185), rgb(38, 124, 96)); */
+}
+.MAIN-Menu::before{
+content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 80%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    transparent 100%
+  );
+  animation: shine 5s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+
+@keyframes shine {
+  0% { left: -120%; opacity: 0.4; }
+  50% { left: 120%; opacity: 0.8; }
+  100% { left: -120%; opacity: 0.4; }
+}
+
+.MAIN-Menu .logo{
+    border-radius: 50%;
+    box-sizing: border-box;
+    display: flex;
+    float: left;
+}
+.MAIN-Menu ul{
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    float:inherit;
+    margin-left: 6px;
+}
+.MAIN-Menu ul li{
+    list-style: none;
+    margin-right: 6px;
+    background: transparent;
+    display: flex;
+    border: solid 2px white;
+    border-radius: 15px;
+    width: max-content;
+    justify-content: center;
+}
+.MAIN-Menu ul li:hover{
+    opacity: 0.5;
+    cursor: pointer;
+}
+.MAIN-Menu a{
+    display: block;
+    color: rgb(235, 225, 225);
+    text-align: center;
+    padding: 6px 8px;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.3em;
+    font-weight: 700;
+}
+
+/* =================SUPER MAINBOARD============================= */
+.SUPER-mainboard{
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    background: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+    padding-top: 62px;
+    text-align: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+
+}
+.SUPER-mainboard .mainboard-left{
+    height: max-content;
+    width: 600px;
+    justify-items: center;
+    padding-top: 5px;
+    display: flex;
+    padding-left: 10px;
+    padding-right: 10px;
+    align-items: stretch;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+.mainboard-left .halo{
+    padding: 0;
+    margin: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    width: 100%;
+    font-size: 19px;
+    font-weight: 800;
+    border-left-color: blueviolet;
+    border-left: solid 3px;
+    border-right: solid 3px;
+}
+.mainboard-left .name{
+    border-bottom: solid rgb(233, 216, 216) 3px;
+    width: 100%;
+    font-weight: 900;
+    font-family: 'Times New Roman', Times, serif;
+    background-image: linear-gradient(to right, rgb(193, 223, 57),  rgb(73, 73, 235));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    padding-bottom: -15px;
+    flex-wrap: wrap;
+    font-size: 30px;
+
+    backdrop-filter: blur(10px); /* efek blur di belakang */
+    -webkit-backdrop-filter: blur(10px); /* buat Safari */
+    border: 0px solid rgba(255, 255, 255, 0.3); /* biar keliatan glossy */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* efek mengkilap lembut */
+}
+
+.mainboard-left .my-information{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    position: relative;
+    flex-wrap: wrap;
+    display: flex;
+    text-align: justify;
+    width: 100%;
+    margin-top: 10px;
+    background: transparent;
+    text-indent: 40px;
+    margin: 10px;
+    padding: 10px;
+    
+}
+
+.mainboard-left .more{ 
+    cursor: context-menu;}
+.mainboard-left .button1{
+    width: 120px;
+    height: 33px;
+    border-radius: 12px;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 19px;
+    background: transparent;
+    border: solid 2px;
+    color: rgb(37, 34, 34);
+    background-image: linear-gradient(to right, rgb(24, 204, 180),  rgb(63, 199, 9));
+    background-clip: border-box;
+    backdrop-filter: blur(10px); /* efek blur di belakang */
+    -webkit-backdrop-filter: blur(10px); /* buat Safari */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* biar keliatan glossy */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* efek mengkilap lembut */
+}
+.mainboard-left .more .button1 img{
+    justify-content: center;
+    justify-items: center;
+    margin-right: 4px;
+}
+.mainboard-left .button1 a{
+    text-decoration: none;
+    padding: 2px;
+}
+.mainboard-left .button1:hover{opacity: 0.3;}
+/* ============================================================================================= */
+
+
+.SUPER-mainboard .mainboard-right{
+  
+    box-sizing: border-box;
+    height: max-content;
+    width: 700px;
+    justify-items: center;
+    padding-top: 0px;
+    flex-wrap: wrap;
+    display: flex;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-display: auto;
+    margin: 10px;
+    padding-top: 20px;
+    align-items:center;
+    justify-content: center;
+    position: relative;
+}
+
+    
+
+.SUPER-mainboard .mainboard-right .imagecom img{
+    border-radius: 50%;
+    height: auto;
+    border-style: solid;
+    border-left-color: rgb(58, 226, 43);
+    border-right-color: rgb(58, 226, 43);
+}
+.SUPER-mainboard .mainboard-right .imagecom img:hover{
+    opacity: 0.3;
+    cursor: pointer;
+    border-left-color: blueviolet;
+    border-right-color: blueviolet;
+}
+.SUPER-mainboard .mainboard-right .imagecom{
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    padding: 10px;
+    margin-top: 0px;
+    border-spacing: 0;
+    border-collapse: collapse;
+    text-align: center;
+    justify-content: center;
+    width: max-content;
+    margin-right: 40px;
+}
+.SUPER-mainboard .mainboard-right .img-info{
+    height: 270px;
+    width: 450px;
+    text-align: justify;
+    padding: 0;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 520;
+    font-size: 18px;
+    margin-right: 20px;
+}
+.SUPER-mainboard .mainboard-right .img-info p{
+    text-indent: 50px;
+}
+.SUPER-mainboard .mainboard-right .imagecom{
+    padding-left: 20px;
+    
+}
+
+.SUPER-mainboard .mainboard-right .my-skill-up{
+    width: 100%;
+    border: solid 3px red;
+    display: contents;
+    flex-wrap: wrap;
+    position: relative;
+}
+.SUPER-mainboard .mainboard-right .my-skill-up p{
+    border: solid 1px rgb(74, 230, 222);
+    width: max-content;
+    margin-right: 8px;
+    font-size: 18px;
+    border-radius: 16px;
+    padding: 6px;
+    cursor: pointer;
+    font-weight: 700;
+    background: transparent;
+    box-sizing: border-box;
+    background-image: linear-gradient(to left, rgb(29, 97, 185),  rgb(38, 124, 96));
+    background-clip: border-box;
+    backdrop-filter: blur(10px); /* efek blur di belakang */
+    -webkit-backdrop-filter: blur(10px); /* buat Safari */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* biar keliatan glossy */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* efek mengkilap lembut */
+}
+
+.SUPER-mainboard .mainboard-right .my-skill-up p:hover{
+    opacity: 0.4;
+    border-color: rgb(255, 0, 0);
+}
+/* ======================================================================================= */
+/* =========================================mainboard Bottom================================= */
+.SUPER-mainboard .mainboard-bottom{
+    box-sizing: border-box;
+    height: max-content;
+    width: 100%;
+    justify-items: center;
+    padding-top: 0px;
+    flex-wrap: wrap;
+    display: flex;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 10px;
+    padding-top: 20px;
+    align-items:center;
+    justify-content: center;
+    position: relative;
+    /* border: solid 3px red; */
+}
+
+.SUPER-mainboard h2{
+    /* border: solid 3px red; */
+    width: 100%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 800;
+    border-top-style: solid;
+    border-top-color:antiquewhite ;
+    border-bottom-style: solid;
+    border-bottom-color:antiquewhite ;
+}
+
+.SUPER-mainboard .mainboard-bottom .my-skill{
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    padding: 0;
+    margin-top: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    text-align: center;
+    justify-content: center;
+    width: max-content;
+    margin-right: 0;
+    /* border: solid 3px red; */
+    width: auto;
+    max-width: 300px;
+    padding: 10px;
+}
+
+.SUPER-mainboard .mainboard-bottom .my-skill img:hover{
+    cursor: pointer;
+   
+}
+.SUPER-mainboard .mainboard-bottom .my-skill p{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 500;
+    text-align: center;
+    flex-wrap: wrap;
+
+    /* BORDER COLOR GRADIAN */
+    border-width: 2.5px;
+    border-style: solid;
+    border-image: linear-gradient(to right, rgb(219, 48, 48), rgb(85, 231, 27)) 1;
+
+    backdrop-filter: blur(10px); /* efek blur di belakang */
+    -webkit-backdrop-filter: blur(10px); /* buat Safari */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* biar keliatan glossy */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* efek mengkilap lembut */
+}
+
+
+
+/* =======================ZOOM CONTROL IMAGE====================== */
+
+
+ 
+.my-skill img {
+    /* Sesuai kode kamu */
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease, z-index 0.3s ease; /* Efek smooth */
+}
+.my-skill img:hover {
+    opacity: 0.8; /* Efek hover */
+}
+/* Kelas untuk zoom in-place */
+.zoomed {
+    position: absolute; /* Agar tidak mempengaruhi layout skill lain */
+    z-index: 1000; /* Di atas skill lain */
+    transform: scale(2); /* Zoom 2x, ubah sesuai */
+    transform-origin: center; /* Zoom dari tengah */
+}
+
+/* ==================================SUPER-MAINBOARD-TWO========================================= */
+/* ============================================================================================================= */
+.SUPER-MAINBOARD-TWO{
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    background: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+    padding-top: 62px;
+    text-align: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    border: solid 3px red;
+}
+
+
+.SUPER-MAINBOARD-TWO .SUPER-TWO{
+    height: max-content;
+    width: 30%;
+    justify-items: center;
+    padding-top: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    border-collapse: 1;
+    margin: 0;
+    padding-top: 0;
+    align-items:center;
+    justify-content: center;
+    border: solid 3px red;
+}
+
+.SUPER-MAINBOARD-TWO .SUPER-TWO .main-control{
+    width: 220px;
+    height: 40px;
+    padding: 0;
+    background: linear-gradient(135deg, rgba(23, 124, 255, 0.486), rgba(53, 16, 185, 0.493));
+    backdrop-filter: blur(10px); /* efek blur di belakang */
+    -webkit-backdrop-filter: blur(10px); /* buat Safari */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* biar keliatan glossy */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* efek mengkilap lembut */
+    color: white;
+    background-image:
+    linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 30%),
+    linear-gradient(135deg, rgba(29,97,185,0.7), rgba(38,124,96,0.7));
+    overflow: hidden; 
+
+    margin-top: 10px;
+    
+}
+.SUPER-MAINBOARD-TWO .SUPER-TWO .main-control::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.6),
+    transparent
+  );
+  animation: shine 2s infinite;
+}
+
+@keyframes shine {
+  0% { left: -75%; }
+  100% { left: 125%; }
+}
+
+.SUPER-MAINBOARD-TWO .SUPER-TWO .main-control a{
+    text-decoration: none;
+}
+
+
+
+
+
+
+/* ========================= ITEM SIZE PHONE============================================== */
+/* ========================================================================================== */
+
+@media (max-width: 600px){
+    .MAIN-Menu ul{
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    float:inherit;
+    margin-left: 6px;
+    }
+    .MAIN-Menu ul li{
+    list-style: none;
+    margin-right: 6px;
+    background: transparent;
+    display: flex;
+    border: solid 2px white;
+    border-radius: 15px;
+    width: max-content;
+    font-size: 10px;
+    }
+    .SUPER-mainboard{
+        align-items: center;
+        /* justify-content:space-around; */
+        display: flex;
+        position: relative;
+        flex-wrap: wrap;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+
+    }
+
+    .SUPER-mainboard .mainboard-left{
+        flex-wrap: wrap;
+        position: relative;
+        width: 100%;
+        height: max-content;
+        margin: 0;
+        padding: 10px;
+        display: grid;
+        align-items: center;
+        margin-top: 70px;
+    }
+}
+
+
+@media (max-width: 600px){
+    .SUPER-mainboard .mainboard-right{
+        width: 100%;
+        height: max-content;
+        padding-top: 30px;
+        margin-top: 3px;
+    }
+    .mainboard-left .name{
+        font-size: 40px;
+    }
+    .SUPER-mainboard .mainboard-right .imagecom{
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        border-top-style: solid;
+        border-top-color: antiquewhite;
+        align-items: center;
+        display: flex;
+        padding-top: 20px;
+    }
+    .SUPER-mainboard .mainboard-right .img-info{
+        font-size: 20px;
+        width: 100%;
+        border-top: rgb(199, 185, 185) solid 3px;
+        border-bottom: rgb(199, 185, 185) solid 3px;
+        display: flex;
+        position: relative;
+        flex-wrap: wrap;
+        text-align: justify;
+        text-indent: 20px;
+        border: none;
+        padding: 0;
+        margin: 7px;
+    }
+    .SUPER-mainboard .mainboard-right .my-skill-up{
+        padding-top: 50px;
+        font-size: 15px;
+    }
+    .SUPER-mainboard .mainboard-right .my-skill-up p{
+        margin-top: 20px;
+        font-size: 15px;
+        border-radius: 15px;
+        cursor: pointer;
+    }
+
+
+    .SUPER-mainboard .mainboard-bottom{
+        width: 100%;
+        margin: 0;
+        background-position: right center;
+    }
+}
+/* ============================================BOTTOM MAINBOARD========================================= */
+@media (max-width: 600px){
+    .SUPER-mainboard .mainboard-bottom .my-skill{
+    padding-top: 20px;
+    }
+    
+    .SUPER-mainboard .mainboard-bottom .my-skill p{
+    margin-top: 20px;
+    }
+    .SUPER-mainboard .mainboard-bottom .my-skill img{
+    width: 300px;
+    height: auto;
+    }
+}

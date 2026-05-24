@@ -1,0 +1,39 @@
+<DOCTYPE html>
+<html>
+<head>
+	<title>FROM</title>
+</head>
+	<body>
+			<from action="login.php" method="POST">
+			<fieldset>
+			<legend>LOGIN</legend>
+			<p>
+				<label>Username:</label>
+				<input type="text" name="Username" placeholder="masukan username...."/>
+			</P>
+			<p><label>password:</label>
+				<input type="password" name="password" placeholder="masukan password...."/></p>
+			 <p>Email: <input type="text" name="email" placeholder="Tulis di sini..."/></p	 
+			<p>	<label>Kota:</label>
+				<select name="kota">
+				<option value="new york">new york</option>
+				<option value="beijing">beijing</option>
+				<option value="london">london</option>
+				<option value="other">other</option>
+			</p>
+			<p>
+				<label><input type="checkbox" name="remember" value="remember" /> remember me</label>
+			</p>
+			<p>Pilih Salah satu:
+				<input type="radio" name="Pilih salah satu" value="12">12
+				<input type="radio" name="Pilih salah satu" value="16">16
+				<input type="radio" name="Pilih salah satu" value="18">18
+			</p>
+			<p><input type="reset" name="reset" value="reset"></p>
+			<p>
+				<input type="submit" name="submit" value="login" />
+			</P>
+			</fieldset>
+			</from>
+		</body>
+</html>

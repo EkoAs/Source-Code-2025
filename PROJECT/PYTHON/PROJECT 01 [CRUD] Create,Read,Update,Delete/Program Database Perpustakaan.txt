@@ -1,0 +1,12 @@
+Wajib versi python 3.11 keatas
+only 3.11+ version. 
+
+
+
+
+
+
+
+
+
+Last Update sept-09-2025

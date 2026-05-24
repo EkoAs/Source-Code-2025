@@ -1,0 +1,578 @@
+html{scroll-behavior: smooth;}
+/*=========AUTO SCYCRON==========*/
+
+@media (max-width: 600px){
+    .dark-mode-toggle {
+        display: none;}
+    .mainboard-left{
+        width: 100%;}
+    .mainboard-right p{
+        font-size: 16px;
+    }
+    
+   
+}
+@media (max-width: 600px){
+    .mainboard-right .year p{ font-size: 17px; }
+    .mainboard-right .school p{ font-size: 17px;}
+    .mainboard-right .house p{ font-size: 17px;}
+    .mainboard-right .tell p{ font-size: 17px;}
+    .mainboard .mainboard-right .skill p{ font-size: 15px;}
+}
+
+/*============================DARK-MODE CONTROL============================*/
+body.dark-mode {
+    background-color: #0b0a0b;
+    color: #fff;
+  }
+.dark-mode .navbar-navigator li{
+    color: black;
+    border-color: white;
+}
+.dark-mode .navbar{
+    background-color: rgba(28, 66, 204, 0.726);
+    color: rgb(0, 0, 0);
+  }
+.dark-mode .mainboard-left span{
+    border-bottom: 9px rgb(219, 204, 204) solid;
+}
+.dark-mode .mainboard-left .button1 a{
+    border-color: aquamarine;
+    color: rgb(16, 17, 17);
+}
+.dark-mode .mainboard-left .button1{
+    background-color: rgba(86, 215, 26, 0.846);
+}
+ion-icon {
+    color: blue;
+    font-size: 64;
+  }
+.dark-mode .mainboard-2 h2{
+    border-top: solid 5px rgb(231, 218, 218);
+    border-bottom: solid 5px rgb(231, 218, 218);
+}
+.dark-mode .imagecom{
+    border: solid 3px rgb(198, 182, 182);
+}
+.dark-mode .mainboard-3 h2{
+    border-top: solid 5px rgb(32, 200, 17);
+    border-bottom: solid 5px rgb(32, 200, 17);
+}
+.dark-mode .cyp p{
+    border-top: solid 3px rgb(17, 200, 179);
+    border-bottom: solid 3px rgb(17, 200, 179);
+}
+/*==============================NAVBAR CONTROL============================*/
+.navbar{
+    clear: both;
+    z-index: 999;
+    display: block;
+    width: 100%;
+    background-color: rgba(51, 51, 51, 0.897);
+    backdrop-filter: blur(5px);
+    padding: 8px;
+    float: left;
+    justify-content: space-between;
+    position: fixed;
+    overflow: auto;
+}
+.navbar-profille img{
+    border-radius: 50%;
+    box-sizing: border-box;
+    display: flex;
+    float: left;
+}
+.navbar-profille:hover{
+    opacity: 0.4;
+}
+@media (max-width: 600px){
+    .navbar-profille{
+     display: none;
+    }
+    .navbar-navigator ul{
+        margin: 0;
+        padding: 0;
+    }
+  }
+.navbar-navigator ul{
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    float:inherit;
+    margin-left: 6px;
+}
+.navbar-navigator ul li{
+    list-style: none;
+    margin-right: 6px;
+    background: transparent;
+    display: flex;
+    border: solid 2px white;
+    border-radius: 15px;
+    width: 75px;
+    justify-content: center;
+}
+.navbar-navigator a{
+    display: block;
+    color: rgb(235, 225, 225);
+    text-align: center;
+    padding: 6px 8px;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.3em;
+    font-weight: 700;
+}
+.navbar-navigator a:hover{ opacity: 0.4;}
+.navbar-navigator button{
+    background: transparent;
+}
+
+/*=============================MAIN BOARD===================================*/
+.mainboard{
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    background: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+    padding-top: 62px;
+    text-align: center;
+    justify-content: center;
+}
+.mainboard-left{
+    display: flex;
+    flex-wrap: wrap;
+    width: 650px;
+    background: transparent;
+    justify-content: center;
+}
+.hello2{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2em;
+    font-weight: 600;
+    margin-bottom: -45px;
+    margin-top: 10px;
+}
+span{
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 35px;
+    font-weight: 800;
+    background-image: linear-gradient(to right, rgb(193, 223, 57),  rgb(73, 73, 235));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    padding-bottom: 10px;
+    width: 100%;
+    margin-top: 18px;
+    border-bottom: 9px rgb(34, 28, 28) solid;
+}
+.mainboard .mainboard-left h3{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 30px;
+    font-weight: 800;
+    font-style: italic;
+}
+.mainboard-left .aboutme{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    position: relative;
+    flex-wrap: wrap;
+    display: flex;
+    text-align: justify;
+    width: 100%;
+    margin-top: -25px;
+    background: transparent;
+    text-indent: 40px;
+    margin-top: 30px;
+    margin: 10px;
+}
+.mainboard-left .more{ 
+    cursor: context-menu;}
+.mainboard-left .button1{
+    width: 120px;
+    height: 33px;
+    border-radius: 12px;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 19px;
+    background: transparent;
+    border: rgb(32, 29, 29), solid 2px;
+}
+.mainboard-left .more .button1 img{
+    justify-content: center;
+    justify-items: center;
+    margin-right: 4px;
+}
+.mainboard-left .button1 a{
+    text-decoration: none;
+    padding: 2px;
+}
+.mainboard-left .button1:hover{opacity: 0.3;}
+/*=============================MAINBOARD RIGHT=======================*/
+.mainboard-right{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 650px;
+    background: transparent;
+    justify-content: center;
+    box-sizing: border-box;
+    border-collapse: collapse;
+    margin: 14px;
+    padding: 0;
+}
+
+
+.mainboard-right .personal-information{
+    width: 100%;
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+    align-items: center;
+    text-align: center;
+    justify-content: center; 
+}
+.mainboard-right .personal-information h3{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.9em;
+    font-weight: 900;
+    font-style: italic;
+}
+.mainboard-right .year{
+    width: 100%;
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+    align-items: center;
+    text-align: center;
+    justify-content: left; 
+    height: 35px;
+}
+
+.mainboard-right p{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.3em;
+    font-weight: 800;
+    font-style: italic;
+    margin-left: 15px;
+}
+.mainboard-right .school{
+    width: 100%;
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+    align-items: center;
+    text-align: center;
+    justify-content: left; 
+    height: 35px;
+}
+.mainboard-right .house{
+    width: 100%;
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+    align-items: center;
+    text-align: center;
+    justify-content: left; 
+    height: 35px;
+}
+.mainboard-right .tell{
+    width: 100%;
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+    align-items: center;
+    text-align: center;
+    justify-content: left; 
+    height: 35px;
+}
+.mainboard-right .skill{
+    width: 100%;
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+    align-items: center;
+    text-align: center;
+    justify-content: left; 
+    height: 35px;
+}
+/*==========================MAINBOARD-2============================*/
+.mainboard-2{
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    padding: 20px;
+    width: 100%;
+    margin-top: 0px;
+    border-spacing: 0;
+    border-collapse: collapse;
+    text-align: center;
+    justify-content: center;
+}
+.mainboard-2 h2{
+    width: 100%;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.9em;
+    font-weight: 900;
+    font-style: italic;
+    border-top: solid 5px black;
+    border-bottom: solid 5px black;
+}
+.image-info{
+    width: 100%;
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    padding: 20px;
+    width: 100%;
+    margin-top: 0px;
+    border-spacing: 0;
+    border-collapse: collapse;
+    text-align: center;
+    justify-content: center;
+}
+.img-info{
+    max-width: 850px;
+    text-align: justify;
+    padding: 10px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 520;
+    font-size: 21px;
+    
+}
+.img-info p{
+    text-indent: 50px;
+}
+.imagecom{
+    padding: 10px;
+    border: solid 3px black;
+    
+}
+
+/*===========================MAINBOARD-3=========================*/
+.mainboard-3 h2{
+    width: 100%;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.9em;
+    font-weight: 900;
+    font-style: italic;
+    border-top: solid 5px black;
+    border-bottom: solid 5px black;
+}
+
+.mainboard-3{
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    padding: 20px;
+    width: 100%;
+    margin-top: 0px;
+    border-spacing: 0;
+    border-collapse: collapse;
+    text-align: center;
+    justify-content: center;
+}
+.mainboard-3 img{
+    width: 280px;
+    height: auto;
+    padding: 15px;
+    border: yellow solid 3px;
+    cursor: all-scroll;
+}
+
+/*==================================MAINBOARD-4=================================*/
+.mainboard-4{
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    background: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+.mainboard-4 p{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+    font-style: normal;
+    font-display: inherit;
+    text-indent: 30px;
+    text-decoration: none;
+    display: flex;
+    text-align: justify;
+}
+
+/*==================================MAINBOARD-4=================================*/
+.mainboard-5{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.mainboard-5 h2{
+    border-top: solid rgb(70, 70, 231) 4px;
+    border-bottom: solid rgb(70, 70, 231) 4px;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainboard-5 p{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+    font-style: normal;
+    font-display: inherit;
+    text-indent: 30px;
+    text-decoration: none;
+    display: flex;
+    text-align: justify;
+    margin: 65px;
+
+}
+
+
+/*================================== FOOTER =================================*/
+.footer-end{
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    background: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+    
+    justify-content: center;
+    border: solid red 4px;
+}
+.footer-left{
+    width: 180px;
+    border: solid red 4px;
+}
+.footer-end .footer-left .usefullinks{
+    width: 180px;
+    border: solid red 4px;
+    list-style: none;
+    text-decoration: none;
+}
+.footer-end .footer-left h2{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-style: oblique;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    border: solid red 4px;
+    font-size: 1.2em;
+}
+
+.footer-end ul li{
+    list-style: none;
+    text-decoration: none;
+    margin-left: 10px;
+    border: solid red 4px;
+    width: max-content;
+}
+.footer-end ul li a{text-decoration: none;}
+
+.footer-end .footer-left .follow-us{
+    width: 180px;
+    border: solid red 4px;
+    margin-left: 10px;
+}
+
+.footer-end .footer-left .follow-us ul img{
+    width: 50px;
+    height: auto;
+}
+
+
+
+
+   
+.footer-right{
+    width: 400px;
+    border: solid red 4px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    background: transparent;
+    justify-content: center;
+    box-sizing: border-box;
+    border-collapse: collapse;
+    margin: 14px;
+    padding: 0;
+}
+.cyp{
+    width: 100%;
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    padding: 20px;
+    margin-top: 0px;
+    border-spacing: 0;
+    border-collapse: collapse;
+    text-align: center;
+    justify-content: center;
+}
+.cyp p{
+    width: 100%;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.0em;
+    font-weight: 700;
+    font-style: italic;
+    border-top: solid 3px black;
+    border-bottom: solid 3px black;
+}
+

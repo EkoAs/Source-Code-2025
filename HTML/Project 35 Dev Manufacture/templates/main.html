@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contoh Super Simpel</title>
+</head>
+<body>
+
+    <h1>Tes Koneksi Python</h1>
+
+    <button onclick="panggilPython()">Hitung 5 x 5</button>
+
+    <p>Hasilnya adalah: <span id="tempat-hasil">...</span></p>
+
+
+    <script>
+        async function panggilPython() {
+            
+            // 1. Telepon ke jalur '/hitung_dong' di app.py
+            let respon = await fetch('/hitung');
+            
+            // 2. Buka paket kiriman dari Python
+            let data = await respon.json();
+            
+            // 3. Ambil isinya, tempel ke layar
+            // data.isi_jawaban itu isinya angka 25
+            document.getElementById('tempat-hasil').innerText = data.Isi_disinu; // panggil nama anunya
+        }
+    </script>
+
+</body>
+</html>

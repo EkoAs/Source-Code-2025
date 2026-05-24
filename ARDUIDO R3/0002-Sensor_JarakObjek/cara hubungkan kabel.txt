@@ -1,0 +1,6 @@
+Pin Sensor,Pin Arduino
+VCC,5V
+Trig,Pin 11
+Echo,Pin 12
+GND,GND
+OUT,(Biarkan Kosong)

@@ -1,0 +1,62 @@
+
+# How to Run This Project
+
+This guide provides instructions for setting up and running this Flask project using Visual Studio Code and a Virtual Environment (venv).
+
+## 1\. ?? Initial Setup
+
+1.  **Open Project:** Open this project folder in Visual Studio Code.
+2.  **Open Terminal:** Open the integrated VS Code terminal (Shortcut: `Ctrl + ~`).
+
+## 2\. ?? Activate the Environment (venv)
+
+1.  **Activate Venv:** In the terminal, type the following command to activate the virtual environment:
+
+    ```bash
+    .\venv_perpus\Scripts\activate
+    ```
+
+    *Your terminal prompt will change to show `(venv_perpus)` at the beginning.*
+
+2.  **Install Libraries:** Run the following command to install all required libraries (like Flask) from the `requirements.txt` file:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+## 3\. ?? Configure the VS Code Interpreter
+
+This step is crucial for VS Code to "see" the libraries inside your `venv` and remove any error lines under `from flask`.
+
+1.  Press `Ctrl + Shift + P` (to open the Command Palette).
+2.  Type and select **`Python: Select Interpreter`**.
+3.  **Automatic:** If `venv_perpus` appears in the list (often marked with `(Workspace)`), select it.
+4.  **Manual (If not found):**
+      * Select **`+ Enter interpreter path...`**.
+      * Select **`Find...`** and navigate to (or paste) the full path of the `python.exe` file inside your venv.
+      * **Example Path:** `C:\Users\YourName\ProjectPath\venv_perpus\Scripts\python.exe`
+
+After selecting, VS Code will reload, and any import errors should disappear.
+
+**IMPORTANT NOTE:** You only need to do this **once per project**. VS Code will remember this setting forever for this specific folder. You do not need to manually change it back to global.
+
+## 4\. ?? Running the Application
+
+1.  **Run Server:** Make sure your terminal is still **active** (shows `(venv_perpus)`) and type:
+    ```bash
+    python app.py
+    ```
+2.  **Open in Browser:** The terminal will display a link, typically:
+    `Running on http://127.0.0.1:5000/`
+3.  **Ctrl + Click** the link (or copy-paste it) into your browser (Chrome, etc.) to access your web application.
+
+## 5\. ?? Stopping the Application
+
+1.  **Stop Server:** Return to the VS Code terminal and press **`Ctrl + C`**.
+2.  **Exit Venv:** (Optional) When you are finished coding, type `deactivate` to exit the virtual environment.
+
+-----
+
+Thanks for saving and running this project.
+
+Copyright © 2023-2025. By E(Asif), All Rights Reserved.

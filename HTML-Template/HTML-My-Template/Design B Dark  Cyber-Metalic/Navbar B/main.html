@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modern Classic Design</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+    <style>
+    /* --- VARIABLES (Tema Hitam-Kuning-Ungu) --- */
+    :root {
+        /* Default (Light/Standard Mode - Tetap Hitam-Kuning biar garang) */
+        --nav-b-bg: #0a0a0a; /* Hitam pekat */
+        --nav-b-shine: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 100%); /* Efek kilap atas */
+        --text-primary: #ffffff;
+        --accent-yellow: #FFD700; /* Emas/Kuning Tajam */
+        --accent-purple: #d946ef; /* Ungu Cerah (Sync dgn A) */
+        --border-glow: linear-gradient(90deg, var(--accent-yellow), var(--accent-purple));
+        --glass-panel: rgba(20, 20, 20, 0.95);
+    }
+
+    /* Jika body ada class 'light-mode' (Opsional kalau mau dibalik) 
+       Tapi karena requestnya campuran hitam kuning, kita kunci base-nya gelap.
+       Kita gunakan variabel ini untuk mengatur intensitas kilap/cahaya saja. */
+    
+    /* --- STRUKTUR UTAMA --- */
+    .navbar-b {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 75px;
+        z-index: 1000;
+        
+        /* Background & Shine Effect */
+        background-color: var(--nav-b-bg);
+        background-image: var(--nav-b-shine);
+        backdrop-filter: blur(10px);
+        
+        /* Border Bawah Gradasi (Kuning ke Ungu) */
+        border-bottom: 3px solid transparent;
+        border-image: var(--border-glow) 1;
+        
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        display: flex;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+    .nav-b-container {
+        width: 100%;
+        max-width: 1200px;
+        padding: 0 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* --- LOGO AREA --- */
+    .nav-b-logo {
+        font-family: sans-serif; /* Bisa ganti font futuristic */
+        font-size: 1.8rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--text-primary);
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* Aksen Kuning di Logo */
+    .logo-accent {
+        color: var(--accent-yellow);
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+
+    /* --- MENU DESKTOP --- */
+    .nav-b-menu {
+        display: flex;
+        gap: 5px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-b-link {
+        text-decoration: none;
+        color: #aaa; /* Abu-abu sebelum di hover */
+        font-family: sans-serif;
+        font-weight: 600;
+        font-size: 0.9rem;
+        padding: 10px 20px;
+        border-radius: 4px;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Efek Hover: Text jadi putih, background glow ungu dikit */
+    .nav-b-link:hover {
+        color: var(--text-primary);
+        background: rgba(217, 70, 239, 0.1); /* Ungu transparan */
+        text-shadow: 0 0 8px var(--accent-purple);
+    }
+
+    /* Garis bawah animasi saat hover (Warna Kuning) */
+    .nav-b-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0%;
+        height: 2px;
+        background-color: var(--accent-yellow);
+        transition: width 0.3s ease;
+        box-shadow: 0 0 10px var(--accent-yellow);
+    }
+
+    .nav-b-link:hover::after {
+        width: 100%;
+    }
+
+    /* --- BAGIAN KANAN (SEARCH & TOOLS) --- */
+    .nav-b-right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    /* Search Bar Futuristik */
+    .search-b-wrapper {
+        position: relative;
+        height: 40px;
+        display: flex;
+        align-items: center;
+    }
+
+    .search-b-input {
+        background: transparent;
+        border: 1px solid #333;
+        color: var(--accent-yellow);
+        padding: 8px 15px 8px 40px; /* Padding kiri besar buat icon */
+        border-radius: 5px;
+        width: 120px; /* Lebar awal */
+        transition: all 0.4s ease;
+        font-family: sans-serif;
+    }
+
+    .search-b-input:focus {
+        outline: none;
+        width: 200px; /* Melebar saat diklik */
+        border-color: var(--accent-purple);
+        background-color: rgba(0,0,0,0.3);
+        box-shadow: 0 0 15px rgba(217, 70, 239, 0.2);
+    }
+
+    .search-b-icon-btn {
+        position: absolute;
+        left: 10px;
+        background: none;
+        border: none;
+        color: #666;
+        cursor: pointer;
+        pointer-events: none; /* Biar tembus ke input */
+    }
+
+    .search-b-input:focus + .search-b-icon-btn {
+        color: var(--accent-purple);
+    }
+
+    /* Tombol Hamburger (Mobile) */
+    .hamburger-b {
+        display: none;
+        background: none;
+        border: 1px solid var(--accent-yellow);
+        color: var(--accent-yellow);
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: 0.3s;
+    }
+    
+    .hamburger-b:hover {
+        background-color: var(--accent-yellow);
+        color: black;
+        box-shadow: 0 0 15px var(--accent-yellow);
+    }
+
+    /* --- MOBILE MENU --- */
+    .mobile-menu-b {
+        position: fixed;
+        top: 75px;
+        right: -100%; /* Sembunyi di kanan */
+        width: 250px;
+        height: calc(100vh - 75px);
+        background-color: var(--nav-b-bg);
+        border-left: 1px solid var(--accent-yellow);
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+    }
+
+    .mobile-menu-b.active {
+        right: 0;
+    }
+
+    .mobile-link-b {
+        color: #fff;
+        text-decoration: none;
+        padding: 15px 0;
+        border-bottom: 1px solid #222;
+        font-family: sans-serif;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        transition: 0.3s;
+    }
+
+    .mobile-link-b:hover {
+        color: var(--accent-yellow);
+        padding-left: 10px;
+        border-bottom-color: var(--accent-purple);
+    }
+
+    @media (max-width: 768px) {
+        .nav-b-menu { display: none; }
+        .hamburger-b { display: block; }
+    }
+</style>
+
+<nav id="navbar-b" class="navbar-b">
+    <div class="nav-b-container">
+        
+        <div class="nav-b-logo">
+            <span class="logo-accent">⚡</span> NEXUS
+        </div>
+
+        <ul class="nav-b-menu">
+            <li><a href="#about" class="nav-b-link">About</a></li>
+            <li><a href="#pendidikan" class="nav-b-link">Pendidikan</a></li>
+            <li><a href="#skills" class="nav-b-link">Skills</a></li>
+            <li><a href="#projects" class="nav-b-link">Projects</a></li>
+            <li><a href="#contact" class="nav-b-link">Contact</a></li>
+        </ul>
+
+        <div class="nav-b-right">
+            
+            <div class="search-b-wrapper">
+                <input type="text" id="searchB" class="search-b-input" placeholder="Search...">
+                <button class="search-b-icon-btn" onclick="searchActionB()">🔍</button>
+            </div>
+
+            <button class="hamburger-b" onclick="toggleMobileB()">
+                ☰
+            </button>
+        </div>
+    </div>
+
+    <div id="mobileMenuB" class="mobile-menu-b">
+        <a href="#about" class="mobile-link-b" onclick="toggleMobileB()">About Me</a>
+        <a href="#pendidikan" class="mobile-link-b" onclick="toggleMobileB()">Pendidikan</a>
+        <a href="#skills" class="mobile-link-b" onclick="toggleMobileB()">Skills</a>
+        <a href="#projects" class="mobile-link-b" onclick="toggleMobileB()">Projects</a>
+        <a href="#contact" class="mobile-link-b" onclick="toggleMobileB()">Contact</a>
+        
+        <div style="margin-top: 20px; border-top: 1px solid #333; padding-top: 20px;">
+             <input type="text" id="searchBMobile" placeholder="Cari..." 
+                    style="width: 100%; padding: 10px; background: #111; border: 1px solid #333; color: white;">
+             <button onclick="searchActionBMobile()" 
+                     style="margin-top:10px; width: 100%; padding: 10px; background: var(--accent-yellow); border:none; font-weight:bold; cursor:pointer;">
+                 CARI
+             </button>
+        </div>
+    </div>
+</nav>
+
+<script>
+    // 1. Toggle Mobile Menu (Slide dari kanan)
+    function toggleMobileB() {
+        const menu = document.getElementById('mobileMenuB');
+        menu.classList.toggle('active');
+    }
+
+    // 2. Fungsi Search Navbar B
+    function searchActionB() {
+        const query = document.getElementById('searchB').value;
+        if(query) {
+            const found = window.find(query);
+            if(!found) alert("Not found: " + query);
+        } else {
+            // Kalau kosong, fokuskan ke input
+            document.getElementById('searchB').focus();
+        }
+    }
+
+    function searchActionBMobile() {
+        const query = document.getElementById('searchBMobile').value;
+        if(query) {
+            toggleMobileB(); // Tutup menu
+            const found = window.find(query);
+            if(!found) alert("Not found: " + query);
+        }
+    }
+    
+    // 3. Enter key support for search
+    document.getElementById('searchB').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            searchActionB();
+        }
+    });
+</script>
+    </body>
+</html>

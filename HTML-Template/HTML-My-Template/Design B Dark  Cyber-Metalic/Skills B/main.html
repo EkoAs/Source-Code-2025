@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modern Classic Design</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+   <style>
+    /* --- VARIABLES LOKAL (SKILLS B) --- */
+    #skills {
+        --skill-bg: #050505;
+        --card-glass: rgba(255, 255, 255, 0.03);
+        --neon-yellow: #FFD700;
+        --neon-purple: #d946ef;
+        --text-main: #ffffff;
+        --border-tech: rgba(255, 215, 0, 0.3);
+    }
+
+    /* --- LAYOUT --- */
+    .skills-b-section {
+        padding: 100px 5%;
+        background-color: var(--skill-bg);
+        /* Background Circuit Pattern Halus */
+        background-image: radial-gradient(#222 1px, transparent 1px);
+        background-size: 20px 20px;
+        position: relative;
+    }
+
+    .skills-b-header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    .skills-b-title {
+        font-family: sans-serif;
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        /* Text Stroke Kuning */
+        -webkit-text-stroke: 1px var(--neon-yellow); 
+        text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    }
+
+    /* --- GRID --- */
+    .modules-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* --- MODULE CARD --- */
+    .skill-module {
+        background: var(--card-glass);
+        border: 1px solid var(--border-tech);
+        padding: 25px;
+        position: relative;
+        /* Sudut Techy (Potong siku) */
+        clip-path: polygon(
+            20px 0, 100% 0, 
+            100% calc(100% - 20px), calc(100% - 20px) 100%, 
+            0 100%, 0 20px
+        );
+        transition: all 0.3s;
+        backdrop-filter: blur(5px);
+    }
+
+    .skill-module:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: var(--neon-yellow);
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.1);
+        transform: translateY(-5px);
+    }
+
+    /* Judul Kategori (Frontend, Backend, etc) */
+    .module-title {
+        color: var(--neon-yellow);
+        font-family: 'Courier New', monospace;
+        font-size: 1.1rem;
+        font-weight: bold;
+        border-bottom: 1px solid #333;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    /* --- ITEM SKILL & BAR --- */
+    .tech-item {
+        margin-bottom: 20px;
+    }
+
+    .tech-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-family: sans-serif;
+        font-size: 0.9rem;
+        color: #ccc;
+        font-weight: 600;
+    }
+
+    .tech-percent {
+        color: var(--neon-purple);
+        font-family: 'Courier New', monospace;
+    }
+
+    /* Container Bar (Jalur Energi) */
+    .energy-bar-bg {
+        width: 100%;
+        height: 8px;
+        background-color: #111;
+        border-radius: 2px;
+        overflow: hidden;
+        position: relative;
+        border: 1px solid #333;
+    }
+
+    /* Isi Bar (Cairan Energi) */
+    .energy-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--neon-yellow), var(--neon-purple));
+        width: 0%; /* Start 0 for animation */
+        position: relative;
+        box-shadow: 0 0 10px var(--neon-yellow);
+        transition: width 1.5s cubic-bezier(0.1, 0.7, 1.0, 0.1);
+    }
+
+    /* Efek Kilap Bergerak di Bar */
+    .energy-fill::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; bottom: 0; right: 0;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+        transform: translateX(-100%);
+        animation: shimmerTech 2s infinite;
+    }
+
+    @keyframes shimmerTech {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
+    /* Hiasan Sudut Kecil (Deco) */
+    .deco-corner {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border: 2px solid var(--neon-purple);
+        bottom: 5px;
+        right: 5px;
+        border-top: none;
+        border-left: none;
+    }
+</style>
+
+<section id="skills" class="skills-b-section">
+    <div class="skills-b-header">
+        <h2 class="skills-b-title">ARSENAL & TOOLS</h2>
+        <p style="color: #666; font-family: 'Courier New'; margin-top: 10px;">[ SYSTEM DIAGNOSTICS: ONLINE ]</p>
+    </div>
+
+    <div class="modules-grid">
+        
+        <div class="skill-module">
+            <div class="module-title">
+                <span>// WEB_CORE</span>
+                <span>V.2.0</span>
+            </div>
+
+            <div class="tech-item">
+                <div class="tech-info">
+                    <span>HTML5 & CSS3</span>
+                    <span class="tech-percent">[ 95% ]</span>
+                </div>
+                <div class="energy-bar-bg">
+                    <div class="energy-fill" style="width: 95%"></div>
+                </div>
+            </div>
+
+            <div class="tech-item">
+                <div class="tech-info">
+                    <span>JavaScript (ES6+)</span>
+                    <span class="tech-percent">[ 85% ]</span>
+                </div>
+                <div class="energy-bar-bg">
+                    <div class="energy-fill" style="width: 85%"></div>
+                </div>
+            </div>
+
+            <div class="deco-corner"></div>
+        </div>
+
+        <div class="skill-module">
+            <div class="module-title">
+                <span>// FRAMEWORKS</span>
+                <span>MOD_ACTIVE</span>
+            </div>
+
+            <div class="tech-item">
+                <div class="tech-info">
+                    <span>Tailwind CSS</span>
+                    <span class="tech-percent">[ 90% ]</span>
+                </div>
+                <div class="energy-bar-bg">
+                    <div class="energy-fill" style="width: 90%"></div>
+                </div>
+            </div>
+
+            <div class="tech-item">
+                <div class="tech-info">
+                    <span>React / Vue</span>
+                    <span class="tech-percent">[ 75% ]</span>
+                </div>
+                <div class="energy-bar-bg">
+                    <div class="energy-fill" style="width: 75%"></div>
+                </div>
+            </div>
+
+            <div class="deco-corner" style="border-color: var(--neon-yellow);"></div>
+        </div>
+
+        <div class="skill-module">
+            <div class="module-title">
+                <span>// BACKEND_SYS</span>
+                <span>DB_LINKED</span>
+            </div>
+
+            <div class="tech-item">
+                <div class="tech-info">
+                    <span>Python & Django</span>
+                    <span class="tech-percent">[ 80% ]</span>
+                </div>
+                <div class="energy-bar-bg">
+                    <div class="energy-fill" style="width: 80%"></div>
+                </div>
+            </div>
+
+            <div class="tech-item">
+                <div class="tech-info">
+                    <span>MySQL / PostgreSQL</span>
+                    <span class="tech-percent">[ 70% ]</span>
+                </div>
+                <div class="energy-bar-bg">
+                    <div class="energy-fill" style="width: 70%"></div>
+                </div>
+            </div>
+            
+            <div class="deco-corner"></div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    // Opsional: Script ini bikin bar ngisi dari 0 pas discroll ke section ini
+    // Kalau gak pake script ini, bar akan langsung penuh saat loading
+    document.addEventListener("DOMContentLoaded", function() {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bars = entry.target.querySelectorAll('.energy-fill');
+                    bars.forEach(bar => {
+                        // Trik memicu animasi CSS: ambil width asli dari atribut style
+                        // Lalu set ulang. (Tapi CSS transition di atas sudah cukup handle sebenarnya)
+                        // Untuk simplisitas, CSS transition di atas sudah cukup 'smooth' saat load
+                        bar.style.opacity = 1; 
+                    });
+                }
+            });
+        });
+        
+        const skillSection = document.querySelector('#skills');
+        if(skillSection) observer.observe(skillSection);
+    });
+</script>
+    </body>
+</html>

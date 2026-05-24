@@ -1,0 +1,37 @@
+# Pengenalan string 
+# String adalah tipe data yang digunakan untuk menyimpan teks
+data = "Ini adalah string"
+print(data)
+
+# single quote ' ' 
+print('='*8, "single quote")
+print("'Ini adalah single quote'")
+
+# double quote " "
+print('='*8, "double quote")
+print('"Ini adalah double quote"')
+
+# Multiline literal string
+print('='*8, "multiline literal string")
+print('''Ini adalah string
+yang terdiri dari beberapa baris
+dan bisa menggunakan
+tanda petik ganda
+atau tanda petik tunggal
+''')
+
+# String literal/ Raw
+print('='*8, "String literal/ Raw")
+print(r'Ini adalah string literal \n dan \t tidak akan di interpretasikan')
+print('='*8, "gabungan multilane dan raw")
+print(r'''Ini adalah string literal
+yang terdiri dari beberapa baris
+yang menggunakan tiga quote sekaligus
+dan menggunkan raw di awal, sehingga akan
+memasukan semua /t /n dan lainnya ke dalam string
+''')
+
+# memasukan satu danda kutip kedalam string
+print('='*4, "memasukan satu danda kutip kedalam string")
+print("ini adalah hari jum\'at")    # gunakan \
+print("C\\User\\halo") # menggunkan dua \\ untuk menjadikan satu \ sebagai string

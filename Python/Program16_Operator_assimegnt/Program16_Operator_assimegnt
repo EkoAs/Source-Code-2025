@@ -1,0 +1,48 @@
+# Operator assignment
+print('Operator =')
+a = 10
+print('a =', a)
+
+# Operator aritmatika
+print('Operator Aritmatika')
+a += 5 # a = a + 5
+print('a += 5 =>', a)
+
+a -= 3 # a = a - 3
+print('a -= 3 =>', a)
+
+a *= 2 # a = a * 2
+print('a *= 2 =>', a)
+
+a /= 2 # a = a / 2
+print('a /= 2 =>', a)
+
+a %= 5  # a = a // 2
+print('a %= 5 =>', a)  
+
+a //= 1 # a = a // 1
+print('a //= 1 =>', a)
+
+# Operator Bitsise
+print('Operator Bitwise')
+a = True
+b = False
+print('a =', a)
+print
+a |= b # a = a | b
+print('True','or false =>', a)
+
+a &= False # a = a & false
+print('True','and', False, '=>', a)
+
+a ^= True # a = a ^ True
+print('False','xor', True, '=>', a)
+
+# Geser-geser
+print('Geser-geser')
+c = 0b0100
+print('c =', c, format(c, '08b'))
+c <<= 1 # c = c << 1
+print(0b0100, 'c 1 Ke kiri jadi', c, format(c, '08b'))
+c >>= 1 # c = c >> 1
+print(c, 'c 1 Ke kanan jadi', c, format(c, '08b'))

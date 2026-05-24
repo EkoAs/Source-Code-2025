@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modern Classic Design</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+
+<style>
+    /* --- SETUP AWAL (Agar preview terlihat hitam) --- */
+    body {
+        margin: 0;
+        background-color: #000000; /* Hitam Pekat */
+        font-family: 'Montserrat', sans-serif; /* Font Formal */
+    }
+
+    /* Import Font Formal */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
+
+    /* --- NAVBAR CONTAINER --- */
+    .navbar-prism {
+        position: fixed;
+        top: 25px; 
+        left: 50%;
+        transform: translateX(-50%); /* Posisi Tengah di Laptop */
+        width: 95%;
+        max-width: 1200px;
+        height: 75px;
+        z-index: 1000;
+        
+        /* Material: Kaca Kristal Gelap */
+        background: rgba(15, 15, 15, 0.85);
+        backdrop-filter: blur(20px);         /* Efek Blur Kaca */
+        -webkit-backdrop-filter: blur(20px);
+        
+        /* Border: Silver Tipis Mengkilap */
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        
+        /* Sudut: Potongan Berlian (Chamfered) - Formal & Tajam */
+        clip-path: polygon(
+            20px 0, 100% 0, 
+            100% calc(100% - 20px), calc(100% - 20px) 100%, 
+            0 100%, 0 20px
+        );
+        
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 40px;
+        
+        /* Shadow halus */
+        box-shadow: 0 15px 40px rgba(0,0,0,0.9);
+        
+        /* Transisi halus */
+        transition: all 0.4s ease;
+        overflow: hidden; /* Penting untuk efek kilau */
+    }
+
+    /* --- ANIMASI KILAU (SHINE) YANG DIPERLAMBAT --- */
+    .navbar-prism::after {
+        content: '';
+        position: absolute;
+        top: 0; left: -150%; /* Mulai dari jauh kiri */
+        width: 50%; height: 100%;
+        
+        /* Gradasi Kilau: Transparan -> Putih Susu -> Transparan */
+        background: linear-gradient(
+            90deg, 
+            transparent, 
+            rgba(255, 255, 255, 0.05), 
+            rgba(255, 255, 255, 0.4), 
+            rgba(255, 255, 255, 0.05), 
+            transparent
+        );
+        
+        transform: skewX(-25deg); /* Miringkan cahaya */
+        pointer-events: none;
+        
+        /* DURASI: 10 detik (Sangat lambat & elegan) */
+        animation: slowShine 10s infinite ease-in-out; 
+    }
+
+    @keyframes slowShine {
+        0% { left: -150%; }
+        20% { left: 200%; } /* Lewat dalam 20% waktu */
+        100% { left: 200%; } /* Sisanya diam (jeda panjang) */
+    }
+
+    /* --- LOGO (Silver & Diamond) --- */
+    .logo-prism {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        z-index: 10;
+    }
+
+    .diamond-symbol {
+        width: 12px; height: 12px;
+        background: #fff;
+        transform: rotate(45deg); /* Belah ketupat */
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); /* Glow putih */
+        position: relative;
+    }
+
+    .logo-text {
+        color: #e0e0e0; /* Silver Pucat */
+        font-size: 1.2rem;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+    }
+
+    /* --- MENU DESKTOP --- */
+    .menu-prism {
+        display: flex;
+        gap: 30px;
+        z-index: 10;
+    }
+
+    .link-prism {
+        text-decoration: none;
+        color: #888; /* Abu sebelum hover */
+        font-size: 0.8rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        transition: 0.4s;
+        position: relative;
+        padding: 5px 0;
+    }
+
+    /* Hover Effect: Jadi Putih Bersinar */
+    .link-prism:hover {
+        color: #fff;
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    }
+
+    /* Garis bawah yang muncul pelan */
+    .link-prism::after {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 0; width: 0%; height: 1px;
+        background: #fff;
+        transition: 0.4s ease;
+        box-shadow: 0 0 5px #fff;
+    }
+    .link-prism:hover::after { width: 100%; }
+
+    /* --- TOOLS (Search & Mobile) --- */
+    .tools-prism {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        z-index: 10;
+    }
+
+    .search-btn-prism {
+        background: transparent;
+        border: 1px solid rgba(255,255,255,0.2);
+        color: #fff;
+        width: 35px; height: 35px;
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer;
+        transition: 0.4s;
+    }
+    
+    /* Hover Search: Jadi Berlian (Putar 45 derajat) */
+    .search-btn-prism:hover {
+        transform: rotate(45deg);
+        background: #fff;
+        color: #000;
+        box-shadow: 0 0 15px #fff;
+    }
+    .search-btn-prism svg { transition: 0.4s; }
+    .search-btn-prism:hover svg { transform: rotate(-45deg); }
+
+    /* Hamburger (Mobile Only) */
+    .hamburger-prism {
+        display: none;
+        flex-direction: column;
+        gap: 6px;
+        cursor: pointer;
+    }
+    .bar-p {
+        width: 25px; height: 1px;
+        background-color: #fff;
+        transition: 0.3s;
+    }
+
+    /* --- RESPONSIVE FIX (HP) --- */
+    @media (max-width: 900px) {
+        .navbar-prism {
+            top: 0; 
+            left: 0; 
+            transform: none; /* Reset posisi tengah */
+            width: 100%; 
+            border-radius: 0;
+            clip-path: none; /* Hilangkan potongan sudut di HP */
+            border: none;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 0 20px;
+            background: #050505; /* Solid Black di HP biar tulisan jelas */
+        }
+
+        .menu-prism { display: none; } /* Sembunyikan menu desktop */
+        .hamburger-prism { display: flex; } /* Munculkan hamburger */
+    }
+
+    /* MOBILE MENU OVERLAY */
+    .mobile-overlay-prism {
+        position: fixed;
+        top: 75px; left: 0; width: 100%; height: 0;
+        background: #080808;
+        overflow: hidden;
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 900;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+    .mobile-overlay-prism.active { height: 300px; }
+
+    .mob-link-p {
+        color: #aaa; text-decoration: none;
+        font-size: 1rem; text-transform: uppercase; letter-spacing: 2px;
+        transition: 0.3s;
+    }
+    .mob-link-p:hover { color: #fff; letter-spacing: 4px; }
+
+</style>
+
+<nav class="navbar-prism">
+    <a href="#" class="logo-prism">
+        <div class="diamond-symbol"></div>
+        <span class="logo-text">PRISMA</span>
+    </a>
+
+    <div class="menu-prism">
+        <a href="#about" class="link-prism">Profile</a>
+        <a href="#pendidikan" class="link-prism">Education</a>
+        <a href="#skills" class="link-prism">Expertise</a>
+        <a href="#projects" class="link-prism">Works</a>
+        <a href="#contact" class="link-prism">Contact</a>
+    </div>
+
+    <div class="tools-prism">
+        <button class="search-btn-prism" onclick="alert('Search Mode Active')">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+        </button>
+        
+        <div class="hamburger-prism" onclick="toggleMobilePrism()">
+            <div class="bar-p"></div>
+            <div class="bar-p"></div>
+        </div>
+    </div>
+</nav>
+
+<div id="mobileMenuPrism" class="mobile-overlay-prism">
+    <a href="#about" class="mob-link-p" onclick="toggleMobilePrism()">Profile</a>
+    <a href="#pendidikan" class="mob-link-p" onclick="toggleMobilePrism()">Education</a>
+    <a href="#skills" class="mob-link-p" onclick="toggleMobilePrism()">Expertise</a>
+    <a href="#projects" class="mob-link-p" onclick="toggleMobilePrism()">Works</a>
+    <a href="#contact" class="mob-link-p" onclick="toggleMobilePrism()">Contact</a>
+</div>
+
+<script>
+    function toggleMobilePrism() {
+        document.getElementById('mobileMenuPrism').classList.toggle('active');
+    }
+</script>
+
+
+    </body>
+</html>

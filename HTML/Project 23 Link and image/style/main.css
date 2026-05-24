@@ -1,0 +1,7 @@
+.navigator{
+    border-top: 2px solid black;
+    with
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+}

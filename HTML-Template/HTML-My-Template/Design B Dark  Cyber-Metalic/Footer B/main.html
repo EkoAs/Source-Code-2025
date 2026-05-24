@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modern Classic Design</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+    <style>
+    /* --- VARIABLES LOKAL (CONTACT B) --- */
+    #contact {
+        --con-b-bg: #050505;
+        --panel-bg: rgba(20, 20, 20, 0.7);
+        --neon-yellow: #FFD700;
+        --neon-purple: #d946ef;
+        --terminal-green: #00ff41; /* Warna teks input */
+        --text-main: #ffffff;
+        --text-dim: #888;
+        --border-tech: #333;
+    }
+
+    /* --- LAYOUT --- */
+    .contact-b-section {
+        padding: 100px 5%;
+        background-color: var(--con-b-bg);
+        position: relative;
+        /* Background Grid Circuit */
+        background-image: 
+            linear-gradient(rgba(255, 215, 0, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 215, 0, 0.03) 1px, transparent 1px);
+        background-size: 50px 50px;
+    }
+
+    .con-b-header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    .con-b-title {
+        font-family: sans-serif;
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    /* --- CONTAINER (PANEL) --- */
+    .con-b-container {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: 0; /* Nempel biar kayak satu mesin */
+        max-width: 1000px;
+        margin: 0 auto;
+        border: 1px solid var(--border-tech);
+        background-color: var(--panel-bg);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    }
+
+    /* --- KOLOM KIRI (INFO) --- */
+    .con-info-panel {
+        padding: 40px;
+        background-color: rgba(255, 215, 0, 0.02); /* Kuning tipis banget */
+        border-right: 1px solid var(--border-tech);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .info-b-item {
+        margin-bottom: 30px;
+    }
+
+    .info-label {
+        font-family: 'Courier New', monospace;
+        color: var(--neon-purple);
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .info-value {
+        font-family: sans-serif;
+        color: #fff;
+        font-size: 1.1rem;
+        font-weight: bold;
+    }
+
+    /* Social Hexagons */
+    .social-b-wrapper {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .hex-btn {
+        width: 45px;
+        height: 40px;
+        background-color: #111;
+        color: var(--neon-yellow);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+        transition: 0.3s;
+        border: 1px solid transparent; /* Buat trigger hover */
+        font-weight: bold;
+        font-size: 0.8rem;
+    }
+
+    .hex-btn:hover {
+        background-color: var(--neon-yellow);
+        color: #000;
+        transform: scale(1.1);
+        box-shadow: 0 0 15px var(--neon-yellow);
+    }
+
+    /* --- KOLOM KANAN (FORM) --- */
+    .con-form-panel {
+        padding: 40px;
+        position: relative;
+    }
+
+    /* Hiasan Sudut Panel */
+    .corner-deco {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--neon-yellow);
+        border-bottom: none;
+        border-right: none;
+        top: 10px;
+        left: 10px;
+    }
+    .corner-deco.bottom {
+        top: auto; left: auto;
+        bottom: 10px; right: 10px;
+        border: 2px solid var(--neon-purple);
+        border-top: none;
+        border-left: none;
+    }
+
+    .form-group-b {
+        margin-bottom: 25px;
+    }
+
+    .label-cyber {
+        display: block;
+        color: var(--text-dim);
+        font-family: 'Courier New', monospace;
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+    }
+
+    .input-cyber {
+        width: 100%;
+        background-color: #0a0a0a;
+        border: 1px solid #333;
+        border-left: 3px solid #333;
+        color: var(--terminal-green); /* Teks Hijau Hacker */
+        padding: 12px 15px;
+        font-family: 'Courier New', monospace;
+        font-size: 1rem;
+        transition: 0.3s;
+        box-sizing: border-box;
+    }
+
+    .input-cyber:focus {
+        outline: none;
+        border-color: var(--neon-yellow);
+        border-left-color: var(--neon-yellow);
+        box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.1);
+    }
+
+    textarea.input-cyber {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    /* Tombol Kirim Keren */
+    .btn-transmit {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(90deg, #222, #111);
+        border: 1px solid var(--neon-purple);
+        color: #fff;
+        font-family: sans-serif;
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 2px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition: 0.4s;
+    }
+
+    .btn-transmit:hover {
+        background: var(--neon-purple);
+        box-shadow: 0 0 20px rgba(217, 70, 239, 0.4);
+        border-color: var(--neon-purple);
+    }
+    
+    /* Animasi garis jalan di tombol */
+    .btn-transmit::before {
+        content: '';
+        position: absolute;
+        top: 0; left: -100%;
+        width: 100%; height: 2px;
+        background: var(--neon-yellow);
+        animation: scanBtn 2s infinite linear;
+    }
+    
+    @keyframes scanBtn {
+        0% { left: -100%; }
+        100% { left: 100%; }
+    }
+
+    /* --- FOOTER B --- */
+    footer {
+        background-color: #000;
+        border-top: 1px solid #222;
+        padding: 30px;
+        text-align: center;
+    }
+
+    .footer-tech-text {
+        font-family: 'Courier New', monospace;
+        color: #555;
+        font-size: 0.8rem;
+    }
+
+    .footer-tech-text span {
+        color: var(--neon-yellow);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+        .con-b-container {
+            grid-template-columns: 1fr;
+        }
+        .con-info-panel {
+            border-right: none;
+            border-bottom: 1px solid var(--border-tech);
+        }
+    }
+</style>
+
+<section id="contact" class="contact-b-section">
+    <div class="con-b-header">
+        <h2 class="con-b-title">ESTABLISH UPLINK</h2>
+        <p style="color: #666; font-family: 'Courier New'; margin-top: 10px;">[ SECURE CONNECTION READY ]</p>
+    </div>
+
+    <div class="con-b-container">
+        
+        <div class="con-info-panel">
+            <div class="info-b-item">
+                <span class="info-label">> TARGET_EMAIL</span>
+                <span class="info-value">contact@nexus.dev</span>
+            </div>
+            
+            <div class="info-b-item">
+                <span class="info-label">> COMMS_FREQ</span>
+                <span class="info-value">+62 812 0000 1010</span>
+            </div>
+
+            <div class="info-b-item">
+                <span class="info-label">> BASE_COORDINATES</span>
+                <span class="info-value">Jakarta, IDN - Sector 7</span>
+            </div>
+
+            <div class="info-b-item">
+                <span class="info-label">> SOCIAL_NODES</span>
+                <div class="social-b-wrapper">
+                    <a href="#" class="hex-btn">GH</a>
+                    <a href="#" class="hex-btn">LN</a>
+                    <a href="#" class="hex-btn">IG</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="con-form-panel">
+            <div class="corner-deco"></div>
+            <div class="corner-deco bottom"></div>
+
+            <form onsubmit="kirimPesanB(event)">
+                <div class="form-group-b">
+                    <label class="label-cyber">CODENAME / NAME:</label>
+                    <input type="text" class="input-cyber" placeholder="_" required>
+                </div>
+
+                <div class="form-group-b">
+                    <label class="label-cyber">RETURN_ADDRESS / EMAIL:</label>
+                    <input type="email" class="input-cyber" placeholder="_" required>
+                </div>
+
+                <div class="form-group-b">
+                    <label class="label-cyber">DATA_PACKET / MESSAGE:</label>
+                    <textarea class="input-cyber" placeholder="Input transmission data..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-transmit">
+                    INITIATE TRANSMISSION
+                </button>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <p class="footer-tech-text">
+        SYSTEM STATUS: <span>ONLINE</span> | VERSION: 2.5.0 <br><br>
+        &copy; 2025 NEXUS PORTFOLIO. ALL RIGHTS RESERVED.<br>
+        DESIGNED BY <span style="color: var(--neon-purple);">[ YOUR_NAME ]</span>
+    </p>
+</footer>
+
+<script>
+    function kirimPesanB(e) {
+        e.preventDefault();
+        // Efek suara atau alert futuristik
+        alert(">> TRANSMISSION SUCCESSFUL.\n>> DATA UPLOADED TO SERVER.");
+        e.target.reset();
+    }
+</script>
+    </body>
+</html>

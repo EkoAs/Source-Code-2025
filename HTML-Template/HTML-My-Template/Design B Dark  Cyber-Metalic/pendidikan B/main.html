@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modern Classic Design</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+    <style>
+    /* --- CSS VARIABLES LOKAL (PENDIDIKAN B) --- */
+    #pendidikan {
+        --edu-b-bg: #080808; /* Hitam pekat beda dikit dari About */
+        --neon-yellow: #FFD700;
+        --neon-purple: #d946ef;
+        --terminal-text: #00ff41; /* Hijau Terminal klasik untuk status */
+        --card-bg: rgba(20, 20, 20, 0.8);
+        --border-color: #333;
+    }
+
+    /* --- LAYOUT --- */
+    .edu-b-section {
+        padding: 100px 5%;
+        background-color: var(--edu-b-bg);
+        font-family: 'Courier New', Courier, monospace; /* Font Hacker */
+        color: #ddd;
+        position: relative;
+        /* Pattern Garis Scanline TV (Opsional, biar retro) */
+        background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+        background-size: 100% 2px, 3px 100%;
+    }
+
+    .edu-b-header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    .edu-b-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--neon-yellow);
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        display: inline-block;
+        border-bottom: 2px solid var(--neon-purple);
+        padding-bottom: 10px;
+    }
+
+    /* Efek Kursor Berkedip di Judul */
+    .cursor-blink {
+        display: inline-block;
+        width: 12px;
+        height: 25px;
+        background-color: var(--neon-yellow);
+        animation: blink 1s infinite;
+        vertical-align: middle;
+        margin-left: 5px;
+    }
+
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+    }
+
+    /* --- CONTAINER KARTU --- */
+    .logs-container {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    /* --- KARTU LOG (ITEM PENDIDIKAN) --- */
+    .log-card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-left: 4px solid var(--neon-yellow); /* Aksen Kiri Kuning */
+        padding: 25px;
+        position: relative;
+        transition: all 0.3s ease;
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 98% 100%, 0 100%); /* Sudut terpotong dikit */
+    }
+
+    /* Hover Effect: Glow Ungu */
+    .log-card:hover {
+        border-color: var(--neon-purple);
+        border-left-color: var(--neon-purple);
+        box-shadow: 0 0 20px rgba(217, 70, 239, 0.2); /* Ungu Glow */
+        transform: translateX(10px); /* Geser kanan dikit */
+    }
+
+    /* Header Kartu (Baris atas: Tahun & Status) */
+    .log-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        font-size: 0.9rem;
+        color: #888;
+        border-bottom: 1px dashed #333;
+        padding-bottom: 10px;
+    }
+
+    .log-year {
+        color: var(--neon-yellow);
+        font-weight: bold;
+    }
+
+    .log-status {
+        color: var(--terminal-text); /* Hijau */
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    /* Konten Kartu */
+    .log-school {
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: #fff;
+        margin: 0 0 5px 0;
+        font-family: sans-serif; /* Judul sekolah tetap sans-serif biar mudah dibaca */
+        text-transform: uppercase;
+    }
+
+    .log-major {
+        color: var(--neon-purple);
+        font-size: 1rem;
+        margin-bottom: 15px;
+        font-style: italic;
+    }
+
+    .log-desc {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #ccc;
+    }
+
+    /* Hiasan Angka Index di background (01, 02) */
+    .log-index {
+        position: absolute;
+        right: 20px;
+        bottom: 10px;
+        font-size: 4rem;
+        font-weight: 900;
+        color: rgba(255, 255, 255, 0.03);
+        pointer-events: none;
+    }
+
+    @media (max-width: 600px) {
+        .edu-b-title { font-size: 1.5rem; }
+        .log-school { font-size: 1.2rem; }
+    }
+</style>
+
+<section id="pendidikan" class="edu-b-section">
+    <div class="edu-b-header">
+        <h2 class="edu-b-title">
+            > SYSTEM_LOGS: EDUCATION<span class="cursor-blink"></span>
+        </h2>
+        <p style="color: #666; margin-top: 10px;">[ LOADING ACADEMIC HISTORY... ]</p>
+    </div>
+
+    <div class="logs-container">
+        
+        <div class="log-card">
+            <span class="log-index">01</span>
+            <div class="log-header">
+                <span class="log-year">[ 2020 - 2024 ]</span>
+                <span class="log-status">STATUS: COMPLETED_SUCCESFULLY</span>
+            </div>
+            <h3 class="log-school">Universitas Teknologi Digital</h3>
+            <div class="log-major">S1 Teknik Informatika</div>
+            <p class="log-desc">
+                >> Output: IPK 3.85 (Cumlaude)<br>
+                >> Focus: Artificial Intelligence & Web Security.<br>
+                >> Melakukan enkripsi data tugas akhir dengan metode kriptografi modern.
+            </p>
+        </div>
+
+        <div class="log-card">
+            <span class="log-index">02</span>
+            <div class="log-header">
+                <span class="log-year">[ 2017 - 2020 ]</span>
+                <span class="log-status">STATUS: ARCHIVED</span>
+            </div>
+            <h3 class="log-school">SMA Negeri 1 Cyber City</h3>
+            <div class="log-major">Jurusan Ilmu Pengetahuan Alam</div>
+            <p class="log-desc">
+                >> Activities: Ketua Klub Komputer.<br>
+                >> Achievement: Juara 1 Lomba Coding tingkat Kota.<br>
+                >> Memulai inisiasi pembelajaran bahasa Python dasar.
+            </p>
+        </div>
+
+        <div class="log-card">
+            <span class="log-index">03</span>
+            <div class="log-header">
+                <span class="log-year">[ 2014 - 2017 ]</span>
+                <span class="log-status">STATUS: ARCHIVED</span>
+            </div>
+            <h3 class="log-school">SMP Negeri 5 Jakarta</h3>
+            <div class="log-major">-</div>
+            <p class="log-desc">
+                >> System Init: Pengenalan dasar logika matematika.<br>
+                >> Mengikuti ekstrakurikuler Robotika dasar.
+            </p>
+        </div>
+
+    </div>
+</section>
+    </body>
+</html>

@@ -1,0 +1,24 @@
+
+Windows + q = search mode (in windows)
+Windows + t = pilih/buka app lainnya di taksbar
+Windows + p = HDMI mode (select mode)
+Windows + e = File eks
+Windows + u = setting (search mode)
+Windows + i = Setting
+Windows + k = Connect to devices (bluetooth)
+Windows + l = Lock windows
+Windows + r = Run (search mode)
+Windows + x = Fast control (everything)
+Windows + v = Clipboard (history copy)
+Windows + b = Show hide icon on taksbar
+Windows + m = Closed the app
+Windows + . = Emoji (For text)
+Windows + , = (menutup sementara(menekan windows + < , kemudian lepas < dan tahan windows. jika windows di lepas akan kembali ke app))
+Windows + / = menghilangkan posisi mouse pada text.
+Windows + ; = Emoji 
+Windows + -/+ = Zoom mode in windows.
+Windows + 1/2/3 = Open app on taksbar(sesuai urutan dari kiri)
+Windows + Tap = Task app view
+
+
+

@@ -1,0 +1,164 @@
+/* ==========================================================================
+   FONT & VARIABEL WARNA (BRONZE LUXURY THEME)
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@400;700&display=swap');
+
+:root {
+    --bg-black: #0a0a0a;
+    --bg-panel: #141414;
+    
+    /* Palet Bronze Mewah */
+    --bronze-light: #e6cfa5;
+    --bronze-main: #c5a059;
+    --bronze-dark: #8a6e36;
+    
+    --text-white: #f0f0f0;
+    --danger: #8b0000; /* Merah darah untuk timer */
+}
+
+body {
+    background-color: var(--bg-black);
+    color: var(--text-white);
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ==========================================================================
+   CONTAINER UTAMA (KARTU TENGAH)
+   ========================================================================== */
+.main-container {
+    background: var(--bg-panel);
+    width: 90%;
+    max-width: 450px;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    
+    /* Efek Bersinar Emas di pinggir */
+    border: 1px solid var(--bronze-dark);
+    box-shadow: 0 0 30px rgba(197, 160, 89, 0.15);
+}
+
+.hidden { display: none; }
+
+/* ==========================================================================
+   TYPOGRAPHY (JUDUL & TEKS)
+   ========================================================================== */
+.luxury-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+    
+    /* Efek Teks Emas Metalik */
+    background: linear-gradient(to bottom, var(--bronze-light), var(--bronze-main), var(--bronze-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0px 2px 5px rgba(0,0,0,0.5);
+}
+
+.subtitle {
+    color: var(--bronze-main);
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.question-area h2 {
+    font-size: 3.5rem;
+    margin: 30px 0;
+    color: var(--text-white);
+    text-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+
+/* ==========================================================================
+   BUTTONS (TOMBOL MENU & JAWABAN)
+   ========================================================================== */
+.menu-grid, .options-grid {
+    display: grid;
+    gap: 15px;
+}
+
+.btn-luxury {
+    background: linear-gradient(145deg, #1e1e1e, #101010);
+    border: 1px solid var(--bronze-dark);
+    color: var(--bronze-light);
+    padding: 15px;
+    font-size: 1.1rem;
+    font-family: 'Cinzel', serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 5px;
+}
+
+.btn-luxury:hover {
+    background: var(--bronze-main);
+    color: var(--bg-black);
+    box-shadow: 0 0 15px var(--bronze-main);
+    transform: translateY(-2px);
+}
+
+/* Tombol khusus campuran (lebih menonjol) */
+.btn-gold {
+    border-color: var(--bronze-light);
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+}
+
+/* Grid Tombol Jawaban (Mode Perkalian) */
+.options-grid {
+    grid-template-columns: 1fr 1fr;
+}
+
+/* ==========================================================================
+   INPUT TEXT (MODE ISIAN)
+   ========================================================================== */
+input[type="number"] {
+    width: 80%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--bronze-main);
+    color: var(--bronze-light);
+    font-size: 2rem;
+    text-align: center;
+    padding: 10px;
+    outline: none;
+}
+
+/* ==========================================================================
+   GAME ELEMENTS (TIMER & SCORE)
+   ========================================================================== */
+.score-box {
+    font-size: 1.2rem;
+    color: var(--bronze-main);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.timer-container {
+    width: 100%;
+    height: 6px;
+    background: #333;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+#timer-bar {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to right, var(--bronze-main), var(--danger));
+    transition: width linear; /* Animasi halus lewat JS */
+}
+
+.game-over-text {
+    color: var(--danger);
+    font-family: 'Cinzel', serif;
+    font-size: 3rem;
+    text-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
+}

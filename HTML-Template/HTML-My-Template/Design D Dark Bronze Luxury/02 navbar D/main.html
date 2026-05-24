@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modern Classic Design</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+    <style>
+    /* --- CSS VARIABLES (TEMA D: LUXURY) --- */
+    :root {
+        --bg-d: #050505;            /* Hitam Pekat */
+        --bronze-dark: #8B4513;     /* Coklat Tua */
+        --bronze-mid: #CD7F32;      /* Tembaga Murni */
+        --bronze-light: #F4A460;    /* Emas Pasir */
+        --bronze-pale: #FFE4B5;     /* Putih Gading Kekuningan */
+        
+        /* Font Setup: Serif untuk judul (Formal), Sans untuk info (Modern) */
+        --font-serif: 'Playfair Display', 'Times New Roman', serif;
+        --font-sans: 'Inter', Helvetica, sans-serif;
+        
+        --grad-metal: linear-gradient(135deg, var(--bronze-dark), var(--bronze-mid), var(--bronze-light), var(--bronze-mid), var(--bronze-dark));
+    }
+
+    /* Import Font Google untuk kesan mewah */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+    /* --- GLOBAL STYLE D (Reset sederhana) --- */
+    body {
+        background-color: var(--bg-d);
+        color: var(--bronze-pale);
+        margin: 0;
+    }
+
+    /* --- NAVBAR STRUCTURE --- */
+    .navbar-d {
+        position: fixed;
+        top: 0; left: 0; width: 100%;
+        padding: 30px 50px; /* Padding besar biar lega/formal */
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.5s ease;
+        /* Tidak ada background block, hanya gradient halus di bawah */
+        background: linear-gradient(to bottom, rgba(5,5,5,0.9) 0%, rgba(5,5,5,0) 100%);
+    }
+
+    /* Garis tipis mewah di bawah navbar */
+    .navbar-d::after {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 5%; width: 90%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--bronze-dark), transparent);
+        opacity: 0.5;
+    }
+
+    /* --- LOGO (SERIF & METALIC) --- */
+    .logo-d {
+        font-family: var(--font-serif);
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-decoration: none;
+        position: relative;
+        
+        /* Efek Teks Metalik */
+        background-image: var(--grad-metal);
+        background-size: 200% auto;
+        color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        animation: shineMetal 5s linear infinite;
+    }
+
+    .logo-d span {
+        font-weight: 400;
+        font-style: italic;
+        font-size: 1.5rem;
+    }
+
+    @keyframes shineMetal {
+        to { background-position: 200% center; }
+    }
+
+    /* --- MENU (Minimalist) --- */
+    .menu-d {
+        display: flex;
+        gap: 40px;
+        align-items: center;
+    }
+
+    .link-d {
+        text-decoration: none;
+        font-family: var(--font-sans);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #888; /* Abu gelap biar tidak mencolok */
+        transition: 0.4s;
+        position: relative;
+    }
+
+    /* Hover Effect: Warna berubah jadi emas & garis kecil muncul */
+    .link-d:hover {
+        color: var(--bronze-light);
+    }
+
+    .link-d::before {
+        content: '';
+        position: absolute;
+        top: -10px; left: 50%;
+        transform: translateX(-50%);
+        width: 1px; height: 0;
+        background-color: var(--bronze-mid);
+        transition: 0.3s;
+    }
+
+    .link-d:hover::before {
+        height: 15px; /* Garis vertikal kecil di atas teks */
+    }
+
+    /* --- SEARCH & TOOLS --- */
+    .tools-d {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    /* Search Button (Icon only) */
+    .search-btn-d {
+        background: none;
+        border: 1px solid var(--bronze-dark);
+        color: var(--bronze-mid);
+        width: 40px; height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.4s;
+    }
+
+    .search-btn-d:hover {
+        border-color: var(--bronze-light);
+        color: var(--bronze-light);
+        box-shadow: 0 0 15px rgba(205, 127, 50, 0.2);
+        transform: rotate(90deg);
+    }
+
+    /* Search Overlay (Full Screen Elegant) */
+    .search-overlay-d {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 0;
+        background-color: rgba(5, 5, 5, 0.95);
+        z-index: 2000;
+        overflow: hidden;
+        transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .search-overlay-d.active {
+        height: 100vh;
+    }
+
+    .input-d {
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid var(--bronze-dark);
+        color: var(--bronze-light);
+        font-family: var(--font-serif);
+        font-size: 3rem; /* Teks input sangat besar */
+        text-align: center;
+        width: 70%;
+        padding: 20px;
+        outline: none;
+        transition: 0.3s;
+    }
+
+    .input-d:focus {
+        border-bottom-color: var(--bronze-light);
+    }
+    
+    .close-search {
+        position: absolute;
+        top: 40px; right: 50px;
+        font-size: 2rem;
+        color: #666;
+        cursor: pointer;
+        background: none;
+        border: none;
+    }
+    .close-search:hover { color: var(--bronze-light); }
+
+    /* --- MOBILE HAMBURGER --- */
+    .hamburger-d {
+        display: none;
+        flex-direction: column;
+        gap: 8px;
+        cursor: pointer;
+    }
+    .line-d {
+        width: 40px; height: 1px;
+        background-color: var(--bronze-mid);
+        transition: 0.4s;
+    }
+    /* Garis panjang pendek biar artistik */
+    .line-d:nth-child(2) { width: 25px; margin-left: auto; }
+
+    /* Mobile Menu (Drawer) */
+    .mobile-d {
+        position: fixed;
+        top: 0; right: -100%;
+        width: 100%; height: 100vh;
+        background: #080808;
+        z-index: 1500;
+        transition: 0.5s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+    }
+    .mobile-d.active { right: 0; }
+
+    .mobile-link-d {
+        font-family: var(--font-serif);
+        font-size: 2rem;
+        color: #666;
+        text-decoration: none;
+        font-style: italic;
+        transition: 0.3s;
+    }
+    .mobile-link-d:hover { color: var(--bronze-light); letter-spacing: 2px; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .navbar-d { padding: 20px; }
+        .menu-d { display: none; }
+        .hamburger-d { display: flex; }
+        .input-d { font-size: 1.5rem; width: 85%; }
+    }
+</style>
+
+<nav id="navbar-d" class="navbar-d">
+    
+    <a href="#" class="logo-d">
+        ALEXANDRIA <span>Portfolio</span>
+    </a>
+
+    <div class="menu-d">
+        <a href="#about" class="link-d">01. Profile</a>
+        <a href="#pendidikan" class="link-d">02. Education</a>
+        <a href="#skills" class="link-d">03. Expertise</a>
+        <a href="#projects" class="link-d">04. Works</a>
+        <a href="#contact" class="link-d">05. Contact</a>
+    </div>
+
+    <div class="tools-d">
+        <button class="search-btn-d" onclick="toggleSearchD()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg>
+        </button>
+
+        <div class="hamburger-d" onclick="toggleMobileD()">
+            <div class="line-d"></div>
+            <div class="line-d"></div>
+        </div>
+    </div>
+
+    <div id="searchOverlayD" class="search-overlay-d">
+        <button class="close-search" onclick="toggleSearchD()">✕</button>
+        <input type="text" id="searchD" class="input-d" placeholder="Type to search...">
+        <p style="color: #666; margin-top: 20px; font-family: var(--font-sans); font-size: 0.8rem; letter-spacing: 1px;">PRESS ENTER TO EXPLORE</p>
+    </div>
+
+    <div id="mobileMenuD" class="mobile-d">
+        <button class="close-search" onclick="toggleMobileD()" style="top: 30px; right: 30px;">✕</button>
+        <a href="#about" class="mobile-link-d" onclick="toggleMobileD()">Profile</a>
+        <a href="#pendidikan" class="mobile-link-d" onclick="toggleMobileD()">Education</a>
+        <a href="#skills" class="mobile-link-d" onclick="toggleMobileD()">Expertise</a>
+        <a href="#projects" class="mobile-link-d" onclick="toggleMobileD()">Selected Works</a>
+        <a href="#contact" class="mobile-link-d" onclick="toggleMobileD()">Get in Touch</a>
+    </div>
+
+</nav>
+
+<script>
+    // 1. Search Toggle (Full Screen)
+    function toggleSearchD() {
+        const overlay = document.getElementById('searchOverlayD');
+        overlay.classList.toggle('active');
+        if (overlay.classList.contains('active')) {
+            setTimeout(() => document.getElementById('searchD').focus(), 500);
+        }
+    }
+
+    // 2. Search Function
+    document.getElementById('searchD').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            const query = this.value;
+            toggleSearchD(); // Tutup dulu
+            if(query) {
+                const found = window.find(query);
+                if(!found) alert("Entry not found in archive.");
+            }
+        }
+    });
+
+    // 3. Mobile Toggle
+    function toggleMobileD() {
+        document.getElementById('mobileMenuD').classList.toggle('active');
+    }
+
+    // 4. Scroll Effect (Navbar mengecil/transparan saat scroll)
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar-d');
+        if (window.scrollY > 50) {
+            nav.style.padding = "15px 50px";
+            nav.style.background = "rgba(5,5,5,0.95)"; // Jadi lebih gelap
+        } else {
+            nav.style.padding = "30px 50px";
+            nav.style.background = "linear-gradient(to bottom, rgba(5,5,5,0.9) 0%, rgba(5,5,5,0) 100%)";
+        }
+    });
+</script>
+    </body>
+</html>

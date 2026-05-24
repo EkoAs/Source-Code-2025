@@ -1,0 +1,132 @@
+.navbar {
+   background: transparent;
+   backdrop-filter: blur(0px);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 25px;
+   text-align: center;
+   color: rgba(245, 222, 222, 0.589);
+   font-weight: bold;
+   text-shadow: 6px 4px 8px black;
+   font-family: 'Times New Roman', Times, serif;
+} 
+.home:hover { color: white; }
+.album:hover { color: white; }
+.about:hover { color: white; }
+.contact:hover { color: white;}
+.home:active { color: blueviolet;}
+.album:active { color: blueviolet; }
+.about:active { color: blueviolet; }
+.contact:active { color: burlywood;}
+
+.leftside {
+   position: relative;
+   width: 200px;
+   height: 350px;
+   background: transparent;
+   border: solid rgba(255, 255, 255, 0.5) 2px;
+   border-radius: 20px;
+   backdrop-filter: blur(8px);
+   display: flek;
+   justify-content: left;
+   align-items: left;
+   font-size: 15px;
+   color: #ddc6c6e1;
+   text-align: left;
+   overflow: hidden;
+   font-family: 'Times New Roman', Times, serif;
+}
+
+button {
+   border-radius: 8px;
+   border-color: rgb(230, 9, 9) 9px;
+   display: flek;
+   text-decoration: none;
+   width: 125px;
+   cursor: pointer;
+   background: transparent;
+   backdrop-filter: blur(1px);
+   color: rgb(189, 159, 159);
+   font-family: 'Times New Roman', Times, serif;
+   font-weight: bold;
+}
+
+button:hover {
+   background-color: rgb(113, 10, 209);
+   font-weight: normal;
+   color: white;
+}
+button:active {
+   background-color: rgba(255, 0, 0, 0.685);
+}
+
+a { text-decoration: none; }
+li { list-style: none; }
+
+.titlelink {
+   font-size: 2.1em;
+   color: rgba(255, 255, 255, 0.438);
+   text-align: left;
+   font-family: 'Times New Roman', Times, serif;
+   font-weight: bold;
+}
+
+body{
+   background: url('background.jpg')no-repeat;
+   background-position: center;
+   background-size: cover;
+   background-attachment: fixed;
+}
+
+.whatare {
+   font-size: 3em;
+   color: rgba(255, 255, 255, 0.616);
+   position: relative;
+   float: right;
+   margin-right: 120px;
+   margin-top: -280px;
+   font-family: 'Times New Roman', Times, serif;
+}
+
+.looking {
+   font-size: 2em;
+   color: rgba(255, 255, 255, 0.623);
+   margin-right: 30px;
+   margin-top: -230px;
+   float: right;
+   position: relative;
+   font-family: 'Times New Roman', Times, serif;
+}
+
+.table2 {
+   margin-top: -345px;
+   margin-left: 290px;
+   text-align: justify;
+   align-items: center;
+   font-size: 1.5em;
+   font-family: 'Times New Roman', Times, serif;
+   line-height: 28px;
+   font-weight: bold;
+   -webkit-text-stroke: 0.2px white;
+   border: 2px solid rgba(255,255,255,0.5);
+   border-radius: 8px;
+}
+.navbar-button {
+   border-bottom: solid 2px rgba(137, 43, 226, 0.616);
+   align-items: center;
+   text-align: center;
+   background: transparent;
+   backdrop-filter: blur(15px);
+   margin-top: 100px;
+   position: relative;
+   display: flex;
+   justify-content: center;
+   color: rgba(255, 255, 255, 0.74);
+   font-weight: bold;
+   height: 55px;
+}
+
+
+
+

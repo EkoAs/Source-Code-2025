@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Struk Pembayaran - Techs Clothing</title>
+    <style>
+        body {
+            background: white;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .struk-box {
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid #eee;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+
+        .header { text-align: center; border-bottom: 2px dashed #000; padding-bottom: 20px; }
+        .header h1 { margin: 0; font-size: 1.5rem; }
+
+        .info-transaksi { margin: 20px 0; font-size: 0.9rem; }
+        
+        .tabel-barang { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .tabel-barang td { padding: 5px 0; }
+
+        .total-section { border-top: 2px dashed #000; padding-top: 15px; }
+        .row { display: flex; justify-content: space-between; margin-bottom: 5px; }
+
+        .kode-bayar {
+            background: #f1f2f6;
+            text-align: center;
+            padding: 15px;
+            margin: 20px 0;
+            border: 1px solid #ccc;
+        }
+
+        .btn-print {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #2d3436;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        @media print {
+            .btn-print { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="struk-box">
+    <div class="header">
+        <h1>TECHS CLOTHING STORE</h1>
+        <p>Jl. Fashionable No. 1, Jakarta</p>
+        <p>{{ waktu }}</p>
+    </div>
+
+    <div class="info-transaksi">
+        <p>Metode: {{ metode }}</p>
+        <p>Status: LUNAS / PROSES</p>
+    </div>
+
+    <table class="tabel-barang">
+        {% for item in t['daftar_barang'] %}
+        <tr>
+            <td>{{ item.nama }}</td>
+            <td style="text-align: right;">Rp {{ "{:,}".format(item.harga_final) }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div class="total-section">
+        <div class="row">
+            <span>Subtotal:</span>
+            <span>Rp {{ "{:,}".format(t.subtotal) }}</span>
+        </div>
+        <div class="row">
+            <span>Ongkir:</span>
+            <span>Rp {{ "{:,}".format(t.ongkir) }}</span>
+        </div>
+        <div class="row">
+            <span>Pajak (11%):</span>
+            <span>Rp {{ "{:,}".format(t.pajak) }}</span>
+        </div>
+        <div class="row" style="font-weight: bold; font-size: 1.2rem; margin-top: 10px;">
+            <span>TOTAL:</span>
+            <span>Rp {{ "{:,}".format(t.total) }}</span>
+        </div>
+    </div>
+
+    {% if metode != 'COD' %}
+    <div class="kode-bayar">
+        <small>Silakan transfer ke nomor Virtual Account berikut:</small>
+        <h2 id="kode">{{ kode }}</h2>
+        <button onclick="copyCode()" style="cursor:pointer; font-size: 0.7rem;">Salin Kode</button>
+    </div>
+    {% endif %}
+
+    <a href="{{ url_for('home.index') }}" class="btn-print">KEMBALI KE BERANDA</a>
+    <p style="text-align: center; font-size: 0.7rem; color: #999; margin-top: 20px;">Terima kasih telah berbelanja emuach</p>
+</div>
+
+<script>
+    function copyCode() {
+        const code = document.getElementById('kode').innerText;
+        navigator.clipboard.writeText(code);
+        alert("Kode disalin ke clipboard!");
+    }
+</script>
+
+</body>
+</html>

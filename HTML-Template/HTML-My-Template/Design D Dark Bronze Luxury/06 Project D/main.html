@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modern Classic Design</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+    <style>
+    /* --- VARIABLES (PROJECTS D) --- */
+    #projects {
+        --bg-d: #050505;
+        --bronze-main: #CD7F32;
+        --bronze-pale: #FFE4B5;
+        --text-gray: #666;
+        --font-serif: 'Playfair Display', serif;
+        --font-sans: 'Inter', sans-serif;
+    }
+
+    /* --- LAYOUT --- */
+    .proj-d-section {
+        position: relative;
+        min-height: 100vh;
+        background-color: var(--bg-d);
+        padding: 120px 5%;
+        display: flex;
+        align-items: center;
+        z-index: 1;
+    }
+
+    .proj-d-container {
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 50px;
+    }
+
+    /* --- KIRI: LIST PROYEK --- */
+    .proj-list {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        gap: 0; /* Nempel vertikal */
+        z-index: 10; /* Di atas gambar */
+    }
+
+    .proj-header-small {
+        font-family: var(--font-sans);
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+        color: var(--bronze-main);
+        text-transform: uppercase;
+        margin-bottom: 40px;
+        display: block;
+    }
+
+    /* Item Baris Proyek */
+    .proj-item {
+        padding: 40px 0;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        cursor: pointer;
+        transition: 0.4s;
+        position: relative;
+    }
+
+    /* Garis terakhir */
+    .proj-item:last-child {
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .proj-meta {
+        display: flex;
+        gap: 20px;
+        font-family: var(--font-sans);
+        font-size: 0.8rem;
+        color: var(--text-gray);
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        transition: 0.3s;
+    }
+
+    .proj-title {
+        font-family: var(--font-serif);
+        font-size: 3.5rem;
+        color: #888; /* Abu mati sebelum hover */
+        font-weight: 400;
+        line-height: 1;
+        margin: 0;
+        transition: 0.4s;
+    }
+
+    /* HOVER STATE */
+    .proj-item:hover .proj-title {
+        color: var(--bronze-pale); /* Jadi Emas Pucat */
+        padding-left: 20px; /* Geser dikit */
+        font-style: italic;
+    }
+    
+    .proj-item:hover .proj-meta {
+        color: var(--bronze-main);
+        padding-left: 20px;
+    }
+
+    /* --- KANAN: PREVIEW GAMBAR (FLOATING) --- */
+    .proj-preview-area {
+        width: 40%;
+        height: 60vh; /* Tinggi fix area gambar */
+        position: sticky; /* Nempel pas discroll */
+        top: 20vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none; /* Biar gak ganggu scroll */
+    }
+
+    /* Bingkai Gambar */
+    .img-frame-d {
+        width: 100%;
+        height: 0; /* Awalnya 0 (tutup) */
+        padding-bottom: 120%; /* Aspect Ratio Portrait */
+        position: relative;
+        overflow: hidden;
+        opacity: 0;
+        transform: scale(0.9) rotate(-2deg); /* Efek miring dikit */
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Kelas aktif untuk memunculkan gambar */
+    .img-frame-d.active {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+
+    .preview-img {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        object-fit: cover;
+        filter: sepia(30%) contrast(1.1); /* Vintage Vibe */
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+        .proj-d-container { flex-direction: column-reverse; }
+        .proj-list { width: 100%; }
+        .proj-preview-area { display: none; } /* Di HP gambar hilang biar ringkas, atau bisa ditaruh di bawah item */
+        .proj-title { font-size: 2.5rem; }
+    }
+</style>
+
+<section id="projects" class="proj-d-section">
+    <div class="proj-d-container">
+        
+        <div class="proj-list">
+            <span class="proj-header-small">Selected Works (2023-2025)</span>
+
+            <div class="proj-item" onmouseenter="showProject('img1')">
+                <div class="proj-meta">
+                    <span>01</span>
+                    <span>Web Development</span>
+                </div>
+                <h2 class="proj-title">Luxe Estate</h2>
+            </div>
+
+            <div class="proj-item" onmouseenter="showProject('img2')">
+                <div class="proj-meta">
+                    <span>02</span>
+                    <span>UI/UX Design</span>
+                </div>
+                <h2 class="proj-title">Fintech App</h2>
+            </div>
+
+            <div class="proj-item" onmouseenter="showProject('img3')">
+                <div class="proj-meta">
+                    <span>03</span>
+                    <span>Brand Identity</span>
+                </div>
+                <h2 class="proj-title">Muse Gallery</h2>
+            </div>
+
+            <div class="proj-item" onmouseenter="showProject('img4')">
+                <div class="proj-meta">
+                    <span>04</span>
+                    <span>E-Commerce</span>
+                </div>
+                <h2 class="proj-title">Noir Fashion</h2>
+            </div>
+
+        </div>
+
+        <div class="proj-preview-area">
+            
+            <div class="img-frame-d" id="img1">
+                <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="preview-img">
+            </div>
+            
+            <div class="img-frame-d" id="img2" style="position:absolute; top:0; left:0;">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="preview-img">
+            </div>
+
+            <div class="img-frame-d" id="img3" style="position:absolute; top:0; left:0;">
+                <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="preview-img">
+            </div>
+
+            <div class="img-frame-d" id="img4" style="position:absolute; top:0; left:0;">
+                <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="preview-img">
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<script>
+    function showProject(id) {
+        // 1. Sembunyikan semua gambar
+        const allImages = document.querySelectorAll('.img-frame-d');
+        allImages.forEach(img => {
+            img.classList.remove('active');
+        });
+
+        // 2. Munculkan gambar yang dipilih
+        const target = document.getElementById(id);
+        if(target) {
+            target.classList.add('active');
+        }
+    }
+
+    // Default: Show gambar 1 pas load
+    document.addEventListener("DOMContentLoaded", () => {
+        showProject('img1');
+    });
+</script>
+    </body>
+</html>

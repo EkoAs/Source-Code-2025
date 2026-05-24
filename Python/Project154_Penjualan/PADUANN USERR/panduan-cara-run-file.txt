@@ -1,0 +1,62 @@
+﻿1.  Persiapan Software (Prasyarat)
+Pastikan laptop/PC sudah terinstall software berikut:
+
+XAMPP (Untuk menjalankan PHP & Apache)
+Python 3.10 keatas (Untuk menjalankan Engine Backend)
+Web Browser (Chrome/Edge/Firefox)
+
+=============================================================================
+2. Penempatan Folder Project
+Copy folder Project154_Penjualan secara utuh.
+
+Paste ke dalam direktori instalasi XAMPP, 
+biasanya di: C:\xampp\htdocs\ 
+(Pastikan strukturnya menjadi C:\xampp\htdocs\Project154_Penjualan\)
+
+
+=====================================================================================================
+3. Instalasi Library Python (Wajib)
+Buka Terminal atau Command Prompt (CMD), arahkan terminal tepat ke lokasi folder Project154 tersebut.
+dengan mengetik "cd C:\xampp\htdocs\Project154_Penjualan" di terminal.
+
+lalu masuk ke folder project dan install library yang dibutuhkan:
+(ketik di terminal satu persatu dibawah ini).
+pip install flask
+pip install flask flask-cors
+
+jika cara diatas tak berhasil. bisa pakai yg dibawah ini 
+python -m pip install flask flask-cors
+
+kalo masih error, buka file txt manual path error.
+
+Keterangan: flask-cors dibutuhkan agar PHP diizinkan mengambil data dari server Python.
+
+=======================================================================
+4. Menjalankan Sistem (2 Tahap)
+Sistem ini memiliki dua "mesin" yang harus menyala secara bersamaan:
+
+Langkah A: Menjalankan Server PHP (XAMPP)
+Buka XAMPP Control Panel.
+Klik tombol Start pada bagian Apache. (Status harus berubah menjadi hijau).
+
+Langkah B: Menjalankan Server API (Python)
+Buka Terminal/CMD di dalam folder project.(yg sudah diarahkan tadi "cd C:\xampp\htdocs\Project154_Penjualan"
+Jalankan perintah berikut:
+
+python app.py
+Pastikan muncul tulisan: * Running on http://127.0.0.1:5000. (Jangan tutup terminal ini selama aplikasi digunakan)
+
+===========================================================================
+5. Cara Mengakses Aplikasi
+Buka Browser, lalu ketik alamat berikut di Address Bar:
+
+http://localhost/Project154_Penjualan/index.php
+
+
+=============================================================================
+💡 Tips Penggunaan:
+Fitur Pencarian: Gunakan kotak pencarian di bagian atas untuk memfilter pakaian.
+
+Simulasi Stok: Setiap kali Anda berhasil melakukan checkout hingga muncul struk, stok di server Python akan otomatis berkurang secara real-time.
+
+Struk Belanja: Setelah memilih metode pembayaran, sistem akan menghasilkan kode Virtual Account atau instruksi COD otomatis yang bisa dicetak/disalin.

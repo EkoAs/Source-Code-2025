@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modern Classic Design</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+    <style>
+    /* --- VARIABLES (TEMA F) --- */
+    :root {
+        --bg-f: #050505;
+        --grid-line: #1a1a1a;
+        --neon-blue: #00f3ff;
+        --neon-dim: rgba(0, 243, 255, 0.1);
+        --text-f: #e0e0e0;
+        --font-tech: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* GLOBAL RESET */
+    body {
+        background-color: var(--bg-f);
+        color: var(--text-f);
+        font-family: var(--font-tech);
+        margin: 0;
+        /* Background Grid Pattern */
+        background-image: 
+            linear-gradient(var(--grid-line) 1px, transparent 1px),
+            linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+        background-size: 40px 40px;
+    }
+
+    /* --- NAVBAR CONTAINER --- */
+    .navbar-f {
+        position: fixed;
+        top: 0; left: 0; width: 100%;
+        height: 80px;
+        background: rgba(5, 5, 5, 0.95); /* Lebih gelap biar teks jelas */
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--grid-line);
+        
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        
+        /* KUNCI FIX: Gunakan GAP untuk jarak antar elemen utama */
+        gap: 20px; 
+        padding: 0 30px;
+        
+        z-index: 1000;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        box-sizing: border-box; /* Pastikan padding tidak nambah lebar */
+    }
+
+    /* --- LOGO --- */
+    .logo-f {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #fff;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        flex-shrink: 0; /* Logo tidak boleh mengecil */
+        white-space: nowrap; /* Teks logo dilarang turun baris */
+    }
+
+    .logo-box {
+        width: 35px; height: 35px;
+        background: var(--neon-dim);
+        border: 1px solid var(--neon-blue);
+        display: grid; place-items: center;
+        font-size: 1.2rem; color: var(--neon-blue);
+    }
+
+    /* --- SEARCH BAR (Flexible) --- */
+    .search-container-f {
+        flex: 1; /* Mengambil sisa ruang yang ada */
+        max-width: 500px; /* Batas maksimal lebar */
+        position: relative;
+        min-width: 0; /* Fix standar flexbox agar bisa mengecil */
+    }
+
+    .search-input-f {
+        width: 100%;
+        background: #111;
+        border: 1px solid #333;
+        padding: 10px 15px 10px 40px;
+        border-radius: 4px;
+        color: #fff;
+        font-family: var(--font-tech);
+        transition: 0.3s;
+        box-sizing: border-box;
+    }
+
+    .search-input-f:focus {
+        outline: none; border-color: var(--neon-blue);
+        background: #0a0a0a; box-shadow: 0 0 15px var(--neon-dim);
+    }
+
+    .search-icon-f {
+        position: absolute; left: 12px; top: 50%;
+        transform: translateY(-50%);
+        color: #666; pointer-events: none;
+    }
+
+    /* --- RIGHT MENU --- */
+    .nav-right-f {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-shrink: 0; /* Menu kanan tidak boleh mengecil/kepotong */
+    }
+
+    .link-f {
+        text-decoration: none; color: #888;
+        font-size: 0.9rem; font-weight: 600;
+        text-transform: uppercase; transition: 0.3s;
+        white-space: nowrap; /* Teks link dilarang turun baris */
+    }
+    .link-f:hover { color: #fff; }
+
+    .btn-upload-f {
+        background: var(--neon-dim);
+        border: 1px solid var(--neon-blue);
+        color: var(--neon-blue);
+        padding: 10px 20px;
+        font-weight: 700; text-transform: uppercase; font-size: 0.8rem;
+        cursor: pointer; transition: 0.3s;
+        white-space: nowrap; /* Teks tombol dilarang turun baris */
+        display: flex; align-items: center; gap: 8px;
+    }
+    .btn-upload-f:hover {
+        background: var(--neon-blue); color: #000;
+        box-shadow: 0 0 15px var(--neon-blue);
+    }
+
+    /* --- HAMBURGER (Mobile Toggle) --- */
+    .hamburger-f {
+        display: none; /* Hidden by default */
+        font-size: 1.5rem; color: #fff; cursor: pointer;
+        padding: 5px; border: 1px solid #333; border-radius: 4px;
+    }
+
+    /* --- MOBILE MENU --- */
+    .mobile-menu-f {
+        position: fixed; top: 80px; left: 0; width: 100%;
+        background: #0a0a0a;
+        border-bottom: 1px solid var(--neon-blue);
+        display: none; flex-direction: column;
+        padding: 20px; gap: 15px; z-index: 900;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    }
+    .mobile-menu-f.active { display: flex; }
+
+
+    /* --- MEDIA QUERIES (Titik Kritis Layout) --- */
+    
+    /* 1. Tablet / Laptop Kecil (Max-Width 1024px) */
+    /* Di ukuran ini, menu kanan sering nabrak search. Kita sembunyikan menu kanan. */
+    @media (max-width: 1024px) {
+        .nav-right-f { display: none; } /* Hilangkan menu desktop */
+        .search-container-f { display: none; } /* Hilangkan search bar atas biar bersih */
+        .hamburger-f { display: block; } /* Munculkan hamburger */
+    }
+
+</style>
+
+<nav class="navbar-f">
+    <a href="#" class="logo-f">
+        <div class="logo-box">💾</div>
+        NEXUS
+    </a>
+
+    <div class="search-container-f">
+        <input type="text" class="search-input-f" placeholder="Search resources...">
+        <span class="search-icon-f">🔍</span>
+    </div>
+
+    <div class="nav-right-f">
+        <a href="#categories" class="link-f">Categories</a>
+        <a href="#popular" class="link-f">Top Rated</a>
+        <button class="btn-upload-f" onclick="openUploadModal()">
+            <span>⬆</span> Upload
+        </button>
+    </div>
+
+    <div class="hamburger-f" onclick="toggleMobileF()">☰</div>
+</nav>
+
+<div id="mobileMenuF" class="mobile-menu-f">
+    <div style="position: relative;">
+        <input type="text" class="search-input-f" placeholder="Search files..." style="width: 100%;">
+    </div>
+    
+    <a href="#categories" class="link-f" style="padding: 10px 0; border-bottom: 1px solid #222;">Categories</a>
+    <a href="#popular" class="link-f" style="padding: 10px 0; border-bottom: 1px solid #222;">Top Rated</a>
+    <a href="#community" class="link-f" style="padding: 10px 0; border-bottom: 1px solid #222;">Community</a>
+    
+    <button class="btn-upload-f" style="width: 100%; justify-content: center; margin-top: 10px;">
+        <span>⬆</span> Upload New File
+    </button>
+</div>
+
+<script>
+    function toggleMobileF() {
+        document.getElementById('mobileMenuF').classList.toggle('active');
+    }
+
+   // 1. BUKA TUTUP MODAL
+function openUploadModal() {
+    document.getElementById('uploadModal').classList.add('active');
+}
+
+function closeModal() {
+    document.getElementById('uploadModal').classList.remove('active');
+}
+
+// Tampilkan nama file saat dipilih dari komputer
+document.getElementById('uFile').addEventListener('change', function(e) {
+    const name = e.target.files[0] ? e.target.files[0].name : "No file chosen";
+    document.getElementById('fileName').innerText = name;
+});
+
+// 2. LOGIKA UPLOAD (TAMBAH KARTU)
+function handleUpload(e) {
+    e.preventDefault(); // Cegah refresh halaman
+
+    // Ambil data dari form
+    const title = document.getElementById('uTitle').value;
+    const category = document.getElementById('uCat').value;
+    const tech = document.getElementById('uTech').value;
+    const desc = document.getElementById('uDesc').value;
+    
+    // Simulasi File (Karena tanpa server, kita buat link dummy)
+    // Di dunia nyata, file ini dikirim ke server, lalu server kasih link download
+    const fileInput = document.getElementById('uFile');
+    const fileName = fileInput.files[0] ? fileInput.files[0].name : "file.zip";
+    const fileSize = (Math.random() * 100).toFixed(1) + " MB"; // Ukuran palsu
+
+    // Tentukan Ikon & Tombol berdasarkan Kategori
+    let icon = "📁";
+    let btnClass = "btn-download";
+    let btnText = "Download";
+
+    if (category === 'project') {
+        icon = "💻"; 
+        btnClass = "btn-github"; 
+        btnText = "View Code";
+    } else if (category === 'edu') {
+        icon = "📚";
+    } else if (category === 'game') {
+        icon = "🎮";
+    } else if (category === 'tools') {
+        icon = "🛠";
+    }
+
+    // BUAT KARTU HTML BARU
+    // Kita masukkan data form ke dalam struktur kartu yang sama
+    const newCardHTML = `
+        <div class="repo-card" data-filter="${category} ${tech}">
+            <div class="card-top">
+                <div class="file-icon">${icon}</div>
+                <div class="card-info">
+                    <h3>${title}</h3>
+                    <span class="meta-text">${fileName} • ${fileSize}</span>
+                </div>
+            </div>
+            <p class="card-desc">${desc}</p>
+            <div class="tag-wrapper">
+                <span class="tech-tag">${tech.toUpperCase()}</span>
+                <span class="tech-tag">${category.toUpperCase()}</span>
+            </div>
+            <div class="card-footer">
+                <div class="stats"><span>★ New</span></div>
+                <a href="#" class="btn-action ${btnClass}" onclick="alert('Mendownload: ${fileName}')">${btnText}</a>
+            </div>
+        </div>
+    `;
+
+    // SISIPKAN KE GRID (Paling Atas)
+    const container = document.getElementById('cardContainer');
+    container.insertAdjacentHTML('afterbegin', newCardHTML);
+
+    // Notifikasi & Reset
+    alert("✅ Success! File berhasil diupload ke repository.");
+    closeModal();
+    e.target.reset();
+    document.getElementById('fileName').innerText = "No file chosen";
+    
+    // Update jumlah item
+    updateCount();
+}
+
+function updateCount() {
+    const count = document.querySelectorAll('.repo-card:not(.hidden)').length;
+    document.getElementById('countLabel').innerText = `Showing ${count} items`;
+}
+</script>
+
+
+
+<style>
+    /* --- VARIABLES --- */
+    :root {
+        --sidebar-width: 280px; /* Lebar Sidebar dikunci disini */
+        --navbar-height: 80px;
+        --bg-color: #050505;
+        --neon-blue: #00f3ff;
+        --border-color: #222;
+    }
+
+    /* --- SETUP HALAMAN --- */
+    body {
+        background-color: var(--bg-color);
+        overflow-x: hidden; /* Mencegah scroll samping */
+    }
+
+    .repo-wrapper {
+        display: block;
+        position: relative;
+        width: 100%;
+    }
+
+    /* ================= 1. SIDEBAR (PAKU DI KIRI) ================= */
+    .fixed-sidebar {
+        position:absolute; /* Dikunci di layar */
+        top: var(--navbar-height);
+        left: 0;
+        bottom: 0;
+        width: 15%; /* Lebar fix */
+        background-color: #0a0a0a;
+        border-right: 1px solid var(--border-color);
+        overflow-y: hidden; /* Scrollable jika menu panjang */
+        z-index: 90;
+        padding: 25px;
+        transition: transform 0.3s ease;
+    }
+
+    /* Styling dalam sidebar */
+    .filter-section { margin-bottom: 30px; border-bottom: 1px solid #1a1a1a; padding-bottom: 20px; }
+    .filter-head { color: #fff; font-weight: 700; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; }
+    
+    /* Checkbox Item */
+    .check-item {
+        display: flex; align-items: center; gap: 10px;
+        color: #888; margin-bottom: 8px; cursor: pointer; font-size: 0.9rem;
+    }
+    .check-item:hover { color: #fff; }
+    .check-item input { accent-color: var(--neon-blue); cursor: pointer; }
+
+    /* ================= 2. KONTEN UTAMA (DORONG KE KANAN) ================= */
+    .main-content-area {
+        /* INI KUNCINYA: Margin kiri sama persis dengan lebar sidebar */
+        margin-left: var(--sidebar-width); 
+        width: 75%; /* Sisa layar */
+        
+        padding: 20px;
+        padding-top: calc(var(--navbar-height) + 40px); /* Jarak dari atas */
+        min-height: 100vh;
+        transition: 0.3s;
+    }
+
+    /* --- GRID & CARD STYLE (Sama seperti sebelumnya) --- */
+    .grid-layout {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Responsive */
+        gap: 25px;
+        overflow: hidden;
+    }
+
+    .resource-card {
+        background: #0e0e0e;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        padding: 20px;
+        display: flex; flex-direction: column;
+        position: relative;
+        transition: 0.3s;
+    }
+    .resource-card.hidden { display: none; } /* Class sembunyi */
+
+    .resource-card:hover {
+        border-color: var(--neon-blue);
+        transform: translateY(-5px);
+        box-shadow: 0 5px 20px rgba(0, 243, 255, 0.1);
+    }
+
+    .r-header { display: flex; gap: 15px; margin-bottom: 15px; }
+    .r-icon { width: 40px; height: 40px; background: #111; border: 1px solid #333; display: grid; place-items: center; border-radius: 5px; font-size: 1.2rem; flex-shrink: 0; }
+    .r-title h3 { color: #fff; font-size: 1rem; margin: 0 0 5px 0; }
+    .r-title span { font-size: 0.8rem; color: #666; }
+    .r-desc { color: #999; font-size: 0.85rem; line-height: 1.5; margin-bottom: 15px; flex: 1; }
+    
+    .r-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 15px; }
+    .r-tag { font-size: 0.7rem; background: rgba(0,243,255,0.1); color: var(--neon-blue); padding: 3px 8px; border-radius: 3px; }
+
+    .r-footer { border-top: 1px solid #222; padding-top: 15px; display: flex; justify-content: space-between; align-items: center; }
+    .r-btn { text-decoration: none; font-size: 0.8rem; font-weight: bold; padding: 8px 15px; border-radius: 4px; transition: 0.3s; }
+    
+    .btn-code { background: #222; color: #fff; border: 1px solid #444; }
+    .btn-code:hover { background: #fff; color: #000; }
+    
+    .btn-dl { background: rgba(0,243,255,0.1); color: var(--neon-blue); border: 1px solid var(--neon-blue); }
+    .btn-dl:hover { background: var(--neon-blue); color: #000; }
+
+    /* TOMBOL FILTER MOBILE */
+    .mob-filter-btn { display: none; }
+
+    /* ================= MOBILE RESPONSIVE (< 1024px) ================= */
+    @media (max-width: 1024px) {
+        /* Sidebar Sembunyi ke Kiri Luar */
+        .fixed-sidebar {
+            left: -100%; /* Lempar keluar layar */
+            width: 80%; /* Lebar di HP */
+            z-index: 2000;
+            box-shadow: 10px 0 50px #000;
+        }
+        /* Class Aktif untuk memunculkan Sidebar */
+        .fixed-sidebar.show { left: 0; }
+
+        /* Konten Utama Reset Margin (Full Width) */
+        .main-content-area {
+            margin-left: 0; /* Reset margin */
+            width: 90%;
+            padding: 20px;
+            padding-top: 100px;
+        }
+
+        /* Tombol Buka Filter */
+        .mob-filter-btn {
+            display: block; width: 100%; padding: 12px;
+            background: #111; border: 1px solid var(--neon-blue); color: #fff;
+            font-weight: bold; margin-bottom: 20px; cursor: pointer;
+        }
+
+        /* Overlay Gelap */
+        .overlay-bg {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 1999;
+        }
+        .overlay-bg.active { display: block; }
+    }
+</style>
+
+<div class="repo-wrapper">
+    
+    <div class="overlay-bg" id="overlayMobile" onclick="toggleSidebarF()"></div>
+
+    <aside class="fixed-sidebar" id="sidebarF">
+        <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
+            <h3 style="color:#fff; margin:0;">FILTER RESOURCE</h3>
+            <button onclick="toggleSidebarF()" style="background:none; border:none; color:#fff; font-size:1.5rem; cursor:pointer; display:none;" class="close-mob">×</button>
+        </div>
+
+        <div class="filter-section">
+            <div class="filter-head">📁 TIPE RESOURCE</div>
+            <label class="check-item"><input type="checkbox" value="project" onchange="runFilter()"> Source Code</label>
+            <label class="check-item"><input type="checkbox" value="edu" onchange="runFilter()"> Pembelajaran / E-Book</label>
+            <label class="check-item"><input type="checkbox" value="game" onchange="runFilter()"> Game Assets</label>
+            <label class="check-item"><input type="checkbox" value="tools" onchange="runFilter()"> Tools & Plugins</label>
+        </div>
+
+        <div class="filter-section">
+            <div class="filter-head">⚡ TEKNOLOGI</div>
+            <label class="check-item"><input type="checkbox" value="html" onchange="runFilter()"> HTML & CSS</label>
+            <label class="check-item"><input type="checkbox" value="js" onchange="runFilter()"> JavaScript / Node</label>
+            <label class="check-item"><input type="checkbox" value="python" onchange="runFilter()"> Python</label>
+            <label class="check-item"><input type="checkbox" value="java" onchange="runFilter()"> Java</label>
+            <label class="check-item"><input type="checkbox" value="cpp" onchange="runFilter()"> C++ / C</label>
+            <label class="check-item"><input type="checkbox" value="kotlin" onchange="runFilter()"> Kotlin</label>
+            <label class="check-item"><input type="checkbox" value="php" onchange="runFilter()"> PHP / Laravel</label>
+        </div>
+
+        <button onclick="resetAll()" style="width:100%; padding:10px; background:#222; color:#fff; border:none; cursor:pointer; border-radius:4px;">Reset Filter</button>
+    </aside>
+
+    <main class="main-content-area">
+        
+        <button class="mob-filter-btn" onclick="toggleSidebarF()">🔍 BUKA FILTER & KATEGORI</button>
+
+        <h2 style="color:#fff; margin-bottom:10px;">Library Content</h2>
+        <p style="color:#666; margin-bottom:30px;" id="resultText">Showing all resources</p>
+
+        <div class="grid-layout">
+            
+            <div class="grid-layout" id="cardContainer">
+
+    {% for item in items %}
+    <div class="resource-card" data-tags="{{ item.category }} {{ item.tech }}">
+        <div class="r-header">
+            <div class="r-icon">
+                {% if item.category == 'project' %}💻
+                {% elif item.category == 'game' %}👾
+                {% elif item.category == 'tools' %}🛠
+                {% else %}📚{% endif %}
+            </div>
+            <div class="r-title">
+                <h3>{{ item.title }}</h3>
+                <span>{{ item.file }} • {{ item.size }}</span>
+            </div>
+        </div>
+        <p class="r-desc">{{ item.desc }}</p>
+        <div class="r-tags">
+            {% for t in item.tech.split() %}
+                <span class="r-tag">{{ t.upper() }}</span>
+            {% endfor %}
+            <span class="r-tag" style="color: #fff; border-color: #fff;">{{ item.category.upper() }}</span>
+        </div>
+        <div class="r-footer">
+            <span>★ New Upload</span>
+            <a href="{{ url_for('download_file', filename=item.file) }}" class="r-btn btn-dl btn-action btn-download">Download</a>
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="resource-card" data-tags="project html css js">
+        </div>
+    
+    <div class="resource-card" data-tags="edu python">
+        </div>
+
+    </div>
+
+
+
+
+            <div class="resource-card" data-tags="project html css js">
+                <div class="r-header">
+                    <div class="r-icon">🌐</div>
+                    <div class="r-title"><h3>Portfolio Template</h3><span>Frontend Web</span></div>
+                </div>
+                <p class="r-desc">Template website modern dengan animasi CSS glassmorphism.</p>
+                <div class="r-tags"><span class="r-tag">HTML</span><span class="r-tag">CSS</span></div>
+                <div class="r-footer"><span>⬇ 1.2k</span><a href="#" class="r-btn btn-code">View Code</a></div>
+            </div>
+
+            <div class="resource-card" data-tags="edu python">
+                <div class="r-header">
+                    <div class="r-icon">🐍</div>
+                    <div class="r-title"><h3>Python AI Guide</h3><span>E-Book PDF</span></div>
+                </div>
+                <p class="r-desc">Panduan lengkap Machine Learning untuk pemula (Pandas & NumPy).</p>
+                <div class="r-tags"><span class="r-tag">Python</span><span class="r-tag">AI</span></div>
+                <div class="r-footer"><span>★ 5.0</span><a href="#" class="r-btn btn-dl">Download</a></div>
+            </div>
+
+            <div class="resource-card" data-tags="project java">
+                <div class="r-header">
+                    <div class="r-icon">☕</div>
+                    <div class="r-title"><h3>Inventory System</h3><span>Java Swing</span></div>
+                </div>
+                <p class="r-desc">Aplikasi desktop manajemen gudang dengan database MySQL.</p>
+                <div class="r-tags"><span class="r-tag">Java</span><span class="r-tag">SQL</span></div>
+                <div class="r-footer"><span>⬇ 850</span><a href="#" class="r-btn btn-code">View Code</a></div>
+            </div>
+
+            <div class="resource-card" data-tags="game cpp project">
+                <div class="r-header">
+                    <div class="r-icon">🎮</div>
+                    <div class="r-title"><h3>2D Game Engine</h3><span>C++ Source</span></div>
+                </div>
+                <p class="r-desc">Framework dasar pembuatan game 2D menggunakan OpenGL.</p>
+                <div class="r-tags"><span class="r-tag">C++</span><span class="r-tag">GameDev</span></div>
+                <div class="r-footer"><span>⬇ 400</span><a href="#" class="r-btn btn-code">View Code</a></div>
+            </div>
+
+            <div class="resource-card" data-tags="project kotlin">
+                <div class="r-header">
+                    <div class="r-icon">📱</div>
+                    <div class="r-title"><h3>E-Wallet App</h3><span>Kotlin Android</span></div>
+                </div>
+                <p class="r-desc">Source code aplikasi dompet digital dengan Jetpack Compose.</p>
+                <div class="r-tags"><span class="r-tag">Kotlin</span><span class="r-tag">Mobile</span></div>
+                <div class="r-footer"><span>⬇ 900</span><a href="#" class="r-btn btn-code">View Code</a></div>
+            </div>
+
+            <div class="resource-card" data-tags="tools python">
+                <div class="r-header">
+                    <div class="r-icon">🛠</div>
+                    <div class="r-title"><h3>Auto File Sorter</h3><span>Automation Script</span></div>
+                </div>
+                <p class="r-desc">Script otomatis untuk merapikan file download sesuai ekstensi.</p>
+                <div class="r-tags"><span class="r-tag">Python</span><span class="r-tag">Script</span></div>
+                <div class="r-footer"><span>⬇ 2k</span><a href="#" class="r-btn btn-dl">Download</a></div>
+            </div>
+
+            <div class="resource-card" data-tags="project php">
+                <div class="r-header">
+                    <div class="r-icon">🐘</div>
+                    <div class="r-title"><h3>School Admin</h3><span>Laravel 10</span></div>
+                </div>
+                <p class="r-desc">Sistem informasi akademik sekolah lengkap dengan fitur nilai.</p>
+                <div class="r-tags"><span class="r-tag">PHP</span><span class="r-tag">Web</span></div>
+                <div class="r-footer"><span>⬇ 3k</span><a href="#" class="r-btn btn-code">View Code</a></div>
+            </div>
+
+            <div class="resource-card" data-tags="edu cpp">
+                <div class="r-header">
+                    <div class="r-icon">💾</div>
+                    <div class="r-title"><h3>Struktur Data C</h3><span>Modul Kuliah</span></div>
+                </div>
+                <p class="r-desc">Kumpulan algoritma Sorting, Searching, dan Linked List.</p>
+                <div class="r-tags"><span class="r-tag">C</span><span class="r-tag">Algo</span></div>
+                <div class="r-footer"><span>★ 4.8</span><a href="#" class="r-btn btn-dl">Download</a></div>
+            </div>
+
+            <div class="resource-card" data-tags="game">
+                <div class="r-header">
+                    <div class="r-icon">👾</div>
+                    <div class="r-title"><h3>Pixel Hero Pack</h3><span>PNG Assets</span></div>
+                </div>
+                <p class="r-desc">Karakter hero pixel art 2D dengan animasi berjalan.</p>
+                <div class="r-tags"><span class="r-tag">Asset</span><span class="r-tag">2D</span></div>
+                <div class="r-footer"><span>⬇ 4.5k</span><a href="#" class="r-btn btn-dl">Download</a></div>
+            </div>
+
+            <div class="resource-card" data-tags="project js">
+                <div class="r-header">
+                    <div class="r-icon">⚡</div>
+                    <div class="r-title"><h3>React Dashboard</h3><span>Admin Template</span></div>
+                </div>
+                <p class="r-desc">Template admin dashboard responsif dengan React JS.</p>
+                <div class="r-tags"><span class="r-tag">JS</span><span class="r-tag">React</span></div>
+                <div class="r-footer"><span>⬇ 1k</span><a href="#" class="r-btn btn-code">View Code</a></div>
+            </div>
+
+        </div>
+    </main>
+</div>
+
+<script>
+    // 1. Sidebar Mobile Logic
+    function toggleSidebarF() {
+        const sidebar = document.getElementById('sidebarF');
+        const overlay = document.getElementById('overlayMobile');
+        const closeBtn = document.querySelector('.close-mob');
+        
+        sidebar.classList.toggle('show');
+        overlay.classList.toggle('active');
+        
+        if(window.innerWidth <= 1024) {
+            closeBtn.style.display = sidebar.classList.contains('show') ? 'block' : 'none';
+        }
+    }
+
+    // 2. Filter Logic (Fixed)
+    function runFilter() {
+        // Ambil semua nilai yg dicentang
+        const checked = document.querySelectorAll('input[type="checkbox"]:checked');
+        const filters = Array.from(checked).map(c => c.value);
+        
+        const cards = document.querySelectorAll('.resource-card');
+        let count = 0;
+
+        cards.forEach(card => {
+            const tags = card.getAttribute('data-tags');
+            
+            // Jika tidak ada filter, munculkan semua
+            if (filters.length === 0) {
+                card.classList.remove('hidden');
+                count++;
+            } else {
+                // Cek apakah tags kartu mengandung SALAH SATU filter
+                const isMatch = filters.some(f => tags.includes(f));
+                if (isMatch) {
+                    card.classList.remove('hidden');
+                    count++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            }
+        });
+
+        document.getElementById('resultText').innerText = `Showing ${count} resources`;
+    }
+
+    // 3. Reset
+    function resetAll() {
+        document.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
+        runFilter();
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+    /* --- VARIABLES (FOOTER F) --- */
+    .footer-f-section {
+        background-color: #020202;
+        border-top: 1px solid #222;
+        color: #888;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding: 60px 5% 20px 5%;
+        margin-top: auto; /* Dorong ke bawah */
+        position: relative;
+        z-index: 100; /* Di atas elemen lain */
+    }
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+        gap: 40px;
+        margin-bottom: 50px;
+    }
+
+    /* Kolom Brand */
+    .f-brand h3 {
+        color: #fff; font-size: 1.5rem; margin-bottom: 15px;
+        display: flex; align-items: center; gap: 10px;
+    }
+    .f-brand p { font-size: 0.9rem; line-height: 1.6; max-width: 300px; }
+
+    /* Kolom Links */
+    .f-col h4 { color: #fff; margin-bottom: 20px; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
+    .f-links { list-style: none; padding: 0; margin: 0; }
+    .f-links li { margin-bottom: 10px; }
+    .f-links a {
+        color: #888; text-decoration: none; font-size: 0.9rem; transition: 0.3s;
+    }
+    .f-links a:hover { color: #00f3ff; padding-left: 5px; }
+
+    /* Kolom Newsletter */
+    .f-newsletter input {
+        width: 100%; padding: 12px; background: #111; border: 1px solid #333;
+        color: #fff; border-radius: 4px; margin-bottom: 10px;
+    }
+    .f-newsletter input:focus { outline: none; border-color: #00f3ff; }
+    
+    .btn-sub {
+        width: 100%; padding: 12px; background: rgba(0, 243, 255, 0.1);
+        color: #00f3ff; border: 1px solid #00f3ff; font-weight: bold;
+        cursor: pointer; transition: 0.3s; text-transform: uppercase;
+    }
+    .btn-sub:hover { background: #00f3ff; color: #000; }
+
+    /* Copyright Bar */
+    .f-copyright {
+        border-top: 1px solid #1a1a1a;
+        padding-top: 20px;
+        display: flex; justify-content: space-between; align-items: center;
+        font-size: 0.85rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+        .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
+    }
+    @media (max-width: 600px) {
+        .footer-grid { grid-template-columns: 1fr; }
+        .f-copyright { flex-direction: column; gap: 10px; text-align: center; }
+    }
+</style>
+
+<footer class="footer-f-section">
+    <div class="footer-grid">
+        
+        <div class="f-brand">
+            <h3><span style="color:#00f3ff;">💾</span> NEXUS_REPO</h3>
+            <p>
+                Pusat resource digital open-source terbesar untuk developer, desainer, dan kreator. 
+                Download, pelajari, dan berkarya.
+            </p>
+        </div>
+
+        <div class="f-col">
+            <h4>Explore</h4>
+            <ul class="f-links">
+                <li><a href="#">Source Codes</a></li>
+                <li><a href="#">E-Books</a></li>
+                <li><a href="#">Game Assets</a></li>
+                <li><a href="#">Developer Tools</a></li>
+            </ul>
+        </div>
+
+        <div class="f-col">
+            <h4>Support</h4>
+            <ul class="f-links">
+                <li><a href="#">Contribution Guide</a></li>
+                <li><a href="#">API Documentation</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </div>
+
+        <div class="f-col f-newsletter">
+            <h4>Stay Updated</h4>
+            <p style="font-size:0.85rem; margin-bottom:15px;">Dapatkan notifikasi resource terbaru setiap minggu.</p>
+            <form onsubmit="alert('Subscribed!'); return false;">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit" class="btn-sub">Subscribe</button>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="f-copyright">
+        <span>&copy; 2025 Nexus Repository. All Rights Reserved.</span>
+        <span>
+            Code with <span style="color:#00f3ff;">♥</span> & Coffee.
+        </span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="uploadModal" class="upload-overlay">
+    <div class="upload-box">
+        <div class="upload-header">
+            <h3>⬆ UPLOAD RESOURCE</h3>
+            <button onclick="closeModal()">×</button>
+        </div>
+        
+       <form action="/upload" method="POST" enctype="multipart/form-data">
+    
+    <div class="form-group">
+        <label>Judul Project / File</label>
+        <input type="text" name="title" placeholder="Contoh: E-Commerce App" required>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label>Kategori</label>
+            <select name="category">
+                <option value="project">Source Code</option>
+                <option value="edu">Pembelajaran (E-Book)</option>
+                <option value="game">Game Asset</option>
+                <option value="tools">Tools / Plugin</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Teknologi Utama (Pisahkan spasi)</label>
+            <input type="text" name="tech" placeholder="html python java"> 
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Deskripsi Singkat</label>
+        <textarea name="desc" rows="3" placeholder="Jelaskan isi file ini..."></textarea>
+    </div>
+
+    <div class="form-group">
+        <label>Pilih File</label>
+        <div class="file-input-wrapper">
+            <input type="file" name="file" required>
+            <div class="fake-btn">📂 Choose File</div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn-submit-upload">PUBLISH TO REPO</button>
+</form>
+    </div>
+</div>
+
+<style>
+    /* CSS UNTUK MODAL UPLOAD */
+    .upload-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.8); z-index: 2000;
+        display: none; align-items: center; justify-content: center;
+        backdrop-filter: blur(5px);
+    }
+    .upload-overlay.active { display: flex; }
+
+    .upload-box {
+        width: 500px; background: #0e0e0e; border: 1px solid #00f3ff;
+        padding: 30px; border-radius: 8px;
+        box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
+    }
+
+    .upload-header { display: flex; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+    .upload-header h3 { color: #fff; margin: 0; }
+    .upload-header button { background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+
+    .form-group { margin-bottom: 15px; }
+    .form-row { display: flex; gap: 15px; }
+    .form-row .form-group { flex: 1; }
+
+    label { display: block; color: #888; font-size: 0.8rem; margin-bottom: 5px; }
+    
+    input[type="text"], select, textarea {
+        width: 100%; background: #1a1a1a; border: 1px solid #333;
+        color: #fff; padding: 10px; border-radius: 4px; font-family: sans-serif;
+    }
+    input:focus, select:focus, textarea:focus { border-color: #00f3ff; outline: none; }
+
+    /* Custom File Input */
+    .file-input-wrapper { display: flex; align-items: center; gap: 10px; position: relative; }
+    .file-input-wrapper input { position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
+    .fake-btn { background: #222; color: #fff; padding: 8px 15px; border: 1px solid #444; border-radius: 4px; font-size: 0.8rem; }
+    #fileName { color: #00f3ff; font-size: 0.8rem; }
+
+    .btn-submit-upload {
+        width: 100%; background: #00f3ff; color: #000; font-weight: bold;
+        padding: 12px; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px;
+    }
+    .btn-submit-upload:hover { box-shadow: 0 0 15px #00f3ff; }
+</style>
+    </body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modern Classic Design</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+    <style>
+    /* --- LOCAL VARIABLES (ABOUT D) --- */
+    #about {
+        --bg-d: #050505;
+        --bronze-dark: #8B4513;
+        --bronze-mid: #CD7F32;
+        --bronze-light: #F4A460;
+        --text-gray: #888;
+        --text-light: #e0e0e0;
+        --font-serif: 'Playfair Display', serif;
+        --font-sans: 'Inter', sans-serif;
+    }
+
+    /* --- LAYOUT UTAMA --- */
+    .about-d-section {
+        position: relative;
+        min-height: 100vh; /* Full Screen */
+        background-color: var(--bg-d);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 100px 5%;
+    }
+
+    /* 1. BACKGROUND DECORATION (Abstrak) */
+    .deco-circle {
+        position: absolute;
+        top: -10%; right: -10%;
+        width: 60vw; height: 60vw;
+        border: 1px solid rgba(205, 127, 50, 0.1); /* Garis tembaga tipis */
+        border-radius: 50%;
+        z-index: 0;
+        animation: rotateCircle 60s linear infinite;
+    }
+
+    .deco-line-vert {
+        position: absolute;
+        left: 20%; top: 0;
+        width: 1px; height: 100%;
+        background: linear-gradient(to bottom, transparent, var(--bronze-dark), transparent);
+        opacity: 0.3;
+    }
+
+    @keyframes rotateCircle {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    /* Watermark Text Besar di Belakang */
+    .watermark-text {
+        position: absolute;
+        font-family: var(--font-serif);
+        font-size: 15vw; /* Sangat Besar */
+        font-weight: 700;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(244, 164, 96, 0.05); /* Outline tipis */
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        white-space: nowrap;
+        pointer-events: none;
+        z-index: 0;
+        font-style: italic;
+    }
+
+    /* --- KONTEN (FREE FLOW) --- */
+    .d-container {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 1200px;
+        height: 600px; /* Area kerja imajiner */
+    }
+
+    /* 2. ELEMEN FOTO (Posisi Unik: Kanan Bawah tapi Melayang) */
+    .d-photo-wrapper {
+        position: absolute;
+        right: 5%;
+        top: 10%;
+        width: 350px;
+        height: 500px;
+        z-index: 1;
+    }
+
+    .d-photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* Filter Vintage Luxury */
+        filter: sepia(20%) contrast(1.1) brightness(0.8) grayscale(50%);
+        transition: 1s ease;
+    }
+
+    /* Frame Garis Emas (Offset/Tidak Pas) */
+    .d-photo-frame {
+        position: absolute;
+        top: -30px; left: -30px;
+        width: 100%; height: 100%;
+        border: 1px solid var(--bronze-mid);
+        z-index: -1;
+        transition: 0.5s;
+    }
+
+    /* Hover Effect pada Foto */
+    .d-photo-wrapper:hover .d-photo {
+        filter: sepia(0%) contrast(1) grayscale(0%); /* Jadi normal */
+        transform: scale(0.98);
+    }
+    .d-photo-wrapper:hover .d-photo-frame {
+        top: 20px; left: 20px; /* Frame bergerak ke sebaliknya */
+    }
+
+    /* 3. ELEMEN TEKS (Posisi Unik: Kiri Atas & Tumpang Tindih) */
+    .d-text-group {
+        position: absolute;
+        top: 20%;
+        left: 0;
+        width: 500px;
+        z-index: 2;
+        /* Mix Blend Mode untuk efek tumpang tindih yang artistik */
+        /* mix-blend-mode: exclusion; (Opsional, kadang bikin teks susah dibaca tergantung foto) */ 
+    }
+
+    .d-greeting {
+        font-family: var(--font-sans);
+        color: var(--bronze-mid);
+        letter-spacing: 3px;
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+        display: block;
+        text-transform: uppercase;
+    }
+
+    .d-title {
+        font-family: var(--font-serif);
+        font-size: 4rem;
+        line-height: 1.1;
+        color: var(--text-light);
+        margin-bottom: 30px;
+    }
+    
+    .d-title span {
+        font-style: italic;
+        color: var(--bronze-light); /* Aksen emas */
+    }
+
+    .d-desc {
+        font-family: var(--font-sans);
+        color: var(--text-gray);
+        line-height: 1.8;
+        font-size: 1rem;
+        margin-bottom: 40px;
+        border-left: 1px solid var(--bronze-dark);
+        padding-left: 20px;
+        background: linear-gradient(to right, rgba(0,0,0,0.8), transparent); /* Biar teks terbaca kalau kena foto */
+        padding-right: 10px;
+    }
+
+    /* Tanda Tangan (Signature) */
+    .d-signature {
+        font-family: 'Herr Von Muellerhoff', cursive; /* Font tanda tangan (perlu import kalau mau persis) */
+        /* Kita pakai serif italic sbg fallback */
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 2rem;
+        color: var(--bronze-mid);
+        margin-top: 20px;
+        opacity: 0.8;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+        .about-d-section { padding: 100px 5%; height: auto; display: block; }
+        .d-container { height: auto; display: flex; flex-direction: column-reverse; gap: 50px; }
+        
+        .d-photo-wrapper {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            top: 0; right: 0;
+        }
+        
+        .d-text-group {
+            position: relative;
+            width: 100%;
+            top: 0;
+        }
+
+        .watermark-text { font-size: 20vw; top: 20%; }
+        .d-title { font-size: 3rem; }
+    }
+</style>
+
+<section id="about" class="about-d-section">
+    <div class="watermark-text">PROFILE</div>
+    <div class="deco-circle"></div>
+    <div class="deco-line-vert"></div>
+
+    <div class="d-container">
+        
+        <div class="d-text-group">
+            <span class="d-greeting">— The Persona</span>
+            
+            <h1 class="d-title">
+                Designing the <br>
+                <span>Unseen Logic.</span>
+            </h1>
+
+            <p class="d-desc">
+                Saya bukan hanya menulis kode; saya merangkai struktur digital. 
+                Dengan latar belakang teknis yang kuat dan apresiasi terhadap estetika minimalis, 
+                saya membangun jembatan antara fungsi yang kompleks dan tampilan yang elegan. 
+                Berfokus pada detail terkecil untuk dampak terbesar.
+            </p>
+
+            <div class="d-signature">Alexandria W.</div>
+        </div>
+
+        <div class="d-photo-wrapper">
+            <div class="d-photo-frame"></div> 
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Portrait" 
+                 class="d-photo">
+        </div>
+
+    </div>
+</section>
+    </body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modern Classic Design</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+        <style>
+    /* --- VARIABLES (PENDIDIKAN E) --- */
+    #pendidikan-e {
+        --bg-deep: #000000;
+        --glass-block: rgba(20, 20, 20, 0.6);
+        --border-edge: rgba(255, 255, 255, 0.15);
+        --shine-color: #ffffff;
+        --platinum: #e5e4e2;
+        --font-formal: 'Montserrat', sans-serif;
+    }
+
+    /* --- LAYOUT UTAMA --- */
+    .edu-e-section {
+        padding: 120px 5%;
+        background-color: var(--bg-deep);
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Background Refraksi Cahaya (Garis-garis cahaya tipis) */
+    .light-rays {
+        position: absolute;
+        top: 0; left: 50%;
+        width: 1px; height: 100%;
+        background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent);
+        box-shadow: 0 0 50px rgba(255,255,255,0.1);
+    }
+
+    .edu-e-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* HEADER */
+    .edu-e-header {
+        text-align: center;
+        margin-bottom: 80px;
+    }
+
+    .edu-e-title {
+        font-family: var(--font-formal);
+        font-size: 3rem;
+        font-weight: 300;
+        color: #fff;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+    .edu-e-title span {
+        font-weight: 700;
+        /* Gradient Text Emas Pucat */
+        background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    /* --- CONTAINER BLOK --- */
+    .monolith-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    /* --- CARD (THE MONOLITH) --- */
+    .monolith-card {
+        position: relative;
+        background: var(--glass-block);
+        border: 1px solid var(--border-edge);
+        padding: 40px;
+        /* Efek Kaca Blur */
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        
+        /* Potongan Sudut (Chamfered) - Khas Diamond */
+        clip-path: polygon(
+            20px 0, 100% 0, 
+            100% calc(100% - 20px), calc(100% - 20px) 100%, 
+            0 100%, 0 20px
+        );
+
+        transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        overflow: hidden;
+    }
+
+    /* Garis kilap di pinggir kartu */
+    .monolith-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border: 1px solid rgba(255,255,255,0.1);
+        clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+        pointer-events: none;
+    }
+
+    /* HOVER EFFECT: Glow & Lift */
+    .monolith-card:hover {
+        transform: translateY(-5px) scale(1.02);
+        background: rgba(30, 30, 35, 0.8);
+        border-color: rgba(255, 255, 255, 0.4);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.05);
+    }
+
+    /* Kilatan Cahaya Lewat saat Hover */
+    .monolith-card::after {
+        content: '';
+        position: absolute;
+        top: 0; left: -100%;
+        width: 50%; height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        transform: skewX(-25deg);
+        transition: 0.5s;
+    }
+    .monolith-card:hover::after {
+        left: 200%;
+        transition: 0.7s ease-in-out;
+    }
+
+    /* --- CONTENT INSIDE --- */
+    .mono-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 30px;
+    }
+
+    /* TAHUN (Kiri) */
+    .mono-year {
+        font-family: var(--font-formal);
+        font-size: 1rem;
+        color: var(--platinum);
+        letter-spacing: 3px;
+        writing-mode: vertical-rl; /* Teks Vertikal Unik */
+        transform: rotate(180deg);
+        text-transform: uppercase;
+        border-left: 1px solid rgba(255,255,255,0.2);
+        padding-left: 15px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        opacity: 0.7;
+    }
+
+    /* INFO (Kanan) */
+    .mono-info {
+        flex: 1;
+    }
+
+    /* TEKS MENGKILAP (ANIMASI) */
+    .shine-text-anim {
+        font-family: var(--font-formal);
+        font-size: 2rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        
+        /* Gradient Metalik */
+        background: linear-gradient(
+            90deg, 
+            #666 0%, 
+            #fff 20%, 
+            #aaa 40%, 
+            #fff 60%, 
+            #666 100%
+        );
+        background-size: 200% auto;
+        color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        
+        /* Animasi Mengalir */
+        animation: shineFlow 4s linear infinite;
+    }
+
+    @keyframes shineFlow {
+        to { background-position: 200% center; }
+    }
+
+    .mono-degree {
+        font-family: var(--font-formal);
+        font-size: 1.1rem;
+        color: #fff;
+        margin-bottom: 15px;
+        display: block;
+        letter-spacing: 1px;
+    }
+
+    .mono-desc {
+        color: #888;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        max-width: 90%;
+    }
+
+    /* Decoration: Diamond Icon Kecil */
+    .deco-diamond {
+        position: absolute;
+        top: 20px; right: 20px;
+        width: 15px; height: 15px;
+        border: 1px solid rgba(255,255,255,0.3);
+        transform: rotate(45deg);
+    }
+    .monolith-card:hover .deco-diamond {
+        background: #fff;
+        box-shadow: 0 0 10px #fff;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+        .mono-row { flex-direction: column; gap: 15px; }
+        .mono-year { 
+            writing-mode: horizontal-tb; 
+            transform: none; 
+            border-left: none; 
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-left: 0; padding-bottom: 10px;
+            height: auto; width: 100%;
+        }
+        .shine-text-anim { font-size: 1.5rem; }
+    }
+</style>
+
+<section id="pendidikan-e" class="edu-e-section">
+    <div class="light-rays"></div>
+
+    <div class="edu-e-container">
+        
+        <div class="edu-e-header">
+            <h2 class="edu-e-title">Academic <span>History</span></h2>
+        </div>
+
+        <div class="monolith-stack">
+            
+            <div class="monolith-card">
+                <div class="deco-diamond"></div>
+                <div class="mono-row">
+                    <div class="mono-year">2020 — 2024</div>
+                    <div class="mono-info">
+                        <h3 class="shine-text-anim">Universitas Teknologi</h3>
+                        <span class="mono-degree">Bachelor of Computer Science (S1)</span>
+                        <p class="mono-desc">
+                            Graduated with Cumlaude honors. Specialized in High-Performance Computing and User Interface Design.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="monolith-card">
+                <div class="deco-diamond"></div>
+                <div class="mono-row">
+                    <div class="mono-year">2017 — 2020</div>
+                    <div class="mono-info">
+                        <h3 class="shine-text-anim">SMA Negeri 1 Jakarta</h3>
+                        <span class="mono-degree">Natural Science Major</span>
+                        <p class="mono-desc">
+                            Focused on Physics and Mathematics. Awarded "Best Student in Technology" during the final year.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="monolith-card">
+                <div class="deco-diamond"></div>
+                <div class="mono-row">
+                    <div class="mono-year">2014 — 2017</div>
+                    <div class="mono-info">
+                        <h3 class="shine-text-anim">SMP Negeri 5 Jakarta</h3>
+                        <span class="mono-degree">General Education</span>
+                        <p class="mono-desc">
+                            Developed early interest in web programming and algorithm logic through extracurricular activities.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+    
+    </body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modern Classic Design</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+    <style>
+    /* --- CSS VARIABLES LOKAL (CONTACT) --- */
+    #contact {
+        --con-bg: #ffffff;
+        --con-title: #111827;
+        --text-main: #374151;
+        --text-sub: #6b7280;
+        --input-bg: #f9fafb;
+        --input-border: #d1d5db;
+        --btn-bg: #2563eb; /* Blue */
+        --btn-text: #ffffff;
+        --footer-bg: #f3f4f6;
+        --footer-text: #9ca3b8;
+    }
+
+    body.dark #contact, body.dark footer {
+        --con-bg: #111827;
+        --con-title: #f9fafb;
+        --text-main: #e5e7eb;
+        --text-sub: #9ca3af;
+        --input-bg: #1f2937;
+        --input-border: #374151;
+        --btn-bg: #3b82f6;
+        --footer-bg: #0f172a; /* Lebih gelap dari bg utama */
+        --footer-text: #64748b;
+    }
+
+    /* --- LAYOUT CONTACT --- */
+    .contact-section {
+        padding: 100px 5%;
+        background-color: var(--con-bg);
+        transition: background-color 0.3s;
+    }
+
+    .con-header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    .con-title {
+        font-family: sans-serif;
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--con-title);
+        margin-bottom: 10px;
+    }
+
+    /* Container Grid (Kiri Info, Kanan Form) */
+    .con-container {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr; /* Kiri lebih kecil, Kanan (form) lebih lebar */
+        gap: 50px;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    /* --- KOLOM KIRI: INFO --- */
+    .info-box {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .info-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .info-icon {
+        width: 50px;
+        height: 50px;
+        background-color: rgba(59, 130, 246, 0.1);
+        color: #3b82f6;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+
+    .info-content h4 {
+        font-family: sans-serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--con-title);
+        margin: 0 0 5px 0;
+    }
+
+    .info-content p {
+        font-family: sans-serif;
+        font-size: 0.95rem;
+        color: var(--text-sub);
+        margin: 0;
+        line-height: 1.5;
+    }
+
+    /* Social Media Links */
+    .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .social-btn {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        border: 1px solid var(--input-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-main);
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: all 0.3s;
+    }
+
+    .social-btn:hover {
+        background-color: var(--btn-bg);
+        color: white;
+        border-color: var(--btn-bg);
+        transform: translateY(-3px);
+    }
+
+    /* --- KOLOM KANAN: FORM --- */
+    .contact-form {
+        background-color: var(--con-bg); /* Sama dgn bg, tapi dikasih border/shadow biar misah */
+        padding: 0; 
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        display: block;
+        font-family: sans-serif;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text-main);
+        margin-bottom: 8px;
+    }
+
+    .form-input, .form-textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 8px;
+        border: 1px solid var(--input-border);
+        background-color: var(--input-bg);
+        color: var(--text-main);
+        font-family: sans-serif;
+        font-size: 1rem;
+        transition: border 0.3s, box-shadow 0.3s;
+        box-sizing: border-box; /* Penting biar padding gak nambah lebar */
+    }
+
+    .form-input:focus, .form-textarea:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+
+    .form-textarea {
+        resize: vertical; /* Bisa ditarik vertikal aja */
+        min-height: 120px;
+    }
+
+    .btn-submit {
+        background-color: var(--btn-bg);
+        color: var(--btn-text);
+        font-family: sans-serif;
+        font-weight: 700;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 100%;
+        transition: background 0.3s, transform 0.2s;
+    }
+
+    .btn-submit:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+    }
+
+    .btn-submit:active {
+        transform: scale(0.98);
+    }
+
+    /* --- FOOTER --- */
+    footer {
+        background-color: var(--footer-bg);
+        padding: 40px 20px;
+        text-align: center;
+        border-top: 1px solid var(--input-border);
+    }
+
+    .footer-text {
+        font-family: sans-serif;
+        color: var(--footer-text);
+        font-size: 0.9rem;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 768px) {
+        .con-container {
+            grid-template-columns: 1fr; /* Jadi 1 kolom */
+            gap: 40px;
+        }
+        
+        .contact-section {
+            padding: 80px 5%;
+        }
+    }
+</style>
+
+<section id="contact" class="contact-section">
+    <div class="con-header">
+        <h2 class="con-title">Hubungi Saya</h2>
+        <p style="color: #6b7280; font-family: sans-serif;">Punya pertanyaan atau tawaran kerjasama?</p>
+    </div>
+
+    <div class="con-container">
+        
+        <div class="info-box">
+            
+            <div class="info-item">
+                <div class="info-icon">📧</div>
+                <div class="info-content">
+                    <h4>Email</h4>
+                    <p>emailmu@contoh.com</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-icon">📱</div>
+                <div class="info-content">
+                    <h4>WhatsApp / Phone</h4>
+                    <p>+62 812 3456 7890</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-icon">📍</div>
+                <div class="info-content">
+                    <h4>Lokasi</h4>
+                    <p>Jakarta, Indonesia</p>
+                </div>
+            </div>
+
+            <div class="social-links">
+                <a href="#" class="social-btn" title="Instagram">IG</a>
+                <a href="#" class="social-btn" title="LinkedIn">IN</a>
+                <a href="#" class="social-btn" title="GitHub">GH</a>
+                <a href="#" class="social-btn" title="Twitter">TW</a>
+            </div>
+        </div>
+
+        <div class="contact-form">
+            <form onsubmit="kirimPesan(event)">
+                <div class="form-group">
+                    <label class="form-label">Nama Lengkap</label>
+                    <input type="text" class="form-input" placeholder="Masukkan nama Anda" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" placeholder="contoh@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Pesan</label>
+                    <textarea class="form-textarea" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Kirim Pesan 🚀</button>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <p class="footer-text">
+        &copy; 2025 Nama Kamu. Dibuat dengan ❤️ dan Kopi. <br>
+        All rights reserved.
+    </p>
+</footer>
+
+<script>
+    function kirimPesan(e) {
+        e.preventDefault(); // Biar halaman gak reload
+        
+        // Simulasi kirim
+        // Di sini nanti bisa diganti logika kirim ke email beneran
+        alert("Terima kasih! Pesan Anda telah 'terkirim' (Simulasi).");
+        
+        // Reset form
+        e.target.reset();
+    }
+</script>
+    </body>
+</html>

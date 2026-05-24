@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Constructor System</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <h3>Jawab Yg bener</h3>
+        <h1 id="layar-soal">...</h1>
+
+        <input type="number" id="kotak-isi" placeholder="isi .....">
+        <button onclick="cek_jawaban()">Cek</button>
+
+        <script>
+
+            let kunsi_save = 0;
+
+            async function ambilSoal(){
+                 //panggil python tadi (disarankan terpisah dengan app)
+                let respon = await fetch('/soal');
+                let data = await respon.json();
+
+                // tampilakan soal dilayar di id layar-soal tadi
+                document.getElementById('layar-soal').innerText = data.soal + " = ?";
+
+                //simpan jawaban di variabel global
+                kunsi_save = data.jawab;
+
+
+                // clear kotak isi biar kosong
+                document.getElementById('kotak-isi').value = "";
+                document.getElementById('kotak-isi').focus();
+            }
+            // cek jawaban user (pakai fungsi)
+            function cek_jawaban(){
+                // ambil isi kotak dari uuser
+                let jawaban_user = document.getElementById('kotak-isi').value;
+
+                //bandingkat
+                if(jawaban_user == kunsi_save){
+                    alert("Jawaban Benar");
+                    // panggil fungsi ambil soal lagi
+                    ambilSoal();
+                } else {
+                    alert("Jawaban Salah, Coba Lagi");
+                }
+            }
+
+            // panggil fungsi ambil soal wajib ini 
+            ambilSoal();
+        </script>
+
+    </body>

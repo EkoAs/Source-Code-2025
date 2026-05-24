@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modern Classic Design</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+    <style>
+    /* --- CSS VARIABLES LOKAL (ABOUT B) --- */
+    #about {
+        --cyber-bg: #050505; /* Hitam Hampir Pekat */
+        --cyber-grid: rgba(255, 215, 0, 0.05); /* Grid Kuning Tipis */
+        --neon-yellow: #FFD700;
+        --neon-purple: #d946ef; /* Ungu Sinkronisasi */
+        --text-main: #ffffff;
+        --text-dim: #aaaaaa;
+    }
+
+    /* --- LAYOUT UTAMA --- */
+    .about-b-section {
+        position: relative;
+        padding: 120px 5% 100px 5%;
+        background-color: var(--cyber-bg);
+        overflow: hidden;
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Background Grid Animation */
+    .cyber-grid-bg {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background-image: 
+            linear-gradient(var(--cyber-grid) 1px, transparent 1px),
+            linear-gradient(90deg, var(--cyber-grid) 1px, transparent 1px);
+        background-size: 40px 40px;
+        z-index: 0;
+        /* Efek Vignette (Gelap di pinggir) */
+        mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+        -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+    }
+
+    .about-b-container {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: row-reverse; /* Foto di Kanan, Teks di Kiri (Beda dgn A) */
+        align-items: center;
+        gap: 60px;
+        max-width: 1200px;
+        width: 100%;
+    }
+
+    /* --- KOLOM FOTO (HEXAGON) --- */
+    .about-b-photo {
+        flex: 0 0 400px; /* Ukuran Fix */
+        height: 400px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Frame Hexagon Luar (Ungu - Sync) */
+    .hex-frame {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, var(--neon-yellow), var(--neon-purple));
+        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        animation: pulseGlow 3s infinite alternate;
+        z-index: 1;
+    }
+
+    /* Foto Hexagon Dalam */
+    .hex-img-wrapper {
+        width: 96%; /* Sedikit lebih kecil dari frame biar kelihatan bordernya */
+        height: 96%;
+        background-color: #111;
+        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        position: relative;
+        z-index: 2;
+        overflow: hidden;
+    }
+
+    .hex-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(80%); /* Foto jadi agak hitam putih biar garang */
+        transition: 0.5s;
+    }
+
+    /* Saat Hover, foto jadi berwarna */
+    .about-b-photo:hover .hex-img-wrapper img {
+        filter: grayscale(0%);
+        transform: scale(1.1);
+    }
+
+    @keyframes pulseGlow {
+        from { filter: drop-shadow(0 0 5px var(--neon-yellow)); }
+        to { filter: drop-shadow(0 0 20px var(--neon-purple)); }
+    }
+
+    /* --- KOLOM TEKS --- */
+    .about-b-text {
+        flex: 1;
+        text-align: right; /* Rata Kanan biar unik */
+    }
+
+    .label-cyber {
+        font-family: 'Courier New', monospace; /* Font koding */
+        color: var(--neon-yellow);
+        font-size: 1rem;
+        letter-spacing: 3px;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .name-cyber {
+        font-family: sans-serif;
+        font-size: 4rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        line-height: 1;
+        margin-bottom: 20px;
+        /* Efek Teks Metalik (Gradient Text) */
+        background: linear-gradient(to right, #fff, #aaa, #fff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 0 2px rgba(255,255,255,0.5));
+    }
+
+    .desc-cyber {
+        font-family: sans-serif;
+        color: var(--text-dim);
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 30px;
+        padding-left: 20%; /* Biar teksnya gak lebar banget */
+    }
+
+    /* Highlight pencarian nanti */
+    .highlight {
+        background-color: var(--neon-purple);
+        color: white;
+    }
+
+    /* Tombol Cyber */
+    .btn-cyber {
+        display: inline-block;
+        padding: 12px 35px;
+        background: transparent;
+        border: 1px solid var(--neon-yellow);
+        color: var(--neon-yellow);
+        font-family: 'Courier New', monospace;
+        font-weight: bold;
+        text-decoration: none;
+        text-transform: uppercase;
+        position: relative;
+        overflow: hidden;
+        transition: 0.3s;
+    }
+
+    .btn-cyber::before {
+        content: '';
+        position: absolute;
+        top: 0; left: -100%;
+        width: 100%; height: 100%;
+        background: var(--neon-yellow);
+        transition: 0.3s;
+        z-index: -1;
+    }
+
+    .btn-cyber:hover {
+        color: black;
+    }
+    .btn-cyber:hover::before {
+        left: 0;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 900px) {
+        .about-b-container {
+            flex-direction: column-reverse; /* Foto di atas, Teks di bawah */
+            text-align: center;
+            gap: 30px;
+        }
+        .about-b-text {
+            text-align: center;
+        }
+        .desc-cyber {
+            padding-left: 0;
+        }
+        .about-b-photo {
+            flex: none;
+            width: 300px;
+            height: 300px;
+        }
+        .name-cyber {
+            font-size: 2.8rem;
+        }
+    }
+</style>
+
+<section id="about" class="about-b-section">
+    <div class="cyber-grid-bg"></div>
+
+    <div class="about-b-container">
+        
+        <div class="about-b-text">
+            <span class="label-cyber">&lt;HELLO_WORLD /&gt;</span>
+            
+            <h1 class="name-cyber">
+                ALEXANDRIA<br>
+                WIJAYA
+            </h1>
+
+            <p class="desc-cyber">
+                Seorang pengembang web dengan fokus pada antarmuka futuristik dan kinerja tinggi. 
+                Menggabungkan logika kode dengan estetika desain modern. 
+                Cobalah cari kata "Kinerja" di search bar atas untuk menguji sistem.
+            </p>
+
+            <div style="display: flex; gap: 15px; justify-content: flex-end;" class="action-wrapper">
+                <a href="#contact" class="btn-cyber">Initiate Contact</a>
+                <a href="#projects" class="btn-cyber" style="border-color: var(--neon-purple); color: var(--neon-purple);">View Data</a>
+            </div>
+        </div>
+
+        <div class="about-b-photo">
+            <div class="hex-frame"></div> <div class="hex-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Profile">
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    // Script kecil untuk fix alignment tombol di mobile
+    const mediaQuery = window.matchMedia('(max-width: 900px)')
+    function handleTabletChange(e) {
+      const wrappers = document.querySelectorAll('.action-wrapper');
+      wrappers.forEach(w => {
+          if (e.matches) {
+            w.style.justifyContent = 'center';
+          } else {
+            w.style.justifyContent = 'flex-end';
+          }
+      });
+    }
+    mediaQuery.addListener(handleTabletChange);
+    handleTabletChange(mediaQuery);
+</script>
+    </body>
+</html>

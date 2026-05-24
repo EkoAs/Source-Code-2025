@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Design D</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+    <style>
+    /* --- CSS VARIABLES (TEMA D: LUXURY) --- */
+    :root {
+        --bg-d: #050505;            /* Hitam Pekat */
+        --bronze-dark: #8B4513;     /* Coklat Tua */
+        --bronze-mid: #CD7F32;      /* Tembaga Murni */
+        --bronze-light: #F4A460;    /* Emas Pasir */
+        --bronze-pale: #FFE4B5;     /* Putih Gading Kekuningan */
+        
+        /* Font Setup: Serif untuk judul (Formal), Sans untuk info (Modern) */
+        --font-serif: 'Playfair Display', 'Times New Roman', serif;
+        --font-sans: 'Inter', Helvetica, sans-serif;
+        
+        --grad-metal: linear-gradient(135deg, var(--bronze-dark), var(--bronze-mid), var(--bronze-light), var(--bronze-mid), var(--bronze-dark));
+    }
+
+    /* Import Font Google untuk kesan mewah */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+    /* --- GLOBAL STYLE D (Reset sederhana) --- */
+    body {
+        background-color: var(--bg-d);
+        color: var(--bronze-pale);
+        margin: 0;
+    }
+
+    /* --- NAVBAR STRUCTURE --- */
+    .navbar-d {
+        position: fixed;
+        top: 0; left: 0; width: 100%;
+        padding: 30px 50px; /* Padding besar biar lega/formal */
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.5s ease;
+        /* Tidak ada background block, hanya gradient halus di bawah */
+        background: linear-gradient(to bottom, rgba(5,5,5,0.9) 0%, rgba(5,5,5,0) 100%);
+    }
+
+    /* Garis tipis mewah di bawah navbar */
+    .navbar-d::after {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 5%; width: 90%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--bronze-dark), transparent);
+        opacity: 0.5;
+    }
+
+    /* --- LOGO (SERIF & METALIC) --- */
+    .logo-d {
+        font-family: var(--font-serif);
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-decoration: none;
+        position: relative;
+        
+        /* Efek Teks Metalik */
+        background-image: var(--grad-metal);
+        background-size: 200% auto;
+        color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        animation: shineMetal 5s linear infinite;
+    }
+
+    .logo-d span {
+        font-weight: 400;
+        font-style: italic;
+        font-size: 1.5rem;
+    }
+
+    @keyframes shineMetal {
+        to { background-position: 200% center; }
+    }
+
+    /* --- MENU (Minimalist) --- */
+    .menu-d {
+        display: flex;
+        gap: 40px;
+        align-items: center;
+    }
+
+    .link-d {
+        text-decoration: none;
+        font-family: var(--font-sans);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #888; /* Abu gelap biar tidak mencolok */
+        transition: 0.4s;
+        position: relative;
+    }
+
+    /* Hover Effect: Warna berubah jadi emas & garis kecil muncul */
+    .link-d:hover {
+        color: var(--bronze-light);
+    }
+
+    .link-d::before {
+        content: '';
+        position: absolute;
+        top: -10px; left: 50%;
+        transform: translateX(-50%);
+        width: 1px; height: 0;
+        background-color: var(--bronze-mid);
+        transition: 0.3s;
+    }
+
+    .link-d:hover::before {
+        height: 15px; /* Garis vertikal kecil di atas teks */
+    }
+
+    /* --- SEARCH & TOOLS --- */
+    .tools-d {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    /* Search Button (Icon only) */
+    .search-btn-d {
+        background: none;
+        border: 1px solid var(--bronze-dark);
+        color: var(--bronze-mid);
+        width: 40px; height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.4s;
+    }
+
+    .search-btn-d:hover {
+        border-color: var(--bronze-light);
+        color: var(--bronze-light);
+        box-shadow: 0 0 15px rgba(205, 127, 50, 0.2);
+        transform: rotate(90deg);
+    }
+
+    /* Search Overlay (Full Screen Elegant) */
+    .search-overlay-d {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 0;
+        background-color: rgba(5, 5, 5, 0.95);
+        z-index: 2000;
+        overflow: hidden;
+        transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .search-overlay-d.active {
+        height: 100vh;
+    }
+
+    .input-d {
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid var(--bronze-dark);
+        color: var(--bronze-light);
+        font-family: var(--font-serif);
+        font-size: 3rem; /* Teks input sangat besar */
+        text-align: center;
+        width: 70%;
+        padding: 20px;
+        outline: none;
+        transition: 0.3s;
+    }
+
+    .input-d:focus {
+        border-bottom-color: var(--bronze-light);
+    }
+    
+    .close-search {
+        position: absolute;
+        top: 40px; right: 50px;
+        font-size: 2rem;
+        color: #666;
+        cursor: pointer;
+        background: none;
+        border: none;
+    }
+    .close-search:hover { color: var(--bronze-light); }
+
+    /* --- MOBILE HAMBURGER --- */
+    .hamburger-d {
+        display: none;
+        flex-direction: column;
+        gap: 8px;
+        cursor: pointer;
+    }
+    .line-d {
+        width: 40px; height: 1px;
+        background-color: var(--bronze-mid);
+        transition: 0.4s;
+    }
+    /* Garis panjang pendek biar artistik */
+    .line-d:nth-child(2) { width: 25px; margin-left: auto; }
+
+    /* Mobile Menu (Drawer) */
+    .mobile-d {
+        position: fixed;
+        top: 0; right: -100%;
+        width: 100%; height: 100vh;
+        background: #080808;
+        z-index: 1500;
+        transition: 0.5s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+    }
+    .mobile-d.active { right: 0; }
+
+    .mobile-link-d {
+        font-family: var(--font-serif);
+        font-size: 2rem;
+        color: #666;
+        text-decoration: none;
+        font-style: italic;
+        transition: 0.3s;
+    }
+    .mobile-link-d:hover { color: var(--bronze-light); letter-spacing: 2px; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .navbar-d { padding: 20px; }
+        .menu-d { display: none; }
+        .hamburger-d { display: flex; }
+        .input-d { font-size: 1.5rem; width: 85%; }
+    }
+</style>
+
+<nav id="navbar-d" class="navbar-d">
+    
+    <a href="#" class="logo-d">
+        ALEXANDRIA <span>Portfolio</span>
+    </a>
+
+    <div class="menu-d">
+        <a href="#about" class="link-d">01. Profile</a>
+        <a href="#pendidikan" class="link-d">02. Education</a>
+        <a href="#skills" class="link-d">03. Expertise</a>
+        <a href="#projects" class="link-d">04. Works</a>
+        <a href="#contact" class="link-d">05. Contact</a>
+    </div>
+
+    <div class="tools-d">
+        <button class="search-btn-d" onclick="toggleSearchD()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg>
+        </button>
+
+        <div class="hamburger-d" onclick="toggleMobileD()">
+            <div class="line-d"></div>
+            <div class="line-d"></div>
+        </div>
+    </div>
+
+    <div id="searchOverlayD" class="search-overlay-d">
+        <button class="close-search" onclick="toggleSearchD()">✕</button>
+        <input type="text" id="searchD" class="input-d" placeholder="Type to search...">
+        <p style="color: #666; margin-top: 20px; font-family: var(--font-sans); font-size: 0.8rem; letter-spacing: 1px;">PRESS ENTER TO EXPLORE</p>
+    </div>
+
+    <div id="mobileMenuD" class="mobile-d">
+        <button class="close-search" onclick="toggleMobileD()" style="top: 30px; right: 30px;">✕</button>
+        <a href="#about" class="mobile-link-d" onclick="toggleMobileD()">Profile</a>
+        <a href="#pendidikan" class="mobile-link-d" onclick="toggleMobileD()">Education</a>
+        <a href="#skills" class="mobile-link-d" onclick="toggleMobileD()">Expertise</a>
+        <a href="#projects" class="mobile-link-d" onclick="toggleMobileD()">Selected Works</a>
+        <a href="#contact" class="mobile-link-d" onclick="toggleMobileD()">Get in Touch</a>
+    </div>
+
+</nav>
+
+<script>
+    // 1. Search Toggle (Full Screen)
+    function toggleSearchD() {
+        const overlay = document.getElementById('searchOverlayD');
+        overlay.classList.toggle('active');
+        if (overlay.classList.contains('active')) {
+            setTimeout(() => document.getElementById('searchD').focus(), 500);
+        }
+    }
+
+    // 2. Search Function
+    document.getElementById('searchD').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            const query = this.value;
+            toggleSearchD(); // Tutup dulu
+            if(query) {
+                const found = window.find(query);
+                if(!found) alert("Entry not found in archive.");
+            }
+        }
+    });
+
+    // 3. Mobile Toggle
+    function toggleMobileD() {
+        document.getElementById('mobileMenuD').classList.toggle('active');
+    }
+
+    // 4. Scroll Effect (Navbar mengecil/transparan saat scroll)
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar-d');
+        if (window.scrollY > 50) {
+            nav.style.padding = "15px 50px";
+            nav.style.background = "rgba(5,5,5,0.95)"; // Jadi lebih gelap
+        } else {
+            nav.style.padding = "30px 50px";
+            nav.style.background = "linear-gradient(to bottom, rgba(5,5,5,0.9) 0%, rgba(5,5,5,0) 100%)";
+        }
+    });
+</script>
+
+<style>
+    /* --- LOCAL VARIABLES (ABOUT D) --- */
+    #about {
+        --bg-d: #050505;
+        --bronze-dark: #8B4513;
+        --bronze-mid: #CD7F32;
+        --bronze-light: #F4A460;
+        --text-gray: #888;
+        --text-light: #e0e0e0;
+        --font-serif: 'Playfair Display', serif;
+        --font-sans: 'Inter', sans-serif;
+    }
+
+    /* --- LAYOUT UTAMA --- */
+    .about-d-section {
+        position: relative;
+        min-height: 100vh; /* Full Screen */
+        background-color: var(--bg-d);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 100px 5%;
+    }
+
+    /* 1. BACKGROUND DECORATION (Abstrak) */
+    .deco-circle {
+        position: absolute;
+        top: -10%; right: -10%;
+        width: 60vw; height: 60vw;
+        border: 1px solid rgba(205, 127, 50, 0.1); /* Garis tembaga tipis */
+        border-radius: 50%;
+        z-index: 0;
+        animation: rotateCircle 60s linear infinite;
+    }
+
+    .deco-line-vert {
+        position: absolute;
+        left: 20%; top: 0;
+        width: 1px; height: 100%;
+        background: linear-gradient(to bottom, transparent, var(--bronze-dark), transparent);
+        opacity: 0.3;
+    }
+
+    @keyframes rotateCircle {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    /* Watermark Text Besar di Belakang */
+    .watermark-text {
+        position: absolute;
+        font-family: var(--font-serif);
+        font-size: 15vw; /* Sangat Besar */
+        font-weight: 700;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(244, 164, 96, 0.05); /* Outline tipis */
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        white-space: nowrap;
+        pointer-events: none;
+        z-index: 0;
+        font-style: italic;
+    }
+
+    /* --- KONTEN (FREE FLOW) --- */
+    .d-container {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 1200px;
+        height: 600px; /* Area kerja imajiner */
+    }
+
+    /* 2. ELEMEN FOTO (Posisi Unik: Kanan Bawah tapi Melayang) */
+    .d-photo-wrapper {
+        position: absolute;
+        right: 5%;
+        top: 10%;
+        width: 350px;
+        height: 500px;
+        z-index: 1;
+    }
+
+    .d-photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* Filter Vintage Luxury */
+        filter: sepia(20%) contrast(1.1) brightness(0.8) grayscale(50%);
+        transition: 1s ease;
+    }
+
+    /* Frame Garis Emas (Offset/Tidak Pas) */
+    .d-photo-frame {
+        position: absolute;
+        top: -30px; left: -30px;
+        width: 100%; height: 100%;
+        border: 1px solid var(--bronze-mid);
+        z-index: -1;
+        transition: 0.5s;
+    }
+
+    /* Hover Effect pada Foto */
+    .d-photo-wrapper:hover .d-photo {
+        filter: sepia(0%) contrast(1) grayscale(0%); /* Jadi normal */
+        transform: scale(0.98);
+    }
+    .d-photo-wrapper:hover .d-photo-frame {
+        top: 20px; left: 20px; /* Frame bergerak ke sebaliknya */
+    }
+
+    /* 3. ELEMEN TEKS (Posisi Unik: Kiri Atas & Tumpang Tindih) */
+    .d-text-group {
+        position: absolute;
+        top: 20%;
+        left: 0;
+        width: 500px;
+        z-index: 2;
+        /* Mix Blend Mode untuk efek tumpang tindih yang artistik */
+        /* mix-blend-mode: exclusion; (Opsional, kadang bikin teks susah dibaca tergantung foto) */ 
+    }
+
+    .d-greeting {
+        font-family: var(--font-sans);
+        color: var(--bronze-mid);
+        letter-spacing: 3px;
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+        display: block;
+        text-transform: uppercase;
+    }
+
+    .d-title {
+        font-family: var(--font-serif);
+        font-size: 4rem;
+        line-height: 1.1;
+        color: var(--text-light);
+        margin-bottom: 30px;
+    }
+    
+    .d-title span {
+        font-style: italic;
+        color: var(--bronze-light); /* Aksen emas */
+    }
+
+    .d-desc {
+        font-family: var(--font-sans);
+        color: var(--text-gray);
+        line-height: 1.8;
+        font-size: 1rem;
+        margin-bottom: 40px;
+        border-left: 1px solid var(--bronze-dark);
+        padding-left: 20px;
+        background: linear-gradient(to right, rgba(0,0,0,0.8), transparent); /* Biar teks terbaca kalau kena foto */
+        padding-right: 10px;
+    }
+
+    /* Tanda Tangan (Signature) */
+    .d-signature {
+        font-family: 'Herr Von Muellerhoff', cursive; /* Font tanda tangan (perlu import kalau mau persis) */
+        /* Kita pakai serif italic sbg fallback */
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 2rem;
+        color: var(--bronze-mid);
+        margin-top: 20px;
+        opacity: 0.8;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+        .about-d-section { padding: 100px 5%; height: auto; display: block; }
+        .d-container { height: auto; display: flex; flex-direction: column-reverse; gap: 50px; }
+        
+        .d-photo-wrapper {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            top: 0; right: 0;
+        }
+        
+        .d-text-group {
+            position: relative;
+            width: 100%;
+            top: 0;
+        }
+
+        .watermark-text { font-size: 20vw; top: 20%; }
+        .d-title { font-size: 3rem; }
+    }
+</style>
+
+<section id="about" class="about-d-section">
+    <div class="watermark-text">PROFILE</div>
+    <div class="deco-circle"></div>
+    <div class="deco-line-vert"></div>
+
+    <div class="d-container">
+        
+        <div class="d-text-group">
+            <span class="d-greeting">— The Persona</span>
+            
+            <h1 class="d-title">
+                Designing the <br>
+                <span>Unseen Logic.</span>
+            </h1>
+
+            <p class="d-desc">
+                Saya bukan hanya menulis kode; saya merangkai struktur digital. 
+                Dengan latar belakang teknis yang kuat dan apresiasi terhadap estetika minimalis, 
+                saya membangun jembatan antara fungsi yang kompleks dan tampilan yang elegan. 
+                Berfokus pada detail terkecil untuk dampak terbesar.
+            </p>
+
+            <div class="d-signature">Alexandria W.</div>
+        </div>
+
+        <div class="d-photo-wrapper">
+            <div class="d-photo-frame"></div> 
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Portrait" 
+                 class="d-photo">
+        </div>
+
+    </div>
+</section>
+
+<style>
+    /* --- VARIABLES LOKAL (PENDIDIKAN D) --- */
+    #pendidikan {
+        --bg-d: #050505;
+        --bronze-main: #CD7F32;
+        --bronze-light: #F4A460;
+        --line-color: rgba(205, 127, 50, 0.2); /* Garis pemisah transparan */
+        --text-light: #e0e0e0;
+        --text-dim: #666;
+        --font-serif: 'Playfair Display', serif;
+        --font-sans: 'Inter', sans-serif;
+    }
+
+    /* --- LAYOUT --- */
+    .edu-d-section {
+        padding: 120px 5%;
+        background-color: var(--bg-d);
+        color: var(--text-light);
+        position: relative;
+        /* Background Noise Halus (Optional Texture) */
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+    }
+
+    /* HEADER (Kecil & Minimalis) */
+    .edu-d-header {
+        max-width: 1000px;
+        margin: 0 auto 60px auto;
+        border-bottom: 1px solid var(--line-color);
+        padding-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    .edu-d-title {
+        font-family: var(--font-sans);
+        font-size: 0.9rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--bronze-main);
+    }
+
+    .edu-d-number {
+        font-family: var(--font-serif);
+        font-size: 3rem;
+        font-style: italic;
+        color: rgba(255,255,255,0.05);
+        line-height: 0.8;
+    }
+
+    /* --- LIST CONTAINER --- */
+    .edu-list {
+        max-width: 1000px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* --- ITEM BARIS (THE ROW) --- */
+    .edu-item {
+        position: relative;
+        padding: 40px 0;
+        border-bottom: 1px solid var(--line-color);
+        display: grid;
+        grid-template-columns: 1fr 3fr; /* Kiri (Tahun) : Kanan (Konten) */
+        gap: 40px;
+        transition: all 0.5s ease;
+        cursor: default;
+    }
+
+    /* Efek Hover pada Baris */
+    .edu-item:hover {
+        border-bottom-color: var(--bronze-main);
+        background: linear-gradient(to right, rgba(205, 127, 50, 0.03), transparent);
+        padding-left: 20px; /* Sedikit geser ke kanan */
+    }
+
+    /* KOLOM TAHUN (Kiri) */
+    .edu-year-d {
+        font-family: var(--font-serif);
+        font-size: 2.5rem;
+        font-weight: 400;
+        font-style: italic;
+        color: var(--text-dim);
+        transition: 0.4s;
+        position: relative;
+    }
+
+    /* Garis dekorasi kecil di sebelah tahun */
+    .edu-year-d::before {
+        content: '';
+        position: absolute;
+        top: 50%; left: -20px;
+        width: 0; height: 1px;
+        background-color: var(--bronze-light);
+        transition: 0.4s;
+    }
+
+    .edu-item:hover .edu-year-d {
+        color: var(--bronze-light);
+    }
+    .edu-item:hover .edu-year-d::before {
+        width: 15px; /* Muncul garis saat hover */
+        left: -25px;
+    }
+
+    /* KOLOM KONTEN (Kanan) */
+    .edu-content-d {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .edu-school-d {
+        font-family: var(--font-sans);
+        font-size: 1.8rem;
+        font-weight: 300; /* Tipis biar elegan */
+        color: var(--text-light);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: 0.4s;
+    }
+
+    /* Text Gradient Metalik saat Hover */
+    .edu-item:hover .edu-school-d {
+        background: linear-gradient(to right, var(--bronze-light), var(--bronze-main));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-weight: 400;
+    }
+
+    .edu-major-d {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 1.2rem;
+        color: var(--bronze-main);
+    }
+
+    .edu-desc-d {
+        font-family: var(--font-sans);
+        font-size: 0.95rem;
+        color: var(--text-dim);
+        line-height: 1.6;
+        max-width: 80%;
+        margin-top: 10px;
+        
+        /* Sembunyikan deskripsi secara halus (Opacity) */
+        opacity: 0.4;
+        transform: translateY(10px);
+        transition: 0.5s;
+    }
+
+    .edu-item:hover .edu-desc-d {
+        opacity: 1;
+        transform: translateY(0);
+        color: #aaa;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+        .edu-item {
+            grid-template-columns: 1fr; /* Tumpuk vertikal di HP */
+            gap: 10px;
+            padding: 30px 0;
+        }
+        .edu-year-d { font-size: 1.5rem; margin-bottom: 10px; }
+        .edu-school-d { font-size: 1.4rem; }
+        .edu-item:hover { padding-left: 0; } /* Matikan geser di HP */
+    }
+</style>
+
+<section id="pendidikan" class="edu-d-section">
+    
+    <div class="edu-d-header">
+        <span class="edu-d-title">Academic Timeline</span>
+        <span class="edu-d-number">02</span>
+    </div>
+
+    <div class="edu-list">
+        
+        <div class="edu-item">
+            <div class="edu-year-d">2020 — 2024</div>
+            <div class="edu-content-d">
+                <h3 class="edu-school-d">Universitas Teknologi Digital</h3>
+                <span class="edu-major-d">Bachelor of Computer Science</span>
+                <p class="edu-desc-d">
+                    Lulus dengan predikat Cumlaude. Fokus penelitian pada Artificial Intelligence dan Keamanan Data. 
+                    Memimpin organisasi mahasiswa tingkat fakultas selama dua periode.
+                </p>
+            </div>
+        </div>
+
+        <div class="edu-item">
+            <div class="edu-year-d">2017 — 2020</div>
+            <div class="edu-content-d">
+                <h3 class="edu-school-d">SMA Negeri 1 Jakarta</h3>
+                <span class="edu-major-d">Natural Science (IPA)</span>
+                <p class="edu-desc-d">
+                    Aktif dalam klub sains dan teknologi. Juara 1 Olimpiade Komputer tingkat kota. 
+                    Mengembangkan minat awal pada pemrograman web.
+                </p>
+            </div>
+        </div>
+
+        <div class="edu-item">
+            <div class="edu-year-d">2014 — 2017</div>
+            <div class="edu-content-d">
+                <h3 class="edu-school-d">SMP Negeri 5 Jakarta</h3>
+                <span class="edu-major-d">General Education</span>
+                <p class="edu-desc-d">
+                    Membangun fondasi logika matematika dan bahasa Inggris yang kuat. 
+                    Mulai bereksperimen dengan HTML dasar secara otodidak.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    /* --- VARIABLES LOKAL (SKILLS D) --- */
+    #skills {
+        --bg-d: #050505;
+        --bronze-main: #CD7F32;
+        --bronze-light: #F4A460;
+        --text-dim: #444;
+        --text-light: #fff;
+        --font-serif: 'Playfair Display', serif;
+        --font-sans: 'Inter', sans-serif;
+    }
+
+    /* --- LAYOUT --- */
+    .skills-d-section {
+        position: relative;
+        min-height: 100vh;
+        background-color: var(--bg-d);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+        padding: 80px 0;
+    }
+
+    .d-skills-container {
+        display: flex;
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 5%;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* --- BAGIAN KIRI: DISPLAY VISUAL --- */
+    .d-visual-panel {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+    }
+
+    /* Angka Besar (Dynamic) */
+    .d-big-number {
+        font-family: var(--font-serif);
+        font-size: 15rem; /* Sangat Besar */
+        line-height: 1;
+        font-weight: 400;
+        font-style: italic;
+        background: linear-gradient(135deg, #fff, var(--bronze-light), var(--bronze-main));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        opacity: 0; /* Hidden default, muncul via JS */
+        transform: translateY(50px);
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .d-big-number.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Label Kategori di atas angka */
+    .d-skill-label {
+        font-family: var(--font-sans);
+        color: var(--bronze-main);
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        margin-bottom: -20px;
+        padding-left: 20px;
+        opacity: 0;
+        transition: 0.5s;
+    }
+    .d-skill-label.active { opacity: 1; }
+
+    /* Deskripsi Skill di bawah angka */
+    .d-skill-desc {
+        font-family: var(--font-sans);
+        color: #888;
+        max-width: 400px;
+        margin-top: 20px;
+        padding-left: 20px;
+        line-height: 1.6;
+        opacity: 0;
+        transform: translateX(-20px);
+        transition: 0.5s;
+    }
+    .d-skill-desc.active {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    /* --- BAGIAN KANAN: LIST MENU --- */
+    .d-list-panel {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .d-skill-item {
+        font-family: var(--font-sans);
+        font-size: 3rem; /* Teks besar */
+        font-weight: 700;
+        color: var(--text-dim); /* Abu gelap saat diam */
+        cursor: pointer;
+        transition: 0.4s;
+        position: relative;
+        padding-left: 0;
+    }
+
+    /* Hover Effect: Jadi Emas & Geser */
+    .d-skill-item:hover, .d-skill-item.active {
+        color: var(--text-light);
+        padding-left: 40px; /* Geser kanan */
+    }
+    
+    /* Garis Emas muncul saat hover */
+    .d-skill-item::before {
+        content: '';
+        position: absolute;
+        left: 0; top: 50%;
+        width: 0; height: 2px;
+        background-color: var(--bronze-main);
+        transition: 0.4s;
+    }
+    
+    .d-skill-item:hover::before {
+        width: 30px;
+    }
+
+    /* --- RUNNING TEXT (MARQUEE) --- */
+    .d-marquee-wrapper {
+        margin-top: auto;
+        padding-top: 80px;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        border-top: 1px solid rgba(205, 127, 50, 0.1);
+        position: relative;
+    }
+
+    .d-marquee-content {
+        display: inline-block;
+        animation: scrollText 20s linear infinite;
+    }
+
+    .d-marquee-item {
+        font-family: var(--font-serif);
+        font-size: 1.5rem;
+        color: #444;
+        margin: 0 40px;
+        font-style: italic;
+    }
+    
+    .d-marquee-item span {
+        color: var(--bronze-main); /* Tanda titik/pemisah */
+    }
+
+    @keyframes scrollText {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 900px) {
+        .d-skills-container { flex-direction: column-reverse; }
+        .d-visual-panel { height: 250px; align-items: center; text-align: center; }
+        .d-big-number { font-size: 8rem; }
+        .d-list-panel { text-align: center; gap: 5px; }
+        .d-skill-item { font-size: 2rem; }
+        .d-skill-item:hover { padding-left: 0; color: var(--bronze-light); }
+        .d-skill-item::before { display: none; }
+    }
+</style>
+
+<section id="skills" class="skills-d-section">
+    
+    <div class="d-skills-container">
+        
+        <div class="d-visual-panel">
+            <div class="d-skill-label" id="skillLabel">SKILL MASTERY</div>
+            <div class="d-big-number active" id="skillNum">Select</div>
+            <div class="d-skill-desc active" id="skillDesc">
+                Hover over the list on the right to view detailed mastery metrics.
+            </div>
+        </div>
+
+        <div class="d-list-panel">
+            <div class="d-skill-item" 
+                 onmouseover="updateSkill('95%', 'Frontend Dev', 'Menguasai HTML5, CSS3, dan manipulasi DOM modern untuk struktur web yang kokoh.')">
+                HTML & CSS
+            </div>
+            
+            <div class="d-skill-item" 
+                 onmouseover="updateSkill('85%', 'Scripting', 'Logika interaktif menggunakan ES6+ dan manajemen asinkronus.')">
+                JavaScript
+            </div>
+            
+            <div class="d-skill-item" 
+                 onmouseover="updateSkill('90%', 'Styling', 'Penggunaan Utility-first CSS framework untuk desain cepat dan responsif.')">
+                Tailwind
+            </div>
+            
+            <div class="d-skill-item" 
+                 onmouseover="updateSkill('80%', 'Backend', 'Pengolahan data server-side dan integrasi API menggunakan Python.')">
+                Python
+            </div>
+            
+            <div class="d-skill-item" 
+                 onmouseover="updateSkill('75%', 'UI/UX Design', 'Prototyping dan desain antarmuka high-fidelity.')">
+                Figma
+            </div>
+        </div>
+
+    </div>
+
+    <div class="d-marquee-wrapper">
+        <div class="d-marquee-content">
+            <span class="d-marquee-item">VS Code <span>•</span></span>
+            <span class="d-marquee-item">Git <span>•</span></span>
+            <span class="d-marquee-item">NPM <span>•</span></span>
+            <span class="d-marquee-item">Postman <span>•</span></span>
+            <span class="d-marquee-item">MySQL <span>•</span></span>
+            <span class="d-marquee-item">Adobe XD <span>•</span></span>
+            <span class="d-marquee-item">Bootstrap <span>•</span></span>
+            <span class="d-marquee-item">Django <span>•</span></span>
+            <span class="d-marquee-item">VS Code <span>•</span></span>
+            <span class="d-marquee-item">Git <span>•</span></span>
+            <span class="d-marquee-item">NPM <span>•</span></span>
+            <span class="d-marquee-item">Postman <span>•</span></span>
+            <span class="d-marquee-item">MySQL <span>•</span></span>
+            <span class="d-marquee-item">Adobe XD <span>•</span></span>
+        </div>
+    </div>
+
+</section>
+
+<script>
+    // Fungsi Ganti Angka & Teks
+    function updateSkill(percent, label, desc) {
+        const numEl = document.getElementById('skillNum');
+        const labelEl = document.getElementById('skillLabel');
+        const descEl = document.getElementById('skillDesc');
+
+        // 1. Fade Out
+        numEl.classList.remove('active');
+        labelEl.classList.remove('active');
+        descEl.classList.remove('active');
+
+        // 2. Ganti Konten & Fade In (ada delay dikit biar smooth)
+        setTimeout(() => {
+            numEl.innerText = percent;
+            labelEl.innerText = label;
+            descEl.innerText = desc;
+
+            numEl.classList.add('active');
+            labelEl.classList.add('active');
+            descEl.classList.add('active');
+        }, 200);
+    }
+</script>
+
+<style>
+    /* --- VARIABLES (PROJECTS D) --- */
+    #projects {
+        --bg-d: #050505;
+        --bronze-main: #CD7F32;
+        --bronze-pale: #FFE4B5;
+        --text-gray: #666;
+        --font-serif: 'Playfair Display', serif;
+        --font-sans: 'Inter', sans-serif;
+    }
+
+    /* --- LAYOUT --- */
+    .proj-d-section {
+        position: relative;
+        min-height: 100vh;
+        background-color: var(--bg-d);
+        padding: 120px 5%;
+        display: flex;
+        align-items: center;
+        z-index: 1;
+    }
+
+    .proj-d-container {
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 50px;
+    }
+
+    /* --- KIRI: LIST PROYEK --- */
+    .proj-list {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        gap: 0; /* Nempel vertikal */
+        z-index: 10; /* Di atas gambar */
+    }
+
+    .proj-header-small {
+        font-family: var(--font-sans);
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+        color: var(--bronze-main);
+        text-transform: uppercase;
+        margin-bottom: 40px;
+        display: block;
+    }
+
+    /* Item Baris Proyek */
+    .proj-item {
+        padding: 40px 0;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        cursor: pointer;
+        transition: 0.4s;
+        position: relative;
+    }
+
+    /* Garis terakhir */
+    .proj-item:last-child {
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .proj-meta {
+        display: flex;
+        gap: 20px;
+        font-family: var(--font-sans);
+        font-size: 0.8rem;
+        color: var(--text-gray);
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        transition: 0.3s;
+    }
+
+    .proj-title {
+        font-family: var(--font-serif);
+        font-size: 3.5rem;
+        color: #888; /* Abu mati sebelum hover */
+        font-weight: 400;
+        line-height: 1;
+        margin: 0;
+        transition: 0.4s;
+    }
+
+    /* HOVER STATE */
+    .proj-item:hover .proj-title {
+        color: var(--bronze-pale); /* Jadi Emas Pucat */
+        padding-left: 20px; /* Geser dikit */
+        font-style: italic;
+    }
+    
+    .proj-item:hover .proj-meta {
+        color: var(--bronze-main);
+        padding-left: 20px;
+    }
+
+    /* --- KANAN: PREVIEW GAMBAR (FLOATING) --- */
+    .proj-preview-area {
+        width: 40%;
+        height: 60vh; /* Tinggi fix area gambar */
+        position: sticky; /* Nempel pas discroll */
+        top: 20vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none; /* Biar gak ganggu scroll */
+    }
+
+    /* Bingkai Gambar */
+    .img-frame-d {
+        width: 100%;
+        height: 0; /* Awalnya 0 (tutup) */
+        padding-bottom: 120%; /* Aspect Ratio Portrait */
+        position: relative;
+        overflow: hidden;
+        opacity: 0;
+        transform: scale(0.9) rotate(-2deg); /* Efek miring dikit */
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Kelas aktif untuk memunculkan gambar */
+    .img-frame-d.active {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+
+    .preview-img {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        object-fit: cover;
+        filter: sepia(30%) contrast(1.1); /* Vintage Vibe */
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+        .proj-d-container { flex-direction: column-reverse; }
+        .proj-list { width: 100%; }
+        .proj-preview-area { display: none; } /* Di HP gambar hilang biar ringkas, atau bisa ditaruh di bawah item */
+        .proj-title { font-size: 2.5rem; }
+    }
+</style>
+
+<section id="projects" class="proj-d-section">
+    <div class="proj-d-container">
+        
+        <div class="proj-list">
+            <span class="proj-header-small">Selected Works (2023-2025)</span>
+
+            <div class="proj-item" onmouseenter="showProject('img1')">
+                <div class="proj-meta">
+                    <span>01</span>
+                    <span>Web Development</span>
+                </div>
+                <h2 class="proj-title">Luxe Estate</h2>
+            </div>
+
+            <div class="proj-item" onmouseenter="showProject('img2')">
+                <div class="proj-meta">
+                    <span>02</span>
+                    <span>UI/UX Design</span>
+                </div>
+                <h2 class="proj-title">Fintech App</h2>
+            </div>
+
+            <div class="proj-item" onmouseenter="showProject('img3')">
+                <div class="proj-meta">
+                    <span>03</span>
+                    <span>Brand Identity</span>
+                </div>
+                <h2 class="proj-title">Muse Gallery</h2>
+            </div>
+
+            <div class="proj-item" onmouseenter="showProject('img4')">
+                <div class="proj-meta">
+                    <span>04</span>
+                    <span>E-Commerce</span>
+                </div>
+                <h2 class="proj-title">Noir Fashion</h2>
+            </div>
+
+        </div>
+
+        <div class="proj-preview-area">
+            
+            <div class="img-frame-d" id="img1">
+                <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="preview-img">
+            </div>
+            
+            <div class="img-frame-d" id="img2" style="position:absolute; top:0; left:0;">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="preview-img">
+            </div>
+
+            <div class="img-frame-d" id="img3" style="position:absolute; top:0; left:0;">
+                <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="preview-img">
+            </div>
+
+            <div class="img-frame-d" id="img4" style="position:absolute; top:0; left:0;">
+                <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="preview-img">
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<script>
+    function showProject(id) {
+        // 1. Sembunyikan semua gambar
+        const allImages = document.querySelectorAll('.img-frame-d');
+        allImages.forEach(img => {
+            img.classList.remove('active');
+        });
+
+        // 2. Munculkan gambar yang dipilih
+        const target = document.getElementById(id);
+        if(target) {
+            target.classList.add('active');
+        }
+    }
+
+    // Default: Show gambar 1 pas load
+    document.addEventListener("DOMContentLoaded", () => {
+        showProject('img1');
+    });
+</script>
+
+<style>
+    /* --- VARIABLES (CONTACT D) --- */
+    #contact {
+        --bg-d: #050505;
+        --bronze-main: #CD7F32;
+        --bronze-light: #F4A460;
+        --text-gray: #666;
+        --text-light: #e0e0e0;
+        --font-serif: 'Playfair Display', serif;
+        --font-sans: 'Inter', sans-serif;
+    }
+
+    /* --- LAYOUT CONTACT --- */
+    .contact-d-section {
+        position: relative;
+        padding: 150px 5% 100px 5%;
+        background-color: var(--bg-d);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .con-d-container {
+        width: 100%;
+        max-width: 800px;
+        text-align: center;
+        z-index: 2;
+    }
+
+    /* TYPOGRAPHY */
+    .con-d-pre {
+        font-family: var(--font-sans);
+        font-size: 0.9rem;
+        color: var(--bronze-main);
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        display: block;
+    }
+
+    .con-d-title {
+        font-family: var(--font-serif);
+        font-size: 4rem;
+        font-weight: 400;
+        font-style: italic;
+        color: var(--text-light);
+        margin-bottom: 60px;
+        line-height: 1.2;
+    }
+
+    /* --- FORMULIR (NO BOX, JUST LINES) --- */
+    .form-d-minimal {
+        width: 100%;
+        margin-top: 50px;
+    }
+
+    .input-group-d {
+        position: relative;
+        margin-bottom: 50px;
+    }
+
+    .input-d-line {
+        width: 100%;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid #333; /* Garis abu gelap */
+        padding: 15px 0;
+        font-family: var(--font-serif);
+        font-size: 1.5rem;
+        color: var(--bronze-light);
+        transition: 0.5s;
+    }
+
+    .input-d-line:focus {
+        outline: none;
+        border-bottom-color: var(--bronze-main);
+    }
+
+    /* Label Floating */
+    .label-d {
+        position: absolute;
+        top: 0; left: 0;
+        font-family: var(--font-sans);
+        font-size: 0.8rem;
+        color: var(--text-gray);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        pointer-events: none;
+        transition: 0.5s;
+    }
+
+    /* Animasi Label saat input di-klik/isi */
+    .input-d-line:focus ~ .label-d,
+    .input-d-line:valid ~ .label-d {
+        top: -25px;
+        font-size: 0.7rem;
+        color: var(--bronze-main);
+    }
+
+    /* TOMBOL KIRIM (Teks Besar) */
+    .btn-d-send {
+        background: none;
+        border: none;
+        font-family: var(--font-sans);
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-light);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        cursor: pointer;
+        padding: 20px 40px;
+        border: 1px solid rgba(205, 127, 50, 0.3);
+        transition: 0.4s;
+        margin-top: 30px;
+    }
+
+    .btn-d-send:hover {
+        background-color: var(--bronze-main);
+        border-color: var(--bronze-main);
+        color: #000;
+    }
+
+    /* --- FOOTER D (FREE FLOW) --- */
+    .footer-d {
+        position: relative;
+        padding: 100px 5% 50px 5%;
+        background-color: var(--bg-d);
+        border-top: 1px solid rgba(255,255,255,0.05);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    /* COPYRIGHT (Kiri Bawah) */
+    .footer-copy {
+        font-family: var(--font-sans);
+        color: #444;
+        font-size: 0.8rem;
+        max-width: 300px;
+        line-height: 1.6;
+    }
+
+    /* SOCIAL ICONS (LOGOS) - Posisi Bebas / Kanan */
+    .social-gallery {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+    }
+
+    /* Style untuk Logo SVG/Gambar */
+    .social-icon-img {
+        width: 30px; 
+        height: 30px;
+        fill: #666; /* Warna dasar abu */
+        transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        cursor: pointer;
+    }
+
+    /* Efek Hover: Membesar & Berubah Warna Emas */
+    .social-icon-img:hover {
+        fill: var(--bronze-light);
+        transform: scale(1.5) rotate(5deg);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+        .con-d-title { font-size: 2.5rem; }
+        .footer-d { flex-direction: column; align-items: center; gap: 50px; text-align: center; }
+    }
+</style>
+
+<section id="contact" class="contact-d-section">
+    <div class="con-d-container">
+        <span class="con-d-pre">Inquiries</span>
+        <h2 class="con-d-title">
+            Interested in collaboration? <br>
+            Let’s create something timeless.
+        </h2>
+
+        <form class="form-d-minimal" onsubmit="kirimPesanD(event)">
+            
+            <div class="input-group-d">
+                <input type="text" class="input-d-line" required>
+                <label class="label-d">Your Name</label>
+            </div>
+
+            <div class="input-group-d">
+                <input type="email" class="input-d-line" required>
+                <label class="label-d">Email Address</label>
+            </div>
+
+            <div class="input-group-d">
+                <input type="text" class="input-d-line" required>
+                <label class="label-d">Tell me about your project</label>
+            </div>
+
+            <button type="submit" class="btn-d-send">Send Request</button>
+        </form>
+    </div>
+</section>
+
+<footer class="footer-d">
+    
+    <div class="footer-copy">
+        &copy; 2025 Alexandria Portfolio.<br>
+        Designed with precision and passion.<br>
+        Based in Jakarta, available worldwide.
+    </div>
+
+    <div class="social-gallery">
+        
+        <a href="#" title="Instagram">
+            <svg class="social-icon-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.069-4.85.069-3.204 0-3.584-.012-4.849-.069-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+        </a>
+
+        <a href="#" title="LinkedIn">
+            <svg class="social-icon-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+            </svg>
+        </a>
+
+        <a href="#" title="GitHub">
+            <svg class="social-icon-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+        </a>
+
+    </div>
+</footer>
+
+<script>
+    function kirimPesanD(e) {
+        e.preventDefault();
+        const btn = e.target.querySelector('button');
+        const originalText = btn.innerText;
+        
+        btn.innerText = "Sending...";
+        btn.style.borderColor = "#fff";
+        
+        setTimeout(() => {
+            alert("Thank you. Your message has been received.");
+            btn.innerText = "Message Sent";
+            btn.style.backgroundColor = "#CD7F32";
+            btn.style.color = "black";
+            e.target.reset();
+            setTimeout(() => { 
+                btn.innerText = originalText; 
+                btn.style.backgroundColor = "transparent";
+                btn.style.color = "#e0e0e0";
+            }, 3000);
+        }, 1500);
+    }
+</script>
+    </body>
+</html>

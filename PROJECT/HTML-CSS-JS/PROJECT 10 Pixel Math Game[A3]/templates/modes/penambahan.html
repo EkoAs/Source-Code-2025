@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Arena Penambahan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
+</head>
+<body>
+
+    <!-- DATA HIDDEN: Pastikan value ini sesuai nama file Python (penambahan) -->
+    <input type="hidden" id="game-mode" value="penambahan">
+
+    <div class="container">
+        <div class="hud">
+            <span>SCORE: <b id="score">0</b></span>
+            <span>TIME: <b id="timer">10</b></span>
+        </div>
+
+        <div class="question-box">
+            <!-- teks soall JS -->
+            <h2 id="question-text">LOADING...</h2>
+        </div>
+
+        <div id="options-grid">
+            <!-- Tombol -->
+        </div>
+        
+        <button class="btn-pixel" onclick="window.location.href='/'" style="margin-top: 20px; background: #333; border-color: #666;">EXIT</button>
+    </div>
+
+  
+    <!-- =========================================================== -->
+    <div id="game-over-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h1 class="modal-title">GAME OVER</h1>
+            
+            <p style="color: #aaa;">PLAYER:</p>
+            <h3 id="final-player" style="color: yellow; margin-bottom: 20px;">---</h3>
+            
+            <p style="color: #aaa;">FINAL SCORE:</p>
+            <h1 id="final-score" class="modal-score">0</h1>
+            
+            <button class="btn-pixel" onclick="window.location.href='/'">MAIN MENU</button>
+            <button class="btn-pixel" onclick="window.location.reload()" style="background: #333; border-color: #666;">TRY AGAIN</button>
+        </div>
+    </div>
+    <!-- =========================================================== -->
+
+
+    <script src="{{ url_for('static', filename='js/master_engine.js') }}"></script>
+    <script>
+        
+        MasterEngine.startGame();
+    </script>
+</body>
+</html>

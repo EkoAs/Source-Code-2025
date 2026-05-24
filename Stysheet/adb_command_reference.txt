@@ -1,0 +1,64 @@
+
+==============================
+DAFTAR PERINTAH ADB UNTUK KEAMANAN, STABILITAS, DAN PEMELIHARAAN SISTEM
+==============================
+
+>>> 1. KONEKSI & SISTEM DASAR
+adb devices                           # Menampilkan daftar perangkat yang terhubung
+adb reboot                            # Reboot perangkat
+adb shell reboot -p                   # Mematikan perangkat
+adb shell getprop ro.build.version.release  # Melihat versi Android
+adb shell screencap /sdcard/screen.png  # Mengambil screenshot
+adb pull /sdcard/screen.png          # Mengambil file dari HP ke PC
+
+>>> 2. INFORMASI BATERAI & STATUS DAYA
+adb shell dumpsys battery            # Informasi baterai (level, suhu, tegangan, status charging)
+adb shell dumpsys power              # Informasi wakelock dan status daya
+adb shell dumpsys cpuinfo            # Penggunaan CPU oleh aplikasi
+adb shell top -n 1                   # Proses aktif saat ini
+adb logcat > log.txt                 # Log sistem real-time untuk debugging
+
+>>> 3. PAKSA HENTIKAN & NONAKTIFKAN APLIKASI
+adb shell am force-stop com.nama.aplikasi          # Paksa aplikasi berhenti
+adb shell pm disable-user --user 0 com.nama.aplikasi # Nonaktifkan aplikasi (dibekukan)
+adb shell pm enable com.nama.aplikasi              # Aktifkan kembali aplikasi
+adb shell pm clear com.nama.aplikasi               # Hapus cache dan data aplikasi
+
+>>> 4. BATASI AKSES LATAR BELAKANG & WAKES
+adb shell appops set com.nama.aplikasi RUN_IN_BACKGROUND ignore  # Cegah aplikasi hidup di latar
+adb shell appops set com.nama.aplikasi WAKE_LOCK ignore          # Cegah aplikasi mencegah tidur
+adb shell appops set com.nama.aplikasi GET_USAGE_STATS ignore    # Cegah akses statistik penggunaan
+
+>>> 5. SINKRONISASI & KONEKSI DATA
+adb shell settings put global auto_sync 0          # Nonaktifkan sinkronisasi otomatis
+adb shell settings put global auto_sync 1          # Aktifkan sinkronisasi otomatis
+adb shell cmd netpolicy add-restricted-background-whitelist com.nama.aplikasi  # Batasi akses data latar
+
+>>> 6. DETEKSI & PEMANTAUAN
+adb shell pm list packages -3                      # Daftar semua aplikasi pihak ketiga
+adb shell pm list packages -d                      # Daftar aplikasi yang dinonaktifkan
+adb shell pm list packages -u                      # Daftar aplikasi termasuk yang tersembunyi
+adb shell dumpsys package com.nama.aplikasi        # Info lengkap aplikasi
+adb shell dumpsys display                          # Status layar dan rendering
+adb shell dumpsys meminfo                          # Informasi penggunaan memori RAM
+adb shell dumpsys activity processes               # Status proses dan aplikasi aktif
+
+>>> 7. PEMINDAIAN MASALAH HARDWARE (deteksi manual)
+adb shell ls -la /data/log/                        # Lihat log sistem (mendeteksi error perangkat keras)
+adb shell ls -la /data/system/dropbox/             # Crash logs & event logs
+adb shell service list                             # Daftar semua service aktif
+adb shell dumpsys sensorservice                    # Status sensor (gyro, accelerometer, proximity)
+
+>>> 8. PERLINDUNGAN & KEAMANAN
+adb shell settings get secure install_non_market_apps   # Cek apakah pemasangan APK luar diizinkan
+adb shell settings put secure install_non_market_apps 0 # Blokir APK luar
+adb shell appops set com.nama.aplikasi READ_SMS deny    # Blokir aplikasi membaca SMS
+adb shell appops set com.nama.aplikasi CAMERA deny      # Blokir akses kamera
+
+>>> 9. NETWORK DAN MODE PENERBANGAN
+adb shell settings put global airplane_mode_on 1
+adb shell am broadcast -a android.intent.action.AIRPLANE_MODE --ez state true
+
+>>> 10. PEMELIHARAAN TAMBAHAN
+adb bugreport > bugreport.txt                   # Ambil laporan sistem lengkap
+adb shell rm -rf /sdcard/Android/data/com.nama.aplikasi/cache  # Hapus cache aplikasi manual

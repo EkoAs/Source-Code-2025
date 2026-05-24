@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modern Classic Design</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+    <style>
+    /* --- VARIABLES LOKAL (PENDIDIKAN C) --- */
+    #pendidikan {
+        --bg-c: #050505;
+        --card-bg: #111;
+        --accent-c: #ff003c; /* Merah Crimson */
+        --text-c: #fff;
+        --text-gray: #888;
+        --path-color: #333;
+    }
+
+    /* --- LAYOUT --- */
+    .edu-c-section {
+        padding: 120px 5%;
+        background-color: var(--bg-c);
+        position: relative;
+        /* Background Texture (Carbon Fiber look) */
+        background-image: 
+            linear-gradient(45deg, #0a0a0a 25%, transparent 25%, transparent 75%, #0a0a0a 75%, #0a0a0a),
+            linear-gradient(45deg, #0a0a0a 25%, transparent 25%, transparent 75%, #0a0a0a 75%, #0a0a0a);
+        background-size: 20px 20px;
+        background-position: 0 0, 10px 10px;
+    }
+
+    .edu-c-header {
+        text-align: center;
+        margin-bottom: 80px;
+    }
+
+    .edu-c-title {
+        font-family: sans-serif;
+        font-size: 3rem;
+        font-weight: 900;
+        font-style: italic;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: -2px;
+        text-shadow: 4px 4px 0px var(--accent-c); /* Shadow Merah Solid */
+    }
+
+    .edu-c-subtitle {
+        color: var(--accent-c);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        margin-top: 10px;
+    }
+
+    /* --- QUEST TREE CONTAINER --- */
+    .quest-tree {
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        padding-left: 50px; /* Ruang untuk garis kiri */
+    }
+
+    /* Garis Penghubung Utama (Kiri) */
+    .quest-tree::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 15px;
+        width: 4px; height: 100%;
+        background-color: var(--path-color);
+    }
+
+    /* --- KARTU QUEST --- */
+    .quest-card {
+        position: relative;
+        margin-bottom: 50px;
+    }
+
+    /* Titik Node di Garis Kiri */
+    .quest-node {
+        position: absolute;
+        left: -43px; /* Menyesuaikan posisi garis */
+        top: 0;
+        width: 20px; height: 20px;
+        background-color: var(--bg-c);
+        border: 3px solid var(--accent-c);
+        transform: rotate(45deg); /* Belah ketupat */
+        z-index: 2;
+        transition: 0.3s;
+    }
+
+    /* Garis Horizontal Penghubung Node ke Kartu */
+    .quest-connector {
+        position: absolute;
+        left: -20px; top: 10px;
+        width: 20px; height: 2px;
+        background-color: var(--accent-c);
+    }
+
+    /* BOX KONTEN UTAMA */
+    .quest-content {
+        background-color: var(--card-bg);
+        padding: 30px;
+        position: relative;
+        transition: all 0.3s;
+        border-left: 4px solid var(--accent-c);
+        /* Potongan Sudut Kanan Bawah */
+        clip-path: polygon(
+            0 0, 
+            100% 0, 
+            100% 80%, 
+            95% 100%, 
+            0 100%
+        );
+    }
+
+    /* Hiasan 'Top Secret' Stripe */
+    .quest-content::before {
+        content: '';
+        position: absolute;
+        top: 0; right: 0;
+        width: 50px; height: 50px;
+        background: linear-gradient(135deg, transparent 50%, rgba(255,0,60,0.2) 50%);
+        pointer-events: none;
+    }
+
+    /* HOVER EFFECT */
+    .quest-card:hover .quest-node {
+        background-color: var(--accent-c);
+        box-shadow: 0 0 15px var(--accent-c);
+    }
+
+    .quest-card:hover .quest-content {
+        transform: translateX(10px); /* Geser Kanan */
+        background-color: #1a1a1a;
+        box-shadow: -5px 5px 20px rgba(0,0,0,0.5);
+    }
+
+    /* --- TEXT INSIDE CARD --- */
+    .rank-badge {
+        display: inline-block;
+        background-color: var(--accent-c);
+        color: #000;
+        font-weight: 900;
+        font-size: 0.8rem;
+        padding: 3px 10px;
+        margin-bottom: 10px;
+        transform: skewX(-20deg);
+    }
+    
+    .year-text {
+        float: right;
+        color: var(--text-gray);
+        font-family: monospace;
+        font-weight: bold;
+    }
+
+    .school-name {
+        font-family: sans-serif;
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #fff;
+        text-transform: uppercase;
+        font-style: italic;
+        margin: 10px 0 5px 0;
+    }
+
+    .major-name {
+        color: var(--accent-c);
+        font-weight: 700;
+        font-size: 1rem;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .quest-desc {
+        color: #aaa;
+        line-height: 1.6;
+        font-size: 0.95rem;
+        border-top: 1px solid #333;
+        padding-top: 15px;
+    }
+
+    /* Status 'Completed' */
+    .status-stamped {
+        position: absolute;
+        bottom: 20px; right: 20px;
+        border: 2px solid rgba(255,255,255,0.1);
+        color: rgba(255,255,255,0.2);
+        padding: 5px 10px;
+        font-weight: 900;
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        transform: rotate(-15deg);
+        pointer-events: none;
+    }
+    
+    .quest-card:hover .status-stamped {
+        color: rgba(255,255,255,0.4);
+        border-color: rgba(255,255,255,0.4);
+    }
+
+    @media (max-width: 768px) {
+        .edu-c-title { font-size: 2.2rem; }
+        .quest-tree { padding-left: 30px; }
+        .quest-node { left: -23px; width: 16px; height: 16px; }
+    }
+</style>
+
+<section id="pendidikan" class="edu-c-section">
+    <div class="edu-c-header">
+        <h2 class="edu-c-title">CAMPAIGN LOG</h2>
+        <div class="edu-c-subtitle">// ACADEMIC HISTORY</div>
+    </div>
+
+    <div class="quest-tree">
+        
+        <div class="quest-card">
+            <div class="quest-connector"></div>
+            <div class="quest-node"></div>
+            
+            <div class="quest-content">
+                <div class="rank-badge">LEVEL 03 // MASTER</div>
+                <span class="year-text">[ 2020 - 2024 ]</span>
+                
+                <h3 class="school-name">Universitas Teknologi Digital</h3>
+                <div class="major-name">S1 Teknik Informatika</div>
+                
+                <p class="quest-desc">
+                    <strong>MISSION REPORT:</strong><br>
+                    Menyelesaikan studi dengan predikat Cumlaude (Score: 3.85). 
+                    Fokus utama pada pengembangan algoritma AI dan keamanan jaringan.
+                </p>
+                
+                <div class="status-stamped">COMPLETED</div>
+            </div>
+        </div>
+
+        <div class="quest-card">
+            <div class="quest-connector"></div>
+            <div class="quest-node"></div>
+            
+            <div class="quest-content">
+                <div class="rank-badge">LEVEL 02 // ROOKIE</div>
+                <span class="year-text">[ 2017 - 2020 ]</span>
+                
+                <h3 class="school-name">SMA Negeri 1 Jakarta</h3>
+                <div class="major-name">Jurusan IPA</div>
+                
+                <p class="quest-desc">
+                    <strong>MISSION REPORT:</strong><br>
+                    Aktif dalam guild (ekskul) Komputer. Memenangkan turnamen logika matematika tingkat regional.
+                </p>
+
+                <div class="status-stamped">COMPLETED</div>
+            </div>
+        </div>
+
+        <div class="quest-card">
+            <div class="quest-connector"></div>
+            <div class="quest-node"></div>
+            
+            <div class="quest-content">
+                <div class="rank-badge">LEVEL 01 // NOOB</div>
+                <span class="year-text">[ 2014 - 2017 ]</span>
+                
+                <h3 class="school-name">SMP Negeri 5 Jakarta</h3>
+                <div class="major-name">Pendidikan Dasar</div>
+                
+                <p class="quest-desc">
+                    <strong>MISSION REPORT:</strong><br>
+                    Inisiasi pembelajaran dasar teknologi. Mengikuti pelatihan pramuka dan basket.
+                </p>
+
+                <div class="status-stamped">COMPLETED</div>
+            </div>
+        </div>
+
+    </div>
+</section>
+    </body>
+</html>

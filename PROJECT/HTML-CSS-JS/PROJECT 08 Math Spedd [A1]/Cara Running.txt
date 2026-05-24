@@ -1,0 +1,14 @@
+
+
+
+
+
+singkat saja
+Ya cara running.
+
+install framwork flask, 
+open terminal, buka lokasi foldernya di ini, projectnya.
+ketik python app.py. nanti kalo muncul http://127.0.0.1:5000
+tinggal copy aja ke chrome.
+
+

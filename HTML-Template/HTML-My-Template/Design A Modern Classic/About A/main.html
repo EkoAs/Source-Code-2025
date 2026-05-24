@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modern Classic Design</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+
+        <style>
+    /* --- CSS LOCAL VARIABLES UNTUK ABOUT --- */
+    /* Kita gunakan variabel yang sinkron dengan switch Dark Mode di Navbar */
+    
+    #about {
+        /* Default (Light Mode) */
+        --about-bg: #ffffff;
+        --about-text: #4b5563;
+        --about-heading: #111827;
+        --blob-color-1: rgba(59, 130, 246, 0.15); /* Biru muda transparan */
+        --blob-color-2: rgba(168, 85, 247, 0.15); /* Ungu muda transparan */
+        --photo-border: rgba(0,0,0,0.1);
+        --photo-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    /* Override saat Dark Mode aktif di body */
+    body.dark #about {
+        --about-bg: #111827; /* Dark Blue/Gray */
+        --about-text: #d1d5db;
+        --about-heading: #f9fafb;
+        --blob-color-1: rgba(59, 130, 246, 0.1);
+        --blob-color-2: rgba(168, 85, 247, 0.1);
+        --photo-border: rgba(255,255,255,0.1);
+        --photo-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+
+    /* --- LAYOUT UTAMA --- */
+    .about-section {
+        position: relative;
+        padding: 120px 5% 100px 5%; /* Padding atas besar biar gak ketutup Navbar */
+        background-color: var(--about-bg);
+        overflow: hidden; /* Biar hiasan background gak keluar layar */
+        transition: background-color 0.3s ease, color 0.3s ease;
+        min-height: 80vh; /* Tinggi minimal biar gagah */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Hiasan Background (Blobs) */
+    .blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(60px);
+        z-index: 0;
+        animation: float 10s infinite ease-in-out;
+    }
+    .blob-1 {
+        top: -10%;
+        right: -10%;
+        width: 400px;
+        height: 400px;
+        background-color: var(--blob-color-1);
+    }
+    .blob-2 {
+        bottom: -10%;
+        left: -10%;
+        width: 300px;
+        height: 300px;
+        background-color: var(--blob-color-2);
+        animation-delay: 5s;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(20px, 30px); }
+    }
+
+    /* Container Konten */
+    .about-container {
+        position: relative;
+        z-index: 1; /* Di atas blobs */
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 60px; /* Jarak antara foto dan teks */
+        max-width: 1200px;
+        width: 100%;
+    }
+
+    /* --- BAGIAN KIRI: FOTO (35-40%) --- */
+    .about-left {
+        flex: 0 0 38%; /* Lebar fix 38% */
+        display: flex;
+        justify-content: center;
+    }
+
+    .photo-wrapper {
+        position: relative;
+        width: 100%;
+        padding-top: 100%; /* Membuat rasio 1:1 (Kotak) */
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: var(--photo-shadow);
+        border: 1px solid var(--photo-border);
+        transition: transform 0.3s ease;
+    }
+
+    .photo-wrapper:hover {
+        transform: scale(1.02); /* Efek zoom dikit pas di hover */
+    }
+
+    .photo-wrapper img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Foto mengisi penuh kotak tanpa gepeng */
+    }
+
+    /* --- BAGIAN KANAN: TEKS --- */
+    .about-right {
+        flex: 1; /* Sisa lebar diambil teks */
+    }
+
+    .section-label {
+        display: inline-block;
+        font-size: 0.9rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #3b82f6; /* Biru standar */
+        margin-bottom: 10px;
+    }
+
+    .profile-name {
+        font-family: sans-serif;
+        font-size: 3rem; /* Nama Besar */
+        font-weight: 800;
+        color: var(--about-heading);
+        margin: 0 0 20px 0;
+        line-height: 1.2;
+    }
+
+    .profile-desc {
+        font-family: sans-serif;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--about-text);
+        text-align: justify; /* Rata Kanan Kiri */
+        margin-bottom: 30px;
+    }
+
+    /* Highlight text dummy untuk demo search */
+    .highlight-demo {
+        background-color: rgba(255, 255, 0, 0.2);
+        padding: 0 2px;
+        border-radius: 2px;
+    }
+
+    /* Tombol Aksi di About */
+    .btn-group {
+        display: flex;
+        gap: 15px;
+    }
+    
+    .btn-about {
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s;
+        border: 2px solid transparent;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        color: white;
+        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+    }
+    .btn-primary:hover {
+        box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+        transform: translateY(-2px);
+    }
+
+    .btn-outline {
+        border-color: var(--about-text);
+        color: var(--about-text);
+        background: transparent;
+    }
+    .btn-outline:hover {
+        background-color: var(--about-heading);
+        color: var(--about-bg);
+        border-color: var(--about-heading);
+    }
+
+    /* --- RESPONSIVE (HP) --- */
+    @media (max-width: 900px) {
+        .about-container {
+            flex-direction: column; /* Jadi atas bawah */
+            text-align: center;
+            gap: 40px;
+        }
+
+        .about-left {
+            width: 70%; /* Foto jadi agak kecil di HP biar gak menuhin layar */
+            flex: none;
+        }
+
+        .profile-name {
+            font-size: 2.2rem;
+        }
+        
+        /* Di HP text align justify kadang jelek kalau layar sempit, 
+           tapi sesuai request kita biarkan justify atau ganti left */
+        .profile-desc {
+            text-align: justify; 
+        }
+
+        .btn-group {
+            justify-content: center;
+        }
+    }
+</style>
+
+<section id="about" class="about-section">
+    
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <div class="about-container">
+        
+        <div class="about-left">
+            <div class="photo-wrapper">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="Foto Profil">
+            </div>
+        </div>
+
+        <div class="about-right">
+            <span class="section-label">About Me</span>
+            
+            <h1 class="profile-name">Alexandria <br>Wijaya</h1>
+            
+            <p class="profile-desc">
+                Halo! Saya adalah seorang profesional yang berdedikasi di dunia teknologi digital. 
+                Berpengalaman dalam menciptakan solusi web yang tidak hanya fungsional tetapi juga estetis. 
+                Saya percaya bahwa desain yang baik harus bisa memecahkan masalah. 
+                <br><br>
+                Saat ini saya fokus mengembangkan antarmuka pengguna yang responsif dan interaktif. 
+                Jika kamu menggunakan fitur search di navbar atas, kamu bisa mencoba mencari kata 
+                "teknologi" atau "desain", dan halaman ini akan menyorot kata tersebut secara otomatis.
+            </p>
+
+            <div class="btn-group">
+                <a href="#contact" class="btn-about btn-primary">Hire Me</a>
+                <a href="#cv" class="btn-about btn-outline">Download CV</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+    </body>
+</html>

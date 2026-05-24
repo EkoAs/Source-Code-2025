@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio E - Black Diamond</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+<body>
+<style>
+    /* --- SETUP AWAL (Agar preview terlihat hitam) --- */
+    body {
+        margin: 0;
+        background-color: #000000; /* Hitam Pekat */
+        font-family: 'Montserrat', sans-serif; /* Font Formal */
+    }
+
+    /* Import Font Formal */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
+
+    /* --- NAVBAR CONTAINER --- */
+    .navbar-prism {
+        position: fixed;
+        top: 25px; 
+        left: 50%;
+        transform: translateX(-50%); /* Posisi Tengah di Laptop */
+        width: 95%;
+        max-width: 1200px;
+        height: 75px;
+        z-index: 1000;
+        
+        /* Material: Kaca Kristal Gelap */
+        background: rgba(15, 15, 15, 0.85);
+        backdrop-filter: blur(20px);         /* Efek Blur Kaca */
+        -webkit-backdrop-filter: blur(20px);
+        
+        /* Border: Silver Tipis Mengkilap */
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        
+        /* Sudut: Potongan Berlian (Chamfered) - Formal & Tajam */
+        clip-path: polygon(
+            20px 0, 100% 0, 
+            100% calc(100% - 20px), calc(100% - 20px) 100%, 
+            0 100%, 0 20px
+        );
+        
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 40px;
+        
+        /* Shadow halus */
+        box-shadow: 0 15px 40px rgba(0,0,0,0.9);
+        
+        /* Transisi halus */
+        transition: all 0.4s ease;
+        overflow: hidden; /* Penting untuk efek kilau */
+    }
+
+    /* --- ANIMASI KILAU (SHINE) YANG DIPERLAMBAT --- */
+    .navbar-prism::after {
+        content: '';
+        position: absolute;
+        top: 0; left: -150%; /* Mulai dari jauh kiri */
+        width: 50%; height: 100%;
+        
+        /* Gradasi Kilau: Transparan -> Putih Susu -> Transparan */
+        background: linear-gradient(
+            90deg, 
+            transparent, 
+            rgba(255, 255, 255, 0.05), 
+            rgba(255, 255, 255, 0.4), 
+            rgba(255, 255, 255, 0.05), 
+            transparent
+        );
+        
+        transform: skewX(-25deg); /* Miringkan cahaya */
+        pointer-events: none;
+        
+        /* DURASI: 10 detik (Sangat lambat & elegan) */
+        animation: slowShine 10s infinite ease-in-out; 
+    }
+
+    @keyframes slowShine {
+        0% { left: -150%; }
+        20% { left: 200%; } /* Lewat dalam 20% waktu */
+        100% { left: 200%; } /* Sisanya diam (jeda panjang) */
+    }
+
+    /* --- LOGO (Silver & Diamond) --- */
+    .logo-prism {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        z-index: 10;
+    }
+
+    .diamond-symbol {
+        width: 12px; height: 12px;
+        background: #fff;
+        transform: rotate(45deg); /* Belah ketupat */
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); /* Glow putih */
+        position: relative;
+    }
+
+    .logo-text {
+        color: #e0e0e0; /* Silver Pucat */
+        font-size: 1.2rem;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+    }
+
+    /* --- MENU DESKTOP --- */
+    .menu-prism {
+        display: flex;
+        gap: 30px;
+        z-index: 10;
+    }
+
+    .link-prism {
+        text-decoration: none;
+        color: #888; /* Abu sebelum hover */
+        font-size: 0.8rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        transition: 0.4s;
+        position: relative;
+        padding: 5px 0;
+    }
+
+    /* Hover Effect: Jadi Putih Bersinar */
+    .link-prism:hover {
+        color: #fff;
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    }
+
+    /* Garis bawah yang muncul pelan */
+    .link-prism::after {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 0; width: 0%; height: 1px;
+        background: #fff;
+        transition: 0.4s ease;
+        box-shadow: 0 0 5px #fff;
+    }
+    .link-prism:hover::after { width: 100%; }
+
+    /* --- TOOLS (Search & Mobile) --- */
+    .tools-prism {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        z-index: 10;
+    }
+
+    .search-btn-prism {
+        background: transparent;
+        border: 1px solid rgba(255,255,255,0.2);
+        color: #fff;
+        width: 35px; height: 35px;
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer;
+        transition: 0.4s;
+    }
+    
+    /* Hover Search: Jadi Berlian (Putar 45 derajat) */
+    .search-btn-prism:hover {
+        transform: rotate(45deg);
+        background: #fff;
+        color: #000;
+        box-shadow: 0 0 15px #fff;
+    }
+    .search-btn-prism svg { transition: 0.4s; }
+    .search-btn-prism:hover svg { transform: rotate(-45deg); }
+
+    /* Hamburger (Mobile Only) */
+    .hamburger-prism {
+        display: none;
+        flex-direction: column;
+        gap: 6px;
+        cursor: pointer;
+    }
+    .bar-p {
+        width: 25px; height: 1px;
+        background-color: #fff;
+        transition: 0.3s;
+    }
+
+    /* --- RESPONSIVE FIX (HP) --- */
+    @media (max-width: 900px) {
+        .navbar-prism {
+            top: 0; 
+            left: 0; 
+            transform: none; /* Reset posisi tengah */
+            width: 100%; 
+            border-radius: 0;
+            clip-path: none; /* Hilangkan potongan sudut di HP */
+            border: none;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 0 20px;
+            background: #050505; /* Solid Black di HP biar tulisan jelas */
+        }
+
+        .menu-prism { display: none; } /* Sembunyikan menu desktop */
+        .hamburger-prism { display: flex; } /* Munculkan hamburger */
+    }
+
+    /* MOBILE MENU OVERLAY */
+    .mobile-overlay-prism {
+        position: fixed;
+        top: 75px; left: 0; width: 100%; height: 0;
+        background: #080808;
+        overflow: hidden;
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 900;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+    .mobile-overlay-prism.active { height: 300px; }
+
+    .mob-link-p {
+        color: #aaa; text-decoration: none;
+        font-size: 1rem; text-transform: uppercase; letter-spacing: 2px;
+        transition: 0.3s;
+    }
+    .mob-link-p:hover { color: #fff; letter-spacing: 4px; }
+
+</style>
+
+<nav class="navbar-prism">
+    <a href="#" class="logo-prism">
+        <div class="diamond-symbol"></div>
+        <span class="logo-text">PRISMA</span>
+    </a>
+
+    <div class="menu-prism">
+        <a href="#about" class="link-prism">Profile</a>
+        <a href="#pendidikan" class="link-prism">Education</a>
+        <a href="#skills" class="link-prism">Expertise</a>
+        <a href="#projects" class="link-prism">Works</a>
+        <a href="#contact" class="link-prism">Contact</a>
+    </div>
+
+    <div class="tools-prism">
+        <button class="search-btn-prism" onclick="alert('Search Mode Active')">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+        </button>
+        
+        <div class="hamburger-prism" onclick="toggleMobilePrism()">
+            <div class="bar-p"></div>
+            <div class="bar-p"></div>
+        </div>
+    </div>
+</nav>
+
+<div id="mobileMenuPrism" class="mobile-overlay-prism">
+    <a href="#about" class="mob-link-p" onclick="toggleMobilePrism()">Profile</a>
+    <a href="#pendidikan" class="mob-link-p" onclick="toggleMobilePrism()">Education</a>
+    <a href="#skills" class="mob-link-p" onclick="toggleMobilePrism()">Expertise</a>
+    <a href="#projects" class="mob-link-p" onclick="toggleMobilePrism()">Works</a>
+    <a href="#contact" class="mob-link-p" onclick="toggleMobilePrism()">Contact</a>
+</div>
+
+<script>
+    function toggleMobilePrism() {
+        document.getElementById('mobileMenuPrism').classList.toggle('active');
+    }
+</script>
+
+
+
+
+
+
+
+<style>
+    /* --- VARIABLES (TEMA E) --- */
+    #about-e {
+        --bg-deep: #000000;
+        --platinum: #e5e4e2;
+        --glass-panel: rgba(20, 20, 20, 0.6);
+        --border-shine: rgba(255, 255, 255, 0.15);
+        --font-main: 'Montserrat', sans-serif;
+    }
+
+    /* --- LAYOUT UTAMA --- */
+    .about-e-split {
+        padding: 120px 5%;
+        background-color: var(--bg-deep);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Background Light Refraction (Efek Cahaya Halus) */
+    .prism-light-bg {
+        position: absolute;
+        top: -50%; right: -20%;
+        width: 80vw; height: 80vw;
+        background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    .e-container {
+        width: 100%;
+        max-width: 1200px;
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Kiri kanan rata (50:50) */
+        gap: 60px;
+        align-items: start; /* Rata atas biar rapi kalau panjang beda */
+    }
+
+    /* ================= BAGIAN KIRI: PROFILE (FIXED) ================= */
+    .e-profile-side {
+        position: relative;
+        padding-right: 20px;
+    }
+
+    /* Foto Hexagon Formal */
+    .diamond-photo-wrap {
+        width: 200px; height: 200px;
+        margin-bottom: 40px;
+        position: relative;
+    }
+    
+    .d-photo-frame {
+        width: 100%; height: 100%;
+        /* Potongan Permata */
+        clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+        background: #111;
+        position: relative;
+        z-index: 2;
+    }
+
+    .d-photo-img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        opacity: 0.8;
+        transition: 0.5s;
+    }
+
+    /* Garis Hiasan di belakang foto */
+    .d-photo-deco {
+        position: absolute;
+        top: -10px; left: -10px;
+        width: 100%; height: 100%;
+        border: 1px solid var(--platinum);
+        clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+        z-index: 1;
+        opacity: 0.3;
+        transition: 0.5s;
+    }
+
+    /* Hover Effect */
+    .e-profile-side:hover .d-photo-img { opacity: 1; }
+    .e-profile-side:hover .d-photo-deco { top: 10px; left: 10px; opacity: 0.8; }
+
+    /* Teks Profil */
+    .e-name {
+        font-family: var(--font-main);
+        font-size: 2.5rem;
+        color: #fff;
+        font-weight: 300;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+    }
+    .e-name b { font-weight: 700; color: var(--platinum); }
+    
+    .e-role {
+        display: inline-block;
+        padding: 5px 15px;
+        border: 1px solid rgba(255,255,255,0.2);
+        color: #aaa;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 30px;
+    }
+
+    .e-bio {
+        color: #888;
+        line-height: 1.8;
+        font-size: 0.95rem;
+        max-width: 90%;
+    }
+
+
+    /* ================= BAGIAN KANAN: MODULAR (BISA DIGANTI) ================= */
+    /* Ini adalah "Wadah Kaca" universal. */
+    .e-modular-side {
+        background: var(--glass-panel);
+        border: 1px solid var(--border-shine);
+        backdrop-filter: blur(10px);
+        padding: 40px;
+        border-radius: 4px;
+        position: relative;
+        /* Efek kilap statis */
+        box-shadow: inset 0 0 20px rgba(255,255,255,0.02);
+    }
+
+    /* Judul Panel Kanan */
+    .module-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        padding-bottom: 15px;
+    }
+    .module-title {
+        color: var(--platinum);
+        font-family: var(--font-main);
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    /* --- ISI CONTENT (SKILLS E - DIAMOND LIST) --- */
+    .prism-skill-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .prism-item {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 15px;
+        background: rgba(0,0,0,0.3);
+        border: 1px solid transparent;
+        transition: 0.4s;
+    }
+
+    .prism-item:hover {
+        border-color: rgba(255,255,255,0.2);
+        background: rgba(255,255,255,0.05);
+        transform: translateX(10px);
+    }
+
+    .p-icon {
+        width: 10px; height: 10px;
+        background: var(--platinum);
+        transform: rotate(45deg); /* Diamond Icon */
+        box-shadow: 0 0 10px rgba(255,255,255,0.3);
+    }
+
+    .p-info { flex: 1; }
+    .p-name { display: block; color: #fff; font-weight: 600; font-size: 1rem; }
+    .p-level { display: block; color: #666; font-size: 0.8rem; margin-top: 4px; text-transform: uppercase; }
+    
+    .p-percent { font-family: monospace; color: var(--platinum); font-size: 1.1rem; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+        .e-container { grid-template-columns: 1fr; gap: 50px; }
+        .e-profile-side { text-align: center; padding-right: 0; }
+        .diamond-photo-wrap { margin: 0 auto 30px auto; }
+        .e-bio { margin: 0 auto; }
+    }
+</style>
+
+<section id="about-e" class="about-e-split">
+    <div class="prism-light-bg"></div>
+
+    <div class="e-container">
+        
+        <div class="e-profile-side">
+            <div class="diamond-photo-wrap">
+                <div class="d-photo-deco"></div>
+                <div class="d-photo-frame">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="d-photo-img" alt="Profile">
+                </div>
+            </div>
+
+            <h1 class="e-name">Alexandria <b>Wijaya</b></h1>
+            <span class="e-role">Senior Developer</span>
+            <p class="e-bio">
+                Spesialis dalam membangun arsitektur digital yang presisi. 
+                Mengutamakan kode bersih, performa tinggi, dan estetika formal. 
+                Selalu mencari keseimbangan antara logika matematika dan keindahan visual.
+            </p>
+        </div>
+
+        <div class="e-modular-side">
+            
+            <div class="module-header">
+                <span class="module-title">Technical Expertise</span>
+                <div style="width: 30px; height: 1px; background: #fff;"></div>
+            </div>
+
+            <div class="prism-skill-list">
+                
+                <div class="prism-item">
+                    <div class="p-icon"></div>
+                    <div class="p-info">
+                        <span class="p-name">Frontend Architecture</span>
+                        <span class="p-level">React, Vue, Tailwind</span>
+                    </div>
+                    <span class="p-percent">95%</span>
+                </div>
+
+                <div class="prism-item">
+                    <div class="p-icon"></div>
+                    <div class="p-info">
+                        <span class="p-name">Backend Systems</span>
+                        <span class="p-level">Node.js, Python, SQL</span>
+                    </div>
+                    <span class="p-percent">85%</span>
+                </div>
+
+                <div class="prism-item">
+                    <div class="p-icon"></div>
+                    <div class="p-info">
+                        <span class="p-name">UI/UX Design</span>
+                        <span class="p-level">Figma, Prototyping</span>
+                    </div>
+                    <span class="p-percent">80%</span>
+                </div>
+
+                <div class="prism-item">
+                    <div class="p-icon"></div>
+                    <div class="p-info">
+                        <span class="p-name">Cloud Infrastructure</span>
+                        <span class="p-level">AWS, Docker</span>
+                    </div>
+                    <span class="p-percent">70%</span>
+                </div>
+
+            </div>
+            </div>
+        </div>
+</section>
+
+<style>
+    /* --- VARIABLES (PENDIDIKAN E) --- */
+    #pendidikan-e {
+        --bg-deep: #000000;
+        --glass-block: rgba(20, 20, 20, 0.6);
+        --border-edge: rgba(255, 255, 255, 0.15);
+        --shine-color: #ffffff;
+        --platinum: #e5e4e2;
+        --font-formal: 'Montserrat', sans-serif;
+    }
+
+    /* --- LAYOUT UTAMA --- */
+    .edu-e-section {
+        padding: 120px 5%;
+        background-color: var(--bg-deep);
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Background Refraksi Cahaya (Garis-garis cahaya tipis) */
+    .light-rays {
+        position: absolute;
+        top: 0; left: 50%;
+        width: 1px; height: 100%;
+        background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent);
+        box-shadow: 0 0 50px rgba(255,255,255,0.1);
+    }
+
+    .edu-e-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* HEADER */
+    .edu-e-header {
+        text-align: center;
+        margin-bottom: 80px;
+    }
+
+    .edu-e-title {
+        font-family: var(--font-formal);
+        font-size: 3rem;
+        font-weight: 300;
+        color: #fff;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+    .edu-e-title span {
+        font-weight: 700;
+        /* Gradient Text Emas Pucat */
+        background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    /* --- CONTAINER BLOK --- */
+    .monolith-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    /* --- CARD (THE MONOLITH) --- */
+    .monolith-card {
+        position: relative;
+        background: var(--glass-block);
+        border: 1px solid var(--border-edge);
+        padding: 40px;
+        /* Efek Kaca Blur */
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        
+        /* Potongan Sudut (Chamfered) - Khas Diamond */
+        clip-path: polygon(
+            20px 0, 100% 0, 
+            100% calc(100% - 20px), calc(100% - 20px) 100%, 
+            0 100%, 0 20px
+        );
+
+        transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        overflow: hidden;
+    }
+
+    /* Garis kilap di pinggir kartu */
+    .monolith-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border: 1px solid rgba(255,255,255,0.1);
+        clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+        pointer-events: none;
+    }
+
+    /* HOVER EFFECT: Glow & Lift */
+    .monolith-card:hover {
+        transform: translateY(-5px) scale(1.02);
+        background: rgba(30, 30, 35, 0.8);
+        border-color: rgba(255, 255, 255, 0.4);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.05);
+    }
+
+    /* Kilatan Cahaya Lewat saat Hover */
+    .monolith-card::after {
+        content: '';
+        position: absolute;
+        top: 0; left: -100%;
+        width: 50%; height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        transform: skewX(-25deg);
+        transition: 0.5s;
+    }
+    .monolith-card:hover::after {
+        left: 200%;
+        transition: 0.7s ease-in-out;
+    }
+
+    /* --- CONTENT INSIDE --- */
+    .mono-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 30px;
+    }
+
+    /* TAHUN (Kiri) */
+    .mono-year {
+        font-family: var(--font-formal);
+        font-size: 1rem;
+        color: var(--platinum);
+        letter-spacing: 3px;
+        writing-mode: vertical-rl; /* Teks Vertikal Unik */
+        transform: rotate(180deg);
+        text-transform: uppercase;
+        border-left: 1px solid rgba(255,255,255,0.2);
+        padding-left: 15px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        opacity: 0.7;
+    }
+
+    /* INFO (Kanan) */
+    .mono-info {
+        flex: 1;
+    }
+
+    /* TEKS MENGKILAP (ANIMASI) */
+    .shine-text-anim {
+        font-family: var(--font-formal);
+        font-size: 2rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        
+        /* Gradient Metalik */
+        background: linear-gradient(
+            90deg, 
+            #666 0%, 
+            #fff 20%, 
+            #aaa 40%, 
+            #fff 60%, 
+            #666 100%
+        );
+        background-size: 200% auto;
+        color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        
+        /* Animasi Mengalir */
+        animation: shineFlow 4s linear infinite;
+    }
+
+    @keyframes shineFlow {
+        to { background-position: 200% center; }
+    }
+
+    .mono-degree {
+        font-family: var(--font-formal);
+        font-size: 1.1rem;
+        color: #fff;
+        margin-bottom: 15px;
+        display: block;
+        letter-spacing: 1px;
+    }
+
+    .mono-desc {
+        color: #888;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        max-width: 90%;
+    }
+
+    /* Decoration: Diamond Icon Kecil */
+    .deco-diamond {
+        position: absolute;
+        top: 20px; right: 20px;
+        width: 15px; height: 15px;
+        border: 1px solid rgba(255,255,255,0.3);
+        transform: rotate(45deg);
+    }
+    .monolith-card:hover .deco-diamond {
+        background: #fff;
+        box-shadow: 0 0 10px #fff;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+        .mono-row { flex-direction: column; gap: 15px; }
+        .mono-year { 
+            writing-mode: horizontal-tb; 
+            transform: none; 
+            border-left: none; 
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-left: 0; padding-bottom: 10px;
+            height: auto; width: 100%;
+        }
+        .shine-text-anim { font-size: 1.5rem; }
+    }
+</style>
+
+<section id="pendidikan-e" class="edu-e-section">
+    <div class="light-rays"></div>
+
+    <div class="edu-e-container">
+        
+        <div class="edu-e-header">
+            <h2 class="edu-e-title">Academic <span>History</span></h2>
+        </div>
+
+        <div class="monolith-stack">
+            
+            <div class="monolith-card">
+                <div class="deco-diamond"></div>
+                <div class="mono-row">
+                    <div class="mono-year">2020 — 2024</div>
+                    <div class="mono-info">
+                        <h3 class="shine-text-anim">Universitas Teknologi</h3>
+                        <span class="mono-degree">Bachelor of Computer Science (S1)</span>
+                        <p class="mono-desc">
+                            Graduated with Cumlaude honors. Specialized in High-Performance Computing and User Interface Design.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="monolith-card">
+                <div class="deco-diamond"></div>
+                <div class="mono-row">
+                    <div class="mono-year">2017 — 2020</div>
+                    <div class="mono-info">
+                        <h3 class="shine-text-anim">SMA Negeri 1 Jakarta</h3>
+                        <span class="mono-degree">Natural Science Major</span>
+                        <p class="mono-desc">
+                            Focused on Physics and Mathematics. Awarded "Best Student in Technology" during the final year.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="monolith-card">
+                <div class="deco-diamond"></div>
+                <div class="mono-row">
+                    <div class="mono-year">2014 — 2017</div>
+                    <div class="mono-info">
+                        <h3 class="shine-text-anim">SMP Negeri 5 Jakarta</h3>
+                        <span class="mono-degree">General Education</span>
+                        <p class="mono-desc">
+                            Developed early interest in web programming and algorithm logic through extracurricular activities.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    /* --- VARIABLES (TEMA E) --- */
+    #showcase-e {
+        --bg-deep: #000000;
+        --platinum: #e5e4e2;
+        --gold-pale: #fbf5b7; /* Emas pucat untuk sertifikat */
+        --glass-dark: rgba(10, 10, 10, 0.8);
+        --border-shine: rgba(255, 255, 255, 0.15);
+        --font-formal: 'Montserrat', sans-serif;
+    }
+
+    /* --- LAYOUT UTAMA --- */
+    .showcase-e-section {
+        padding: 120px 5%;
+        background-color: var(--bg-deep);
+        position: relative;
+        overflow: hidden;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Background Beam (Sorotan Cahaya Diagonal) */
+    .light-beam {
+        position: absolute;
+        top: -50%; left: -50%;
+        width: 200%; height: 200%;
+        background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.02) 0%, transparent 50%);
+        transform: rotate(45deg);
+        pointer-events: none;
+    }
+
+    .split-container {
+        width: 100%;
+        max-width: 1300px;
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr; /* Kiri (Project) lebih lebar dikit */
+        gap: 80px;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* HEADER PER SECTION */
+    .col-header {
+        margin-bottom: 40px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    .col-title {
+        font-family: var(--font-formal);
+        font-size: 1.5rem;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+    }
+
+    /* ================= KOLOM KIRI: PROJECTS (Obsidian Panels) ================= */
+    .project-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .proj-e-card {
+        position: relative;
+        height: 300px;
+        border-radius: 4px;
+        overflow: hidden;
+        /* Masking Diamond Cut */
+        clip-path: polygon(
+            20px 0, 100% 0, 
+            100% calc(100% - 20px), calc(100% - 20px) 100%, 
+            0 100%, 0 20px
+        );
+        border: 1px solid var(--border-shine);
+        background: #050505;
+        transition: 0.5s;
+        group: 'proj';
+    }
+
+    /* Gambar Proyek */
+    .proj-e-img {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        object-fit: cover;
+        opacity: 0.4; /* Redup di awal */
+        filter: grayscale(100%) contrast(1.2);
+        transition: 0.6s ease;
+    }
+
+    /* Overlay Content */
+    .proj-e-content {
+        position: absolute;
+        bottom: 0; left: 0; width: 100%;
+        padding: 30px;
+        background: linear-gradient(to top, #000 10%, rgba(0,0,0,0.8) 60%, transparent 100%);
+        z-index: 2;
+        transform: translateY(20px);
+        transition: 0.5s;
+    }
+
+    /* Judul Mengkilap (Reusable Class) */
+    .shiny-title-sm {
+        font-family: var(--font-formal);
+        font-size: 1.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+        
+        /* Animasi Liquid Platinum */
+        background: linear-gradient(90deg, #888, #fff, #aaa, #fff, #888);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: shineFlow 5s linear infinite;
+    }
+
+    .proj-e-tech {
+        color: var(--platinum);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        display: block;
+        margin-bottom: 15px;
+        opacity: 0.7;
+    }
+
+    /* Tombol View Invisible -> Visible */
+    .btn-view-e {
+        display: inline-block;
+        color: #fff;
+        text-decoration: none;
+        border-bottom: 1px solid #fff;
+        font-size: 0.8rem;
+        padding-bottom: 3px;
+        opacity: 0;
+        transform: translateX(-10px);
+        transition: 0.5s;
+    }
+
+    /* HOVER EFFECT PROYEK */
+    .proj-e-card:hover .proj-e-img {
+        opacity: 0.8;
+        filter: grayscale(0%);
+        transform: scale(1.05);
+    }
+    .proj-e-card:hover .proj-e-content {
+        transform: translateY(0);
+    }
+    .proj-e-card:hover .btn-view-e {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    .proj-e-card:hover {
+        border-color: rgba(255,255,255,0.5);
+        box-shadow: 0 10px 30px rgba(255,255,255,0.05);
+    }
+
+    /* ================= KOLOM KANAN: CERTIFICATES (Holographic Plaques) ================= */
+    .cert-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .cert-card {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        position: relative;
+        overflow: hidden;
+        transition: 0.4s;
+    }
+
+    /* Sudut kanan atas terpotong dikit */
+    .cert-card::after {
+        content: '';
+        position: absolute;
+        top: -10px; right: -10px;
+        width: 30px; height: 30px;
+        background: var(--bg-deep);
+        transform: rotate(45deg);
+        border-bottom: 1px solid rgba(255,255,255,0.3);
+    }
+
+    /* Icon Medal/Badge */
+    .cert-icon {
+        width: 50px; height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--platinum);
+        transform: rotate(45deg);
+        transition: 0.4s;
+    }
+    .cert-icon span {
+        transform: rotate(-45deg); /* Ikon di dalam dilurusin */
+        font-size: 1.2rem;
+        color: var(--platinum);
+    }
+
+    .cert-info {
+        flex: 1;
+    }
+    .cert-name {
+        color: #fff;
+        font-family: var(--font-formal);
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 5px;
+        display: block;
+        transition: 0.3s;
+    }
+    .cert-issuer {
+        color: #666;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* HOVER EFFECT SERTIFIKAT */
+    .cert-card:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: var(--platinum);
+        transform: translateX(10px);
+    }
+    .cert-card:hover .cert-icon {
+        background: #fff;
+        box-shadow: 0 0 15px rgba(255,255,255,0.5);
+    }
+    .cert-card:hover .cert-icon span {
+        color: #000;
+    }
+    .cert-card:hover .cert-name {
+        color: var(--platinum);
+        text-shadow: 0 0 5px rgba(255,255,255,0.3);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+        .split-container { grid-template-columns: 1fr; gap: 60px; }
+    }
+
+    @keyframes shineFlow {
+        to { background-position: 200% center; }
+    }
+</style>
+
+<section id="projects-e" class="showcase-e-section">
+    <div class="light-beam"></div>
+
+    <div class="split-container">
+        
+        <div class="left-col">
+            <div class="col-header">
+                <h3 class="col-title">Selected Works</h3>
+                <span style="color:#666; font-size:0.8rem;">// LATEST</span>
+            </div>
+
+            <div class="project-stack">
+                <div class="proj-e-card">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="P1" class="proj-e-img">
+                    <div class="proj-e-content">
+                        <span class="proj-e-tech">Fintech Dashboard</span>
+                        <h3 class="shiny-title-sm">CRYPTO VISTA</h3>
+                        <a href="#" class="btn-view-e">View Case Study &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="proj-e-card">
+                    <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="P2" class="proj-e-img">
+                    <div class="proj-e-content">
+                        <span class="proj-e-tech">AI & Machine Learning</span>
+                        <h3 class="shiny-title-sm">NEURAL SCAN</h3>
+                        <a href="#" class="btn-view-e">View Case Study &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-col">
+            <div class="col-header">
+                <h3 class="col-title">Certifications</h3>
+                <span style="color:#666; font-size:0.8rem;">// VERIFIED</span>
+            </div>
+
+            <div class="cert-stack">
+                
+                <div class="cert-card">
+                    <div class="cert-icon"><span>★</span></div>
+                    <div class="cert-info">
+                        <span class="cert-name">AWS Certified Solutions Architect</span>
+                        <span class="cert-issuer">Amazon Web Services • 2024</span>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-icon"><span>◆</span></div>
+                    <div class="cert-info">
+                        <span class="cert-name">Google UX Design Professional</span>
+                        <span class="cert-issuer">Coursera / Google • 2023</span>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-icon"><span>●</span></div>
+                    <div class="cert-info">
+                        <span class="cert-name">Full Stack Developer Nano</span>
+                        <span class="cert-issuer">Udacity • 2022</span>
+                    </div>
+                </div>
+                
+                <div class="cert-card">
+                    <div class="cert-icon"><span>▲</span></div>
+                    <div class="cert-info">
+                        <span class="cert-name">Cybersecurity Analyst</span>
+                        <span class="cert-issuer">IBM Security • 2021</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    /* --- VARIABLES (TEMA E) --- */
+    #contact-e {
+        --bg-deep: #000000;
+        --platinum: #e5e4e2;
+        --border-shine: rgba(255, 255, 255, 0.2);
+        --font-formal: 'Montserrat', sans-serif;
+    }
+
+    /* --- LAYOUT --- */
+    .contact-e-section {
+        padding: 100px 5% 50px 5%;
+        background-color: var(--bg-deep);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Wadah Formulir (The Envelope) */
+    .prism-envelope {
+        width: 100%;
+        max-width: 700px;
+        padding: 60px;
+        border: 1px solid var(--border-shine);
+        background: rgba(10, 10, 10, 0.6);
+        backdrop-filter: blur(10px);
+        position: relative;
+        text-align: center;
+        /* Hiasan sudut Diamond */
+        clip-path: polygon(
+            30px 0, 100% 0, 
+            100% calc(100% - 30px), calc(100% - 30px) 100%, 
+            0 100%, 0 30px
+        );
+        box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+        margin-bottom: 80px;
+    }
+
+    /* Efek Kilau Pinggir Amplop */
+    .prism-envelope::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border: 1px solid rgba(255,255,255,0.05);
+        clip-path: polygon(30px 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 30px);
+        pointer-events: none;
+    }
+
+    /* Diamond Seal (Logo Kecil di Atas Form) */
+    .diamond-seal {
+        width: 40px; height: 40px;
+        background: #fff;
+        margin: 0 auto 40px auto;
+        transform: rotate(45deg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 20px rgba(255,255,255,0.5);
+    }
+    .diamond-seal-inner {
+        width: 80%; height: 80%;
+        border: 1px solid #000;
+    }
+
+    /* JUDUL MENGKILAP */
+    .con-e-title {
+        font-family: var(--font-formal);
+        font-size: 2.5rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        margin-bottom: 50px;
+        
+        /* Gradient Animation */
+        background: linear-gradient(90deg, #666, #fff, #888, #fff, #666);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: shineFlow 6s linear infinite;
+    }
+
+    /* FORM INPUTS */
+    .form-group-e {
+        margin-bottom: 40px;
+        position: relative;
+    }
+
+    .input-prism {
+        width: 100%;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid #333;
+        padding: 15px 0;
+        font-family: var(--font-formal);
+        font-size: 1rem;
+        color: #fff;
+        text-align: center;
+        letter-spacing: 2px;
+        transition: 0.5s;
+    }
+
+    .input-prism:focus {
+        outline: none;
+        border-bottom-color: #fff;
+        background: linear-gradient(to top, rgba(255,255,255,0.05), transparent);
+    }
+
+    .input-prism::placeholder {
+        color: #555;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+    }
+
+    /* TOMBOL KIRIM */
+    .btn-prism-send {
+        margin-top: 20px;
+        background: transparent;
+        border: 1px solid rgba(255,255,255,0.3);
+        color: #fff;
+        padding: 15px 50px;
+        font-family: var(--font-formal);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: 0.4s;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-prism-send:hover {
+        border-color: #fff;
+        background: #fff;
+        color: #000;
+        box-shadow: 0 0 30px rgba(255,255,255,0.4);
+    }
+
+    /* --- FOOTER E --- */
+    .footer-e {
+        width: 100%;
+        border-top: 1px solid rgba(255,255,255,0.05);
+        padding-top: 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+
+    /* SOCIAL LOGOS (DIAMOND SHAPE) */
+    .social-diamond-grid {
+        display: flex;
+        gap: 30px;
+    }
+
+    .social-diamond {
+        width: 50px; height: 50px;
+        border: 1px solid rgba(255,255,255,0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: rotate(45deg); /* Putar kotak jadi diamond */
+        transition: 0.4s;
+        text-decoration: none;
+    }
+
+    .social-icon-svg {
+        width: 20px; height: 20px;
+        fill: #aaa;
+        transform: rotate(-45deg); /* Putar balik icon biar lurus */
+        transition: 0.4s;
+    }
+
+    /* Hover Effect Social */
+    .social-diamond:hover {
+        background: #fff;
+        border-color: #fff;
+        box-shadow: 0 0 20px rgba(255,255,255,0.6);
+        transform: rotate(45deg) scale(1.1);
+    }
+
+    .social-diamond:hover .social-icon-svg {
+        fill: #000; /* Icon jadi hitam saat background putih */
+    }
+
+    /* COPYRIGHT */
+    .footer-copy-e {
+        font-family: var(--font-formal);
+        color: #444;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    @media (max-width: 768px) {
+        .prism-envelope { padding: 40px 20px; }
+        .con-e-title { font-size: 1.8rem; }
+    }
+</style>
+
+<section id="contact" class="contact-e-section">
+    
+    <div class="prism-envelope">
+        <div class="diamond-seal">
+            <div class="diamond-seal-inner"></div>
+        </div>
+
+        <h2 class="con-e-title">Inquire</h2>
+
+        <form onsubmit="kirimPesanE(event)">
+            <div class="form-group-e">
+                <input type="text" class="input-prism" placeholder="Your Name" required>
+            </div>
+            <div class="form-group-e">
+                <input type="email" class="input-prism" placeholder="Email Address" required>
+            </div>
+            <div class="form-group-e">
+                <input type="text" class="input-prism" placeholder="Subject / Message" required>
+            </div>
+
+            <button type="submit" class="btn-prism-send">Send Request</button>
+        </form>
+    </div>
+
+    <footer class="footer-e">
+        
+        <div class="social-diamond-grid">
+            
+            <a href="#" class="social-diamond">
+                <svg class="social-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+
+            <a href="#" class="social-diamond">
+                <svg class="social-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.069-4.85.069-3.204 0-3.584-.012-4.849-.069-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+            </a>
+
+            <a href="#" class="social-diamond">
+                <svg class="social-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+            </a>
+
+        </div>
+
+        <div class="footer-copy-e">
+            &copy; 2025 ALEXANDRIA PORTFOLIO. ALL RIGHTS RESERVED.
+        </div>
+    </footer>
+</section>
+
+<script>
+    function kirimPesanE(e) {
+        e.preventDefault();
+        const btn = document.querySelector('.btn-prism-send');
+        const originalText = btn.innerText;
+        
+        btn.innerText = "Request Sent";
+        btn.style.background = "#fff";
+        btn.style.color = "#000";
+
+        setTimeout(() => {
+            alert("Inquiry Received. We will contact you shortly.");
+            e.target.reset();
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.style.background = "transparent";
+                btn.style.color = "#fff";
+            }, 2000);
+        }, 1000);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modern Classic Design</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+    <style>
+    /* --- VARIABLES LOKAL (CONTACT C) --- */
+    #contact {
+        --bg-c: #050505;
+        --panel-bg: #0a0a0a;
+        --accent-c: #ff003c;
+        --text-c: #fff;
+        --input-text: #ddd;
+    }
+
+    /* --- LAYOUT --- */
+    .contact-c-section {
+        padding: 120px 5% 80px 5%;
+        background-color: var(--bg-c);
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Hiasan Background Besar (Tulisan Samar) */
+    .bg-text-deco {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%) rotate(-10deg);
+        font-size: 15vw; /* Sangat besar */
+        font-weight: 900;
+        font-style: italic;
+        color: rgba(255, 255, 255, 0.02);
+        white-space: nowrap;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .contact-c-container {
+        position: relative;
+        z-index: 1;
+        max-width: 900px;
+        margin: 0 auto;
+        background-color: var(--panel-bg);
+        padding: 60px;
+        border-right: 10px solid var(--accent-c); /* Garis tebal di kanan */
+        box-shadow: -20px 20px 0px rgba(20, 20, 20, 1); /* Shadow kotak solid */
+    }
+
+    .con-c-header {
+        margin-bottom: 50px;
+    }
+
+    .con-c-title {
+        font-family: sans-serif;
+        font-size: 3rem;
+        font-weight: 900;
+        font-style: italic;
+        color: #fff;
+        text-transform: uppercase;
+        line-height: 1;
+    }
+
+    .con-c-subtitle {
+        color: var(--accent-c);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-top: 10px;
+        display: block;
+    }
+
+    /* --- FORM --- */
+    .form-group-c {
+        position: relative;
+        margin-bottom: 40px;
+    }
+
+    .input-c-field {
+        width: 100%;
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid #333;
+        padding: 15px 0;
+        font-size: 1.2rem;
+        color: var(--input-text);
+        font-family: sans-serif;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .input-c-field:focus {
+        outline: none;
+        border-bottom-color: var(--accent-c);
+    }
+
+    /* Label Floating (Diam di atas, tapi berubah warna) */
+    .label-c-float {
+        position: absolute;
+        top: -10px; left: 0;
+        font-size: 0.8rem;
+        color: #666;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: 0.3s;
+    }
+
+    .input-c-field:focus + .label-c-float {
+        color: var(--accent-c);
+    }
+
+    /* Tombol Kirim (Slanted Button) */
+    .btn-trigger {
+        display: inline-block;
+        width: 100%;
+        padding: 20px;
+        background-color: var(--accent-c);
+        border: none;
+        color: #fff;
+        font-size: 1.5rem;
+        font-weight: 900;
+        font-style: italic;
+        text-transform: uppercase;
+        cursor: pointer;
+        transform: skewX(-10deg);
+        transition: 0.3s;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-trigger:hover {
+        background-color: #fff;
+        color: var(--accent-c);
+        box-shadow: 0 0 30px var(--accent-c);
+    }
+
+    .btn-text {
+        display: block;
+        transform: skewX(10deg); /* Balikin teks biar tegak */
+    }
+
+    /* --- FOOTER C --- */
+    .footer-c {
+        background-color: #000;
+        padding: 60px 5%;
+        text-align: center;
+        border-top: 5px solid var(--accent-c);
+    }
+
+    .footer-c-grid {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .footer-logo {
+        font-size: 2rem;
+        font-weight: 900;
+        font-style: italic;
+        color: #fff;
+    }
+
+    .social-c-links {
+        display: flex;
+        gap: 20px;
+    }
+
+    .social-c-btn {
+        width: 50px; height: 50px;
+        border: 2px solid #333;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-weight: bold;
+        transform: rotate(45deg); /* Belah ketupat */
+        transition: 0.3s;
+    }
+    
+    .social-c-btn span {
+        transform: rotate(-45deg); /* Teks lurus */
+    }
+
+    .social-c-btn:hover {
+        border-color: var(--accent-c);
+        background-color: var(--accent-c);
+        box-shadow: 0 0 15px var(--accent-c);
+    }
+
+    .copyright-c {
+        color: #555;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+        .contact-c-container { padding: 30px; border-right: 5px solid var(--accent-c); }
+        .bg-text-deco { display: none; }
+        .con-c-title { font-size: 2rem; }
+    }
+</style>
+
+<section id="contact" class="contact-c-section">
+    <div class="bg-text-deco">GAME OVER</div>
+
+    <div class="contact-c-container">
+        <div class="con-c-header">
+            <h2 class="con-c-title">INITIATE COMMS</h2>
+            <span class="con-c-subtitle">// SEND MESSAGE TO BASE</span>
+        </div>
+
+        <form onsubmit="kirimPesanC(event)">
+            <div class="form-group-c">
+                <input type="text" class="input-c-field" required placeholder=" ">
+                <label class="label-c-float">PLAYER NAME / ID</label>
+            </div>
+
+            <div class="form-group-c">
+                <input type="email" class="input-c-field" required placeholder=" ">
+                <label class="label-c-float">EMAIL ADDRESS</label>
+            </div>
+
+            <div class="form-group-c">
+                <input type="text" class="input-c-field" required placeholder=" ">
+                <label class="label-c-float">MISSION BRIEF / MESSAGE</label>
+            </div>
+
+            <button type="submit" class="btn-trigger">
+                <span class="btn-text">SEND DATA >></span>
+            </button>
+        </form>
+    </div>
+</section>
+
+<footer class="footer-c">
+    <div class="footer-c-grid">
+        <div class="footer-logo">
+            SAMURAI<span style="color: var(--accent-c)">DEV</span>
+        </div>
+
+        <div class="social-c-links">
+            <a href="#" class="social-c-btn"><span>GH</span></a>
+            <a href="#" class="social-c-btn"><span>IG</span></a>
+            <a href="#" class="social-c-btn"><span>LI</span></a>
+        </div>
+
+        <div class="copyright-c">
+            &copy; 2025 ALL RIGHTS RESERVED. <br>
+            PRESS 'START' TO PLAY AGAIN.
+        </div>
+    </div>
+</footer>
+
+<script>
+    function kirimPesanC(e) {
+        e.preventDefault();
+        const btn = document.querySelector('.btn-text');
+        const originalText = btn.innerText;
+        
+        btn.innerText = "SENDING...";
+        
+        setTimeout(() => {
+            alert("MISSION ACCOMPLISHED.\nMessage Sent Successfully.");
+            btn.innerText = "SENT!";
+            e.target.reset();
+            setTimeout(() => { btn.innerText = originalText; }, 2000);
+        }, 1000);
+    }
+</script>
+    </body>
+</html>

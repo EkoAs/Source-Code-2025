@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Techs Clothing</title>
+    <style>
+        :root {
+            --shiny-white: #fcfcfc;
+            --dark-gray: #2d3436;
+            --border-color: #dfe6e9;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+            color: var(--dark-gray);
+        }
+
+        .checkout-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        h2 { border-bottom: 2px solid var(--shiny-white); padding-bottom: 10px; }
+
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .summary-section {
+            background: var(--shiny-white);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .flex-row { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .total-bold { font-size: 1.4rem; font-weight: bold; color: #d63031; }
+
+        .payment-method {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .btn-bayar {
+            background: var(--dark-gray);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-bayar:hover { background: #000; transform: scale(1.02); }
+    </style>
+</head>
+<body>
+
+<div class="checkout-container">
+    <h2>Rincian Pesanan</h2>
+    
+    {% for item in data.daftar_barang %}
+    <div class="item-row">
+        <span>{{ item.nama }}</span>
+        <span>Rp {{ "{:,}".format(item.harga_final) }}</span>
+    </div>
+    {% endfor %}
+
+    <div class="summary-section">
+        <div class="flex-row">
+            <span>Subtotal</span>
+            <span>Rp {{ "{:,}".format(data.subtotal) }}</span>
+        </div>
+        <div class="flex-row">
+            <span>Ongkos Kirim </span>
+            <span>Rp {{ "{:,}".format(data.ongkir) }}</span>
+        </div>
+        <div class="flex-row">
+            <span>Pajak (PPN 11%)</span>
+            <span>Rp {{ "{:,}".format(data.pajak) }}</span>
+        </div>
+        <hr>
+        <div class="flex-row total-bold">
+            <span>Total Bayar</span>
+            <span>Rp {{ "{:,}".format(data.total) }}</span>
+        </div>
+    </div>
+
+    <form action="/checkout/bayar" method="POST" class="payment-method">
+        <label for="metode">Pilih Metode Pembayaran:</label>
+        <select name="metode" id="metode" required onchange="toggleCode(this.value)">
+            <option value="cod">COD (Bayar di Tempat)</option>
+            <option value="transfer">Transfer Bank (Virtual Account)</option>
+            <option value="e-wallet">E-Wallet (OVO/Dana/Gopay)</option>
+        </select>
+
+        <div id="info-pembayaran" style="margin-top: 15px; color: #636e72; font-size: 0.9rem; display: none;">
+            * Kode pembayaran akan muncul di struk belanja setelah klik bayar.
+        </div>
+
+        <button type="submit" class="btn-bayar">PROSES PEMBAYARAN</button>
+    </form>
+</div>
+
+<script>
+    function toggleCode(val) {
+        const info = document.getElementById('info-pembayaran');
+        info.style.display = (val !== 'cod') ? 'block' : 'none';
+    }
+</script>
+
+</body>
+</html>

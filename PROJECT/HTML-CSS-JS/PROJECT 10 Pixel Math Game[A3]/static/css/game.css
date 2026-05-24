@@ -1,0 +1,44 @@
+/* Header Skor & Waktu */
+.hud {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+#score { color: var(--red-neon); }
+#timer { color: #fff; }
+
+/* Kotak Soal */
+.question-box {
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.question-box h2 {
+    font-size: 3rem;
+    margin: 0;
+    text-shadow: 4px 4px 0px #000;
+}
+
+/* Grid Tombol Jawaban */
+#options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+/* Animasi Tombol saat muncul */
+#options-grid button {
+    animation: popIn 0.3s ease-out;
+}
+
+@keyframes popIn {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}

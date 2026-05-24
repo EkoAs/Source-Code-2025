@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 16 - Main Hub</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- RESET & BASIC SETUP --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            height: 100vh;
+            overflow: hidden; /* Supaya tidak ada scrollbar jika tidak perlu */
+            display: flex;
+            flex-direction: column;
+            color: #e0e0e0;
+        }
+
+        /* --- BACKGROUND IMAGE --- */
+        .bg-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: url('https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=1632&auto=format&fit=crop') no-repeat center center/cover;
+        }
+        
+        .bg-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        /* --- ANIMASI METALIK / MENGKILAP (SHINE) --- */
+        @keyframes metalShine {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { box-shadow: 0 0 5px rgba(192, 192, 192, 0.2), inset 0 0 5px rgba(192, 192, 192, 0.1); border-color: rgba(255,255,255,0.3); }
+            50% { box-shadow: 0 0 15px rgba(192, 192, 192, 0.6), inset 0 0 10px rgba(192, 192, 192, 0.3); border-color: rgba(255,255,255,0.8); }
+        }
+        
+        /* Animasi kilau teks */
+        .text-metallic {
+            background: linear-gradient(to right, #999, #fff, #999, #fff, #999);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: metalShine 3s linear infinite;
+            font-family: 'Cinzel', serif; /* Font judul */
+            font-weight: 700;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        /* Box dengan efek kaca dan border glow */
+        .glass-metallic {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            animation: borderGlow 4s infinite ease-in-out;
+            transition: transform 0.3s;
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            width: 100%;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Untuk mendorong elemen ke pinggir */
+            padding: 0 5%; /* Padding di pinggir */
+            
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+            backdrop-filter: blur(5px);
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+            animation: borderGlow 4s infinite ease-in-out; /* Navbar juga glowing */
+            
+            position: relative;
+            z-index: 100;
+            overflow: hidden; /* Penting agar animasi objek tidak keluar dari nav */
+        }
+
+        /* Logo Area */
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 2; /* Di atas animasi pesawat */
+            background: rgba(0,0,0,0.5); /* Background agar terlihat jelas */
+            padding: 10px 20px 10px 0;
+            border-radius: 0 20px 20px 0;
+            margin-left: -5%; /* Dorong ke pinggir kiri */
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 5px #fff);
+        }
+
+        .logo-text {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem; /* Ukuran lebih kecil dari sebelumnya */
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            
+            background: linear-gradient(to right, #888, #fff, #ccc, #fff, #888);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: metalShine 3s linear infinite;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        /* Jam Digital */
+        #clock {
+            font-family: 'Orbitron', monospace; /* Font ala sci-fi */
+            font-size: 1.1rem;
+            color: #00f3ff; /* Warna neon biru */
+            text-shadow: 0 0 10px #00f3ff;
+            background: rgba(0,0,0,0.5);
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: 1px solid rgba(0,243,255,0.3);
+            margin-right: 15px; /* Jarak dari logo */
+            z-index: 2;
+        }
+
+        /* --- ANIMASI PESAWAT --- */
+        .animated-area {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            overflow: hidden; /* Pastikan tidak ada scroll */
+            pointer-events: none; /* Tidak menghalangi interaksi */
+            z-index: 1; /* Di bawah logo dan jam */
+            display: flex;
+            align-items: center;
+        }
+
+        .flying-drone {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            animation: flyAcross 20s linear infinite; /* Animasi bergerak dari kiri ke kanan */
+            filter: drop-shadow(0 0 5px rgba(0,243,255,0.8)); /* Glow biru pada drone */
+        }
+
+        .drone-body {
+            width: 60px; /* Ukuran drone */
+            height: 15px;
+            background-color: #00f3ff; /* Warna drone */
+            border-radius: 5px;
+            position: relative;
+            transform: skewX(-20deg); /* Miring sedikit seperti terbang cepat */
+        }
+        .drone-body::before { /* Kokpit */
+            content: '';
+            position: absolute;
+            left: 5px; top: 2px;
+            width: 10px; height: 10px;
+            background-color: #fff;
+            border-radius: 50%;
+        }
+        .drone-body::after { /* Wing/Sayap */
+            content: '';
+            position: absolute;
+            right: -10px; top: -5px;
+            width: 25px; height: 25px;
+            background-color: #00f3ff;
+            clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+            transform: rotate(-10deg);
+        }
+
+        .jet-trail {
+            width: 150px; /* Panjang jejak */
+            height: 5px;
+            background: linear-gradient(to right, transparent, rgba(0,243,255,0.8), rgba(0,243,255,0.3));
+            margin-left: -50px; /* Posisi di belakang drone */
+            filter: blur(2px); /* Efek kabur */
+            opacity: 0.8;
+            transform: skewX(-20deg);
+        }
+
+        @keyframes flyAcross {
+            0% {
+                left: -20%; /* Mulai dari luar layar kiri */
+                opacity: 0;
+                transform: translateY(-5px); /* Sedikit efek naik turun */
+            }
+            10% { opacity: 1; } /* Muncul */
+            50% { transform: translateY(5px); } /* Bergerak naik turun */
+            90% { opacity: 1; }
+            100% {
+                left: 120%; /* Berakhir di luar layar kanan */
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+        }
+        /* --- MAIN LAYOUT (3 KOLOM) --- */
+        .main-container {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            gap: 30px;
+        }
+
+        /* 1. KOLOM KIRI (TOMBOL NAVIGASI) */
+        .left-sidebar {
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            display: block;
+            padding: 15px 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* 2. KOLOM TENGAH (ABOUT & PHOTO) */
+        .center-content {
+            flex: 1;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255,255,255,0.5);
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            animation: borderGlow 4s infinite ease-in-out;
+        }
+
+        .about-text h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+
+        /* 3. KOLOM KANAN (SEARCH) */
+        .right-sidebar {
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .search-box {
+            width: 100%;
+            position: relative;
+        }
+
+        .search-title {
+            text-align: right;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #fff;
+            border-radius: 8px;
+            outline: none;
+            margin-bottom: 10px;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .search-input:focus {
+            border-color: #fff;
+            box-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+
+        .search-btn {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(45deg, #333, #555);
+            border: 1px solid #fff;
+            color: #fff;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .search-btn:hover {
+            background: #fff;
+            color: #000;
+            box-shadow: 0 0 15px rgba(255,255,255,0.5);
+        }
+
+        /* RESPONSIF (HP) */
+        @media (max-width: 900px) {
+            .main-container {
+                flex-direction: column;
+            }
+            .left-sidebar, .right-sidebar {
+                width: 100%;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .nav-btn { flex: 1; min-width: 120px; }
+            .right-sidebar { align-items: center; }
+            .search-title { text-align: center; }
+            
+            /* Responsive Navbar */
+            nav { height: auto; flex-wrap: wrap; justify-content: center; padding: 10px 5%; }
+            .logo-area, #clock { margin: 10px; padding: 5px 15px; border-radius: 10px; }
+            .logo-area { margin-left: 0; }
+            #clock { margin-right: 0; }
+            .animated-area { display: none; } /* Sembunyikan animasi di mobile */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-container">
+        <div class="bg-overlay"></div>
+    </div>
+
+    <nav>
+        <div id="clock">00:00</div>
+
+        <div class="logo-area">
+            <img src="https://i.imgur.com/kS5x87J.png" alt="Drone Logo" class="logo-img">
+            <span class="logo-text">PROJECT 16</span>
+        </div>
+        
+        <div class="animated-area">
+            <div class="flying-drone">
+                <div class="drone-body"></div>
+                <div class="jet-trail"></div>
+            </div>
+        </div>
+
+        <div style="width: 120px; height: 10px; margin-right: -5%;"></div> </nav>
+
+    <div class="main-container">
+
+        <aside class="left-sidebar">
+            <a href="project.html" class="nav-btn glass-metallic text-metallic">Project</a>
+            <a href="certificate.html" class="nav-btn glass-metallic text-metallic">Sertifikat</a>
+            <a href="samples.html" class="nav-btn glass-metallic text-metallic">Sample Project</a>
+            <a href="reading.html" class="nav-btn glass-metallic text-metallic">Read Project</a>
+        </aside>
+
+        <section class="center-content glass-metallic">
+            
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop" alt="Profile" class="profile-photo">
+            
+            <div class="about-text">
+                <h1 class="text-metallic">Welcome, Traveler.</h1>
+                <p>
+                    Saya adalah seorang penjelajah digital yang fokus menciptakan karya visual dan fungsional. 
+                    Di sini tersimpan arsip proyek, pencapaian, dan eksperimen kode saya. 
+                    Selamat menjelajah di Project 16.
+                </p>
+            </div>
+        </section>
+
+        <aside class="right-sidebar">
+            <div class="search-box glass-metallic">
+                <span class="search-title text-metallic">What do you seek?</span>
+                <input type="text" id="searchInput" class="search-input" placeholder="Type keyword...">
+                <button onclick="performSearch()" class="search-btn">Search</button>
+            </div>
+        </aside>
+
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('clock').innerText = timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        function performSearch() {
+            const query = document.getElementById('searchInput').value;
+            if (query) {
+                const found = window.find(query);
+                if (!found) {
+                    alert("Maaf, kata '" + query + "' tidak ditemukan di halaman ini.");
+                }
+            } else {
+                alert("Silakan ketik sesuatu untuk dicari.");
+            }
+        }
+
+        document.getElementById("searchInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                performSearch();
+            }
+        });
+    </script>
+
+</body>
+</html>

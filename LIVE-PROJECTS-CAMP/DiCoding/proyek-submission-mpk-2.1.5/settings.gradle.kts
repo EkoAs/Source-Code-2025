@@ -1,6 +1,0 @@
-plugins {
-    id("org.gradle.toolchains.foojay-resolver") version "0.8.0"
-}
-
-rootProject.name = "Kotlin Proyek"
-
